@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phish Setlist Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+        }
+        #setlists {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #setlists th, #setlists td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+            border-right: 1px solid #e0e0e0;
+        }
+        #setlists th:last-child, #setlists td:last-child {
+            border-right: none;
+        }
+        #setlists thead {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+        #setlists thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 2px solid #2980b9;
+        }
+        #setlists tbody tr:last-child td {
+            border-bottom: none;
+        }
+        #setlists tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        #setlists tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+        #setlists::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        #setlists::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+        .dataTables_wrapper .dataTables_filter input {
+            margin-left: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 6px;
+            width: 250px;
+        }
+        .dataTables_wrapper .dataTables_length select {
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        #setlists td:nth-child(4) {
+            max-width: 400px;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+        .highlight {
+            background-color: #fff9c4;
+            padding: 2px 0;
+        }
+        #controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        #yearFilter {
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        #stats {
+            background-color: #e8f4fd;
+            padding: 10px;
+            border-radius: 4px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phish Setlist Explorer</h1>
+        <div id="controls">
+            <div>
+                <label for="yearFilter">Filter by Year:</label>
+                <select id="yearFilter">
+                    <option value="">All Years</option>
+                </select>
+            </div>
+            <div id="stats"></div>
+        </div>
+        <table id="setlists" class="display">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Venue</th>
+                    <th>Location</th>
+                    <th>Setlist</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be loaded here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+        // Album to release date mapping
+        const albumReleases = {
+            "Junta": "1989-05-08",
+            "Lawn Boy": "1990-09-21",
+            "A Picture of Nectar": "1992-02-18",
+            "Rift": "1993-02-02",
+            "Hoist": "1994-03-29",
+            "Billy Breathes": "1996-10-15",
+            "The Story of the Ghost": "1998-10-27",
+            "Farmhouse": "2000-05-16",
+            "Round Room": "2002-12-10",
+            "Undermind": "2004-06-15",
+            "Joy": "2009-09-08",
+            "Fuego": "2014-06-24",
+            "Big Boat": "2016-10-07",
+            "Sigma Oasis": "2020-04-02",
+            "Evolve": "2024-07-12"
+        };
+
+        // Comprehensive song to album mapping
+        const songAlbums = {
+            // Junta
+            "Fee": "Junta",
+            "You Enjoy Myself": "Junta",
+            "Esther": "Junta",
+            "Golgi Apparatus": "Junta",
+            "Foam": "Junta",
+            "Dinner and a Movie": "Junta",
+            "The Divided Sky": "Junta",
+            "David Bowie": "Junta",
+            "Fluffhead": "Junta",
+            "Fluff's Travels": "Junta",
+            "Contact": "Junta",
+            "Union Federal": "Junta",
+            "Sanity": "Junta",
+            "Icculus": "Junta",
+
+            // Lawn Boy
+            "The Squirming Coil": "Lawn Boy",
+            "Reba": "Lawn Boy",
+            "My Sweet One": "Lawn Boy",
+            "Split Open and Melt": "Lawn Boy",
+            "Bouncing Around the Room": "Lawn Boy",
+            "Possum": "Lawn Boy",
+            "Lawn Boy": "Lawn Boy",
+            "Bathtub Gin": "Lawn Boy",
+            "Run Like an Antelope": "Lawn Boy",
+            "Magilla": "Lawn Boy",
+
+            // A Picture of Nectar
+            "Llama": "A Picture of Nectar",
+            "Eliza": "A Picture of Nectar",
+            "Cavern": "A Picture of Nectar",
+            "Poor Heart": "A Picture of Nectar",
+            "Stash": "A Picture of Nectar",
+            "Manteca": "A Picture of Nectar",
+            "Guelah Papyrus": "A Picture of Nectar",
+            "Chalk Dust Torture": "A Picture of Nectar",
+            "The Mango Song": "A Picture of Nectar",
+            "Tweezer": "A Picture of Nectar",
+            "The Landlady": "A Picture of Nectar",
+            "Glide": "A Picture of Nectar",
+            "Tweezer Reprise": "A Picture of Nectar",
+            "Catapult": "A Picture of Nectar",
+            "Faht": "A Picture of Nectar",
+
+            // Rift
+            "Rift": "Rift",
+            "Fast Enough for You": "Rift",
+            "Maze": "Rift",
+            "Sparkle": "Rift",
+            "Horn": "Rift",
+            "The Wedge": "Rift",
+            "My Friend, My Friend": "Rift",
+            "Weigh": "Rift",
+            "All Things Reconsidered": "Rift",
+            "Mound": "Rift",
+            "It's Ice": "Rift",
+            "Lengthwise": "Rift",
+            "The Horse": "Rift",
+            "Silent in the Morning": "Rift",
+
+            // Hoist
+            "Julius": "Hoist",
+            "Down with Disease": "Hoist",
+            "If I Could": "Hoist",
+            "Riker's Mailbox": "Hoist",
+            "Axilla (Part II)": "Hoist",
+            "Lifeboy": "Hoist",
+            "Sample in a Jar": "Hoist",
+            "Wolfman's Brother": "Hoist",
+            "Scent of a Mule": "Hoist",
+            "Dog Faced Boy": "Hoist",
+            "Demand": "Hoist",
+
+            // Billy Breathes
+            "Free": "Billy Breathes",
+            "Character Zero": "Billy Breathes",
+            "Waste": "Billy Breathes",
+            "Taste": "Billy Breathes",
+            "Cars Trucks Buses": "Billy Breathes",
+            "Talk": "Billy Breathes",
+            "Theme From the Bottom": "Billy Breathes",
+            "Train Song": "Billy Breathes",
+            "Bliss": "Billy Breathes",
+            "Billy Breathes": "Billy Breathes",
+            "Swept Away": "Billy Breathes",
+            "Steep": "Billy Breathes",
+            "Prince Caspian": "Billy Breathes",
+
+            // The Story of the Ghost
+            "Ghost": "The Story of the Ghost",
+            "Birds of a Feather": "The Story of the Ghost",
+            "Meat": "The Story of the Ghost",
+            "Guyute": "The Story of the Ghost",
+            "Fikus": "The Story of the Ghost",
+            "Shafty": "The Story of the Ghost",
+            "Limb By Limb": "The Story of the Ghost",
+            "Frankie Says": "The Story of the Ghost",
+            "Brian and Robert": "The Story of the Ghost",
+            "Water in the Sky": "The Story of the Ghost",
+            "Roggae": "The Story of the Ghost",
+            "Wading in the Velvet Sea": "The Story of the Ghost",
+            "The Moma Dance": "The Story of the Ghost",
+            "End of Session": "The Story of the Ghost",
+
+            // Farmhouse
+            "Farmhouse": "Farmhouse",
+            "Twist": "Farmhouse",
+            "Bug": "Farmhouse",
+            "Back on the Train": "Farmhouse",
+            "Heavy Things": "Farmhouse",
+            "Gotta Jibboo": "Farmhouse",
+            "Dirt": "Farmhouse",
+            "Piper": "Farmhouse",
+            "Sleep": "Farmhouse",
+            "The Inlaw Josie Wales": "Farmhouse",
+            "Sand": "Farmhouse",
+            "First Tube": "Farmhouse",
+
+            // Round Room
+            "Pebbles and Marbles": "Round Room",
+            "Anything But Me": "Round Room",
+            "Round Room": "Round Room",
+            "Walls of the Cave": "Round Room",
+            "Mexican Cousin": "Round Room",
+            "Friday": "Round Room",
+            "Seven Below": "Round Room",
+            "Mock Song": "Round Room",
+            "46 Days": "Round Room",
+            "All of These Dreams": "Round Room",
+            "Thunderhead": "Round Room",
+            "Waves": "Round Room",
+
+            // Undermind
+            "Scents and Subtle Sounds": "Undermind",
+            "The Connection": "Undermind",
+            "A Song I Heard the Ocean Sing": "Undermind",
+            "Army of One": "Undermind",
+            "Undermind": "Undermind",
+            "Secret Smile": "Undermind",
+            "Access Me": "Undermind",
+            "Nothing": "Undermind",
+            "Two Versions of Me": "Undermind",
+            "Crowd Control": "Undermind",
+            "Maggie's Revenge": "Undermind",
+            "Tiny": "Undermind",
+
+            // Joy
+            "Backwards Down the Number Line": "Joy",
+            "Stealing Time From the Faulty Plan": "Joy",
+            "Joy": "Joy",
+            "Sugar Shack": "Joy",
+            "Ocelot": "Joy",
+            "Kill Devil Falls": "Joy",
+            "Light": "Joy",
+            "I Been Around": "Joy",
+            "Time Turns Elastic": "Joy",
+            "Twenty Years Later": "Joy",
+
+            // Fuego
+            "Fuego": "Fuego",
+            "The Line": "Fuego",
+            "Devotion to a Dream": "Fuego",
+            "Halfway to the Moon": "Fuego",
+            "Winterqueen": "Fuego",
+            "Sing Monica": "Fuego",
+            "555": "Fuego",
+            "Waiting All Night": "Fuego",
+            "Wombat": "Fuego",
+            "Wingsuit": "Fuego",
+
+            // Big Boat
+            "Friends": "Big Boat",
+            "Breath and Burning": "Big Boat",
+            "Home": "Big Boat",
+            "Blaze On": "Big Boat",
+            "Tide Turns": "Big Boat",
+            "Things People Do": "Big Boat",
+            "Waking Up Dead": "Big Boat",
+            "Running Out of Time": "Big Boat",
+            "No Men In No Man's Land": "Big Boat",
+            "Miss You": "Big Boat",
+            "I Always Wanted It This Way": "Big Boat",
+            "More": "Big Boat",
+            "Petrichor": "Big Boat",
+
+            // Sigma Oasis
+            "Sigma Oasis": "Sigma Oasis",
+            "Leaves": "Sigma Oasis",
+            "Everything's Right": "Sigma Oasis",
+            "Mercury": "Sigma Oasis",
+            "Thread": "Sigma Oasis",
+            "Shade": "Sigma Oasis",
+            "A Life Beyond The Dream": "Sigma Oasis",
+            "Thread": "Sigma Oasis",
+
+            // Evolve (upcoming album, track list not confirmed)
+            "Evolve": "Evolve"
+        };
+
+        $(document).ready(function() {
+            var table;
+            var allData;
+
+            $.getJSON('phish_setlists.json', function(data) {
+                allData = data;
+                table = $('#setlists').DataTable({
+                    data: data,
+                    columns: [
+                        { 
+                            data: 'date',
+                            render: function(data, type) {
+                                if (type === 'sort' || type === 'type') {
+                                    return new Date(data).getTime();
+                                }
+                                return data;
+                            }
+                        },
+                        { data: 'venue' },
+                        { data: 'location' },
+                        { data: 'setlist', orderable: false }
+                    ],
+                    pageLength: 50,
+                    order: [[0, "desc"]],
+                    search: {
+                        smart: false
+                    },
+                    language: {
+                        search: "Search setlists:"
+                    },
+                    drawCallback: highlightSearchTerms
+                });
+
+                // Populate year filter
+                var years = [...new Set(data.map(item => new Date(item.date).getFullYear()))].sort((a, b) => b - a);
+                $('#yearFilter').append($('<option>', {
+                    value: '',
+                    text: 'All Years'
+                }));
+                years.forEach(year => {
+                    $('#yearFilter').append($('<option>', {
+                        value: year,
+                        text: year
+                    }));
+                });
+
+                // Year filter event
+                $('#yearFilter').on('change', function() {
+                    table.column(0).search(this.value).draw();
+                    updateStats();
+                });
+
+                // Real-time searching
+                $('.dataTables_filter input')
+                    .off('keyup search input')
+                    .on('keyup search input', function() {
+                        table.search(this.value).draw();
+                        updateStats();
+                    });
+
+                updateStats();
+            });
+
+            function highlightSearchTerms() {
+                var api = this.api();
+                var searchTerms = api.search().toLowerCase().split(' ').filter(term => term.length > 2);
+                api.rows({page: 'current'}).nodes().each(function(node) {
+                    $(node).find('td').each(function() {
+                        var td = $(this);
+                        var content = td.text();
+                        searchTerms.forEach(function(term) {
+                            var regex = new RegExp('(' + term + ')', 'gi');
+                            content = content.replace(regex, '<span class="highlight">$1</span>');
+                        });
+                        td.html(content);
+                    });
+                });
+            }
+
+            function updateStats() {
+                var searchTerm = $('.dataTables_filter input').val().toLowerCase();
+                var yearFilter = $('#yearFilter').val();
+                
+                var filteredData = allData.filter(function(item) {
+                    return (yearFilter === '' || new Date(item.date).getFullYear().toString() === yearFilter) &&
+                           (searchTerm === '' || 
+                            item.setlist.toLowerCase().includes(searchTerm) ||
+                            item.venue.toLowerCase().includes(searchTerm) ||
+                            item.location.toLowerCase().includes(searchTerm));
+                });
+
+                var allTimeData = allData.filter(function(item) {
+                    return searchTerm === '' || 
+                           item.setlist.toLowerCase().includes(searchTerm) ||
+                           item.venue.toLowerCase().includes(searchTerm) ||
+                           item.location.toLowerCase().includes(searchTerm);
+                });
+
+                var statsHtml = '';
+                if (searchTerm !== '') {
+                    // Check if the search term matches any venues
+                    var venueMatches = allTimeData.filter(item => item.venue.toLowerCase().includes(searchTerm));
+                    var locationMatches = allTimeData.filter(item => item.location.toLowerCase().includes(searchTerm));
+
+                    if (venueMatches.length > 0) {
+                        var venueName = venueMatches[0].venue;
+                        statsHtml += `<strong>${venueName}</strong> appears ${venueMatches.length} times overall`;
+                        if (yearFilter !== '') {
+                            var yearVenueMatches = filteredData.filter(item => item.venue.toLowerCase().includes(searchTerm));
+                            statsHtml += ` and ${yearVenueMatches.length} times in ${yearFilter}`;
+                        }
+                    } else if (locationMatches.length > 0) {
+                        var locationName = locationMatches[0].location;
+                        statsHtml += `<strong>${locationName}</strong> appears ${locationMatches.length} times overall`;
+                        if (yearFilter !== '') {
+                            var yearLocationMatches = filteredData.filter(item => item.location.toLowerCase().includes(searchTerm));
+                            statsHtml += ` and ${yearLocationMatches.length} times in ${yearFilter}`;
+                        }
+                    } else {
+                        // Check if the search term matches any song titles
+                        const matchingSongs = Object.keys(songAlbums).filter(song => 
+                            song.toLowerCase().includes(searchTerm)
+                        );
+
+                        if (matchingSongs.length > 0) {
+                            const song = matchingSongs[0];
+                            const album = songAlbums[song];
+                            const releaseDate = albumReleases[album];
+                            statsHtml += `<strong>${song}</strong> appears on the album "${album}" (released ${releaseDate}). `;
+                        }
+
+                        // If not a venue, location, or known song, assume it's a setlist search
+                        var filteredOccurrences = filteredData.reduce(function(count, item) {
+                            return count + (item.setlist.toLowerCase().match(new RegExp(searchTerm, 'g')) || []).length;
+                        }, 0);
+
+                        var allTimeOccurrences = allTimeData.reduce(function(count, item) {
+                            return count + (item.setlist.toLowerCase().match(new RegExp(searchTerm, 'g')) || []).length;
+                        }, 0);
+
+                        if (yearFilter !== '') {
+                            statsHtml += `<strong>${searchTerm}</strong> appears ${filteredOccurrences} times in ${yearFilter} and ${allTimeOccurrences} times overall`;
+                        } else {
+                            statsHtml += `<strong>${searchTerm}</strong> appears ${allTimeOccurrences} times overall`;
+                        }
+                    }
+                }
+
+                $('#stats').html(statsHtml);
+            }
+        });
+    </script>
+</body>
+</html>
