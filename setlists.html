@@ -6,6 +6,7 @@
     <title>Phish Setlist Explorer</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -14,15 +15,22 @@
             background-color: #f0f4f8;
             margin: 0;
             padding: 20px;
+            background-image: url('path/to/phish-festival.jpg');  /* You'll need to provide the actual image path */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(240, 244, 248, 0.9);  /* Fallback color */
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.92);
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
         h1 {
             color: #2c3e50;
@@ -34,16 +42,14 @@
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid #2c3e50 !important;  /* Darker outer border */
         }
         #setlists th, #setlists td {
-            padding: 12px;
+            padding: 8px 12px;  /* Reduced padding */
             text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-            border-right: 1px solid #e0e0e0;
+            border-bottom: 1.5px solid #34495e !important;  /* Darker cell borders */
+            border-right: 1.5px solid #34495e !important;
+            line-height: 1.4;   /* Tighter line height */
         }
         #setlists th:last-child, #setlists td:last-child {
             border-right: none;
@@ -62,10 +68,13 @@
             border-bottom: none;
         }
         #setlists tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: rgba(249, 249, 249, 0.95);
+        }
+        #setlists tbody tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.95);
         }
         #setlists tbody tr:hover {
-            background-color: #f0f0f0;
+            background-color: rgba(237, 242, 247, 0.98);
         }
         #setlists::before {
             content: '';
@@ -108,7 +117,11 @@
         }
         .highlight {
             background-color: #fff9c4;
-            padding: 2px 0;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: bold;
+            color: #000;
+            display: inline-block;  /* Prevent highlight breaking */
         }
         #controls {
             display: flex;
@@ -125,14 +138,142 @@
             border: 1px solid #ccc;
         }
         #stats {
-            background-color: #e8f4fd;
-            padding: 10px;
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            font-family: 'Roboto', sans-serif;
+            backdrop-filter: blur(5px);
+        }
+        #stats .song-info {
             color: #2c3e50;
+            font-weight: 500;
+        }
+        #stats .album-info {
+            color: #34495e;
+            font-style: italic;
+        }
+        #stats .stats-count {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .fa, .fas {
+            color: #3498db;
+            transition: transform 0.2s ease;
+        }
+        td:hover .fa, td:hover .fas {
+            transform: scale(1.2);
+        }
+        .setlist-cell {
+            white-space: pre-wrap !important;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.4;  /* Tighter line height */
+            padding: 8px !important;  /* Less padding */
+        }
+
+        /* Style the set markers */
+        .setlist-cell {
+            font-size: 0.9em;  /* Slightly smaller text */
+        }
+
+        /* Set headers */
+        .setlist-cell:contains('*** SET') {
+            color: #3498db;
+            font-weight: 700;
+            font-size: 1em;
+            padding-top: 12px !important;  /* Less padding */
+        }
+
+        /* Encore header */
+        .setlist-cell:contains('*** ENCORE') {
+            color: #e74c3c;
+            font-weight: 700;
+            font-size: 1em;
+            padding-top: 10px !important;
+        }
+
+        /* Set headers styling */
+        .set-header {
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 4px 0;
+            padding: 2px 0;
+            border-top: 1px solid #bdc3c7;
+        }
+
+        /* Prevent nested highlights */
+        .highlight .highlight {
+            background-color: transparent;
+            padding: 0;
+            font-weight: normal;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .stats-card .song-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .stats-card .album-info {
+            color: #34495e;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .stats-card .release-date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .stats-card .occurrence-count {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .stats-card i {
+            margin-right: 8px;
+            color: #3498db;
+        }
+
+        .stats-card .search-term {
+            font-size: 1.1em;
+            color: #2c3e50;
+            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
+    <!-- Add this test div -->
+    <div style="padding: 20px; background: yellow;">
+        Icon Test:
+        <i class="fas fa-music"></i>
+        <i class="fas fa-bolt"></i>
+        <i class="fas fa-heart"></i>
+        <i class="fas fa-fire"></i>
+        <i class="fas fa-guitar"></i>
+    </div>
+
     <div class="container">
         <h1>Phish Setlist Explorer</h1>
         <div id="controls">
@@ -383,38 +524,221 @@
             "Evolve": "Evolve"
         };
 
+        const stateBirds = {
+            'NY': { bird: 'fas fa-statue-liberty', name: 'Statue of Liberty' },
+            'NJ': { bird: 'fas fa-route', name: 'Garden State' },
+            'MA': { bird: 'fas fa-baseball', name: 'Red Sox Nation' },
+            'ME': { bird: 'fas fa-lobster', name: 'Maine Lobster' },
+            'MD': { bird: 'fas fa-crab', name: 'Maryland Blue Crab' },
+            'VT': { bird: 'fas fa-mountain', name: 'Green Mountains' },
+            'NH': { bird: 'fas fa-mountain', name: 'White Mountains' },
+            'CT': { bird: 'fas fa-industry', name: 'Constitution State' },
+            'RI': { bird: 'fas fa-anchor', name: 'Ocean State' },
+            'PA': { bird: 'fas fa-bell', name: 'Liberty Bell' },
+            'DE': { bird: 'fas fa-feather', name: 'Blue Hen' },
+            'VA': { bird: 'fas fa-monument', name: 'Old Dominion' },
+            'NC': { bird: 'fas fa-plane', name: 'First in Flight' },
+            'SC': { bird: 'fas fa-palm-tree', name: 'Palmetto State' },
+            'GA': { bird: 'fas fa-peach', name: 'Peach State' },
+            'FL': { bird: 'fas fa-umbrella-beach', name: 'Sunshine State' },
+            'AL': { bird: 'fas fa-rocket', name: 'Yellowhammer State' },
+            'MS': { bird: 'fas fa-water', name: 'Magnolia State' },
+            'LA': { bird: 'fas fa-music', name: 'Jazz State' },
+            'TN': { bird: 'fas fa-music', name: 'Music City' },
+            'KY': { bird: 'fas fa-horse', name: 'Bluegrass State' },
+            'OH': { bird: 'fas fa-football-ball', name: 'Buckeye State' },
+            'IN': { bird: 'fas fa-flag-checkered', name: 'Hoosier State' },
+            'IL': { bird: 'fas fa-city', name: 'Windy City' },
+            'MI': { bird: 'fas fa-car', name: 'Motor City' },
+            'WI': { bird: 'fas fa-cheese', name: 'Cheese State' },
+            'MN': { bird: 'fas fa-water', name: 'Land of 10,000 Lakes' },
+            'IA': { bird: 'fas fa-tractor', name: 'Hawkeye State' },
+            'MO': { bird: 'fas fa-archway', name: 'Gateway State' },
+            'AR': { bird: 'fas fa-diamond', name: 'Natural State' },
+            'TX': { bird: 'fas fa-star', name: 'Lone Star State' },
+            'OK': { bird: 'fas fa-wind', name: 'Sooner State' },
+            'KS': { bird: 'fas fa-wheat', name: 'Sunflower State' },
+            'NE': { bird: 'fas fa-corn', name: 'Cornhusker State' },
+            'SD': { bird: 'fas fa-mountain', name: 'Mount Rushmore State' },
+            'ND': { bird: 'fas fa-wheat', name: 'Peace Garden State' },
+            'MT': { bird: 'fas fa-mountain', name: 'Big Sky Country' },
+            'WY': { bird: 'fas fa-horse', name: 'Cowboy State' },
+            'CO': { bird: 'fas fa-mountain', name: 'Rocky Mountain State' },
+            'NM': { bird: 'fas fa-sun', name: 'Land of Enchantment' },
+            'AZ': { bird: 'fas fa-cactus', name: 'Grand Canyon State' },
+            'UT': { bird: 'fas fa-skiing', name: 'Beehive State' },
+            'ID': { bird: 'fas fa-gem', name: 'Gem State' },
+            'WA': { bird: 'fas fa-coffee', name: 'Evergreen State' },
+            'OR': { bird: 'fas fa-tree', name: 'Beaver State' },
+            'NV': { bird: 'fas fa-dice', name: 'Silver State' },
+            'CA': { bird: 'fas fa-film', name: 'Golden State' },
+            'AK': { bird: 'fas fa-snowflake', name: 'Last Frontier' },
+            'HI': { bird: 'fas fa-umbrella-beach', name: 'Aloha State' }
+        };
+
         $(document).ready(function() {
+            console.log('Document ready');
+
             var table;
             var allData;
 
+            console.log('About to fetch JSON');
+            
             $.getJSON('phish_setlists.json', function(data) {
-                allData = data;
+                // Pre-sort data before initializing DataTable
+                data.sort((a, b) => {
+                    const parseDate = (str) => {
+                        const match = str.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+                        if (match) {
+                            const [_, month, day, year] = match;
+                            return new Date(year, month - 1, day).getTime();
+                        }
+                        return 0;
+                    };
+                    return parseDate(b.date) - parseDate(a.date);
+                });
+
+                // Updated state icons - EVERY location must have an icon
+                const locationIcons = {
+                    'NY': { icon: 'fas fa-statue-liberty', title: 'New York' },
+                    'NJ': { icon: 'fas fa-route', title: 'Garden State' },
+                    'MA': { icon: 'fas fa-baseball', title: 'Red Sox Nation' },
+                    'ME': { icon: 'fas fa-anchor', title: 'Maine' },
+                    'MD': { icon: 'fas fa-water', title: 'Maryland' },
+                    'VT': { icon: 'fas fa-mountain', title: 'Vermont' },
+                    'NH': { icon: 'fas fa-tree', title: 'New Hampshire' },
+                    'CT': { icon: 'fas fa-university', title: 'Connecticut' },
+                    'RI': { icon: 'fas fa-anchor', title: 'Rhode Island' },
+                    'PA': { icon: 'fas fa-bell', title: 'Pennsylvania' },
+                    'DE': { icon: 'fas fa-building', title: 'Delaware' },
+                    'VA': { icon: 'fas fa-landmark', title: 'Virginia' },
+                    'NC': { icon: 'fas fa-plane', title: 'North Carolina' },
+                    'SC': { icon: 'fas fa-tree', title: 'South Carolina' },
+                    'GA': { icon: 'fas fa-tree', title: 'Georgia' },
+                    'FL': { icon: 'fas fa-umbrella-beach', title: 'Florida' },
+                    'AL': { icon: 'fas fa-university', title: 'Alabama' },
+                    'MS': { icon: 'fas fa-water', title: 'Mississippi' },
+                    'LA': { icon: 'fas fa-music', title: 'Louisiana' },
+                    'TN': { icon: 'fas fa-music', title: 'Tennessee' },
+                    'KY': { icon: 'fas fa-horse', title: 'Kentucky' },
+                    'OH': { icon: 'fas fa-tree', title: 'Ohio' },
+                    'IN': { icon: 'fas fa-flag', title: 'Indiana' },
+                    'IL': { icon: 'fas fa-city', title: 'Illinois' },
+                    'MI': { icon: 'fas fa-car', title: 'Michigan' },
+                    'WI': { icon: 'fas fa-tree', title: 'Wisconsin' },
+                    'MN': { icon: 'fas fa-tree', title: 'Minnesota' },
+                    'IA': { icon: 'fas fa-tractor', title: 'Iowa' },
+                    'MO': { icon: 'fas fa-archway', title: 'Missouri' },
+                    'AR': { icon: 'fas fa-mountain', title: 'Arkansas' },
+                    'TX': { icon: 'fas fa-star', title: 'Texas' },
+                    'OK': { icon: 'fas fa-wind', title: 'Oklahoma' },
+                    'KS': { icon: 'fas fa-wheat', title: 'Kansas' },
+                    'NE': { icon: 'fas fa-landmark', title: 'Nebraska' },
+                    'SD': { icon: 'fas fa-mountain', title: 'South Dakota' },
+                    'ND': { icon: 'fas fa-sun', title: 'North Dakota' },
+                    'MT': { icon: 'fas fa-mountain', title: 'Montana' },
+                    'WY': { icon: 'fas fa-horse', title: 'Wyoming' },
+                    'CO': { icon: 'fas fa-mountain', title: 'Colorado' },
+                    'NM': { icon: 'fas fa-sun', title: 'New Mexico' },
+                    'AZ': { icon: 'fas fa-sun', title: 'Arizona' },
+                    'UT': { icon: 'fas fa-mountain', title: 'Utah' },
+                    'ID': { icon: 'fas fa-mountain', title: 'Idaho' },
+                    'WA': { icon: 'fas fa-coffee', title: 'Washington' },
+                    'OR': { icon: 'fas fa-tree', title: 'Oregon' },
+                    'NV': { icon: 'fas fa-dice', title: 'Nevada' },
+                    'CA': { icon: 'fas fa-film', title: 'California' },
+                    'AK': { icon: 'fas fa-snowflake', title: 'Alaska' },
+                    'HI': { icon: 'fas fa-umbrella-beach', title: 'Hawaii' },
+                    // Add a default icon for any unmatched locations
+                    'DEFAULT': { icon: 'fas fa-map-marker-alt', title: 'Location' }
+                };
+
+                // Now initialize DataTable with the sorted data
                 table = $('#setlists').DataTable({
                     data: data,
                     columns: [
                         { 
                             data: 'date',
+                            type: 'date',
                             render: function(data, type) {
-                                if (type === 'sort' || type === 'type') {
-                                    return new Date(data).getTime();
+                                if (type === 'sort') {
+                                    const match = data.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+                                    if (match) {
+                                        const [_, month, day, year] = match;
+                                        return `${year}${month}${day}`;
+                                    }
+                                    return '';
                                 }
                                 return data;
                             }
                         },
-                        { data: 'venue' },
-                        { data: 'location' },
-                        { data: 'setlist', orderable: false }
+                        { data: 'venue', orderable: false },
+                        { 
+                            data: 'location',
+                            orderable: false,
+                            render: function(data, type) {
+                                if (type === 'display') {
+                                    let state = data.split(',')[1]?.trim() || '';
+                                    let stateInfo = stateBirds[state];
+                                    if (stateInfo) {
+                                        return `<i class="${stateInfo.bird}" title="${stateInfo.name}" style="margin-right: 8px; color: #2c3e50; font-size: 1.1em;"></i>${data}`;
+                                    }
+                                    return data;
+                                }
+                                return data;
+                            }
+                        },
+                        { 
+                            data: 'setlist',
+                            className: 'setlist-cell',
+                            orderable: false,
+                            render: function(data, type) {
+                                if (type === 'display') {
+                                    let lines = data.split('\n');
+                                    lines = lines.map(line => {
+                                        line = line.replace(/\t+/g, ' ').trim();
+                                        if (line.includes('SET 1:')) return `<div class="set-header">SET 1:</div>`;
+                                        if (line.includes('SET 2:')) return `<div class="set-header">SET 2:</div>`;
+                                        if (line.includes('SET 3:')) return `<div class="set-header">SET 3:</div>`;
+                                        if (line.includes('ENCORE:')) return `<div class="set-header">ENCORE:</div>`;
+                                        return line;
+                                    });
+                                    return lines.join('\n').replace(/,\s+/g, ', ');
+                                }
+                                return data;
+                            }
+                        }
                     ],
                     pageLength: 50,
                     order: [[0, "desc"]],
                     search: {
-                        smart: false
+                        smart: false,  // Disable smart search
+                        search: "",    // Clear initial search
+                        regex: false,  // Disable regex search
+                        caseInsensitive: true
                     },
                     language: {
-                        search: "Search setlists:"
+                        search: "Search (type 3+ characters):"  // Update search label
                     },
-                    drawCallback: highlightSearchTerms
+                    initComplete: function() {
+                        // Add minimum character requirement for search
+                        var api = this.api();
+                        $('.dataTables_filter input')
+                            .off()
+                            .on('input', function() {
+                                var searchVal = this.value;
+                                if (searchVal.length >= 3 || searchVal.length === 0) {
+                                    api.search(this.value).draw();
+                                }
+                            });
+                    }
                 });
+
+                console.log('First 3 entries:');
+                console.log(JSON.stringify(data.slice(0, 3), null, 2));
+                
+                console.log('Data loaded successfully:', data);
+                allData = data;
 
                 // Populate year filter
                 var years = [...new Set(data.map(item => new Date(item.date).getFullYear()))].sort((a, b) => b - a);
@@ -444,19 +768,34 @@
                     });
 
                 updateStats();
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('Failed to load JSON:', textStatus, errorThrown);
+                console.error('Status:', jqXHR.status);
+                console.error('Response Text:', jqXHR.responseText);
+                alert('Failed to load data. Check console for details.');
             });
 
             function highlightSearchTerms() {
                 var api = this.api();
                 var searchTerms = api.search().toLowerCase().split(' ').filter(term => term.length > 2);
+                
                 api.rows({page: 'current'}).nodes().each(function(node) {
                     $(node).find('td').each(function() {
                         var td = $(this);
                         var content = td.text();
+                        
                         searchTerms.forEach(function(term) {
                             var regex = new RegExp('(' + term + ')', 'gi');
-                            content = content.replace(regex, '<span class="highlight">$1</span>');
+                            content = content.replace(regex, '<span class="highlight">${match}</span>');
                         });
+                        
+                        // Preserve set markers while adding highlights
+                        if (td.hasClass('setlist-cell')) {
+                            content = content.replace(/\*\*\* (SET [123]|ENCORE): \*\*\*/g, function(match) {
+                                return match.replace(/\*/g, '').trim();
+                            });
+                        }
+                        
                         td.html(content);
                     });
                 });
@@ -464,74 +803,162 @@
 
             function updateStats() {
                 var searchTerm = $('.dataTables_filter input').val().toLowerCase();
-                var yearFilter = $('#yearFilter').val();
-                
-                var filteredData = allData.filter(function(item) {
-                    return (yearFilter === '' || new Date(item.date).getFullYear().toString() === yearFilter) &&
-                           (searchTerm === '' || 
-                            item.setlist.toLowerCase().includes(searchTerm) ||
-                            item.venue.toLowerCase().includes(searchTerm) ||
-                            item.location.toLowerCase().includes(searchTerm));
-                });
-
-                var allTimeData = allData.filter(function(item) {
-                    return searchTerm === '' || 
-                           item.setlist.toLowerCase().includes(searchTerm) ||
-                           item.venue.toLowerCase().includes(searchTerm) ||
-                           item.location.toLowerCase().includes(searchTerm);
-                });
-
-                var statsHtml = '';
-                if (searchTerm !== '') {
-                    // Check if the search term matches any venues
-                    var venueMatches = allTimeData.filter(item => item.venue.toLowerCase().includes(searchTerm));
-                    var locationMatches = allTimeData.filter(item => item.location.toLowerCase().includes(searchTerm));
-
-                    if (venueMatches.length > 0) {
-                        var venueName = venueMatches[0].venue;
-                        statsHtml += `<strong>${venueName}</strong> appears ${venueMatches.length} times overall`;
-                        if (yearFilter !== '') {
-                            var yearVenueMatches = filteredData.filter(item => item.venue.toLowerCase().includes(searchTerm));
-                            statsHtml += ` and ${yearVenueMatches.length} times in ${yearFilter}`;
-                        }
-                    } else if (locationMatches.length > 0) {
-                        var locationName = locationMatches[0].location;
-                        statsHtml += `<strong>${locationName}</strong> appears ${locationMatches.length} times overall`;
-                        if (yearFilter !== '') {
-                            var yearLocationMatches = filteredData.filter(item => item.location.toLowerCase().includes(searchTerm));
-                            statsHtml += ` and ${yearLocationMatches.length} times in ${yearFilter}`;
-                        }
-                    } else {
-                        // Check if the search term matches any song titles
-                        const matchingSongs = Object.keys(songAlbums).filter(song => 
-                            song.toLowerCase().includes(searchTerm)
-                        );
-
-                        if (matchingSongs.length > 0) {
-                            const song = matchingSongs[0];
-                            const album = songAlbums[song];
-                            const releaseDate = albumReleases[album];
-                            statsHtml += `<strong>${song}</strong> appears on the album "${album}" (released ${releaseDate}). `;
-                        }
-
-                        // If not a venue, location, or known song, assume it's a setlist search
-                        var filteredOccurrences = filteredData.reduce(function(count, item) {
-                            return count + (item.setlist.toLowerCase().match(new RegExp(searchTerm, 'g')) || []).length;
-                        }, 0);
-
-                        var allTimeOccurrences = allTimeData.reduce(function(count, item) {
-                            return count + (item.setlist.toLowerCase().match(new RegExp(searchTerm, 'g')) || []).length;
-                        }, 0);
-
-                        if (yearFilter !== '') {
-                            statsHtml += `<strong>${searchTerm}</strong> appears ${filteredOccurrences} times in ${yearFilter} and ${allTimeOccurrences} times overall`;
-                        } else {
-                            statsHtml += `<strong>${searchTerm}</strong> appears ${allTimeOccurrences} times overall`;
-                        }
-                    }
+                if (searchTerm.length < 3) {
+                    $('#stats').html('');
+                    return;
                 }
 
+                // Find matching songs (partial matches)
+                const matchingSongs = Object.keys(songAlbums).filter(song => 
+                    song.toLowerCase().includes(searchTerm)
+                );
+
+                let statsHtml = '';
+                
+                if (matchingSongs.length > 0) {
+                    // Get the first matching song
+                    const song = matchingSongs[0];
+                    const album = songAlbums[song];
+                    const releaseDate = albumReleases[album];
+                    
+                    statsHtml = `
+                        <div class="stats-card">
+                            <div class="song-title">${song}</div>
+                            <div class="album-info">
+                                <i class="fas fa-compact-disc"></i> ${album}
+                            </div>
+                            <div class="release-date">
+                                <i class="fas fa-calendar"></i> Released ${releaseDate}
+                            </div>
+                            <div class="occurrence-count">
+                                <i class="fas fa-play"></i> Played ${countOccurrences(searchTerm)} times
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // If no album match, just show occurrence count
+                    statsHtml = `
+                        <div class="stats-card">
+                            <div class="search-term">"${searchTerm}"</div>
+                            <div class="occurrence-count">
+                                <i class="fas fa-search"></i> Found ${countOccurrences(searchTerm)} matches
+                            </div>
+                        </div>
+                    `;
+                }
+                
                 $('#stats').html(statsHtml);
+            }
+
+            function countOccurrences(term) {
+                var count = 0;
+                table.rows({ search: 'applied' }).every(function() {
+                    var setlist = this.data().setlist.toLowerCase();
+                    count += (setlist.match(new RegExp(term, 'g')) || []).length;
+                });
+                return count;
+            }
+
+            // Add this function to determine the appropriate icon
+            function getVenueIcon(venue) {
+                venue = venue.toLowerCase();
+                
+                // Amphitheaters
+                if (venue.includes('amphitheater') || venue.includes('amphitheatre')) {
+                    return 'fas fa-mountain';
+                }
+                // Arenas
+                if (venue.includes('arena') || venue.includes('center') || venue.includes('centre')) {
+                    return 'fas fa-hockey-puck';
+                }
+                // Theaters
+                if (venue.includes('theater') || venue.includes('theatre')) {
+                    return 'fas fa-masks-theater';
+                }
+                // Parks and outdoor venues
+                if (venue.includes('park') || venue.includes('festival') || venue.includes('field')) {
+                    return 'fas fa-tree';
+                }
+                // Stadiums
+                if (venue.includes('stadium')) {
+                    return 'fas fa-football-ball';
+                }
+                // Civic centers
+                if (venue.includes('civic')) {
+                    return 'fas fa-landmark';
+                }
+                // Clubs and small venues
+                if (venue.includes('club') || venue.includes('hall')) {
+                    return 'fas fa-music';
+                }
+                // Casinos
+                if (venue.includes('casino')) {
+                    return 'fas fa-dice';
+                }
+                // Fairgrounds
+                if (venue.includes('fair') || venue.includes('grounds')) {
+                    return 'fas fa-ferris-wheel';
+                }
+                // Universities
+                if (venue.includes('university') || venue.includes('college')) {
+                    return 'fas fa-graduation-cap';
+                }
+                // Convention centers
+                if (venue.includes('convention')) {
+                    return 'fas fa-building';
+                }
+                // Beach venues
+                if (venue.includes('beach')) {
+                    return 'fas fa-umbrella-beach';
+                }
+                // Default icon for other venues
+                return 'fas fa-map-marker-alt';
+            }
+
+            function getSongIcon(songName) {
+                // Clean up the song name
+                songName = songName.toLowerCase().trim();
+                
+                // Skip set markers and other non-songs
+                if (songName.includes('set') || songName.includes('encore') || songName === 'jam') {
+                    return '';  // Return empty string for non-songs
+                }
+
+                // Epic jams and long songs
+                if (songName.includes('tweezer') || 
+                    songName.includes('you enjoy myself') || 
+                    songName.includes('ghost') ||
+                    songName.includes('carini') ||
+                    songName.includes('sand')) {
+                    return 'fas fa-bolt';
+                }
+                
+                // Funky songs
+                if (songName.includes('moma') || 
+                    songName.includes('boogie') || 
+                    songName.includes('tube') ||
+                    songName.includes('julius')) {
+                    return 'fas fa-music';
+                }
+                
+                // Ballads and slower songs
+                if (songName.includes('waste') || 
+                    songName.includes('farmhouse') || 
+                    songName.includes('velvet sea') ||
+                    songName.includes('mountains in the mist')) {
+                    return 'fas fa-heart';
+                }
+                
+                // High energy rockers
+                if (songName.includes('chalkdust') || 
+                    songName.includes('character zero') || 
+                    songName.includes('wilson') ||
+                    songName.includes('alaska')) {
+                    return 'fas fa-fire';
+                }
+                
+                // Default
+                return 'fas fa-music';
             }
         });
     </script>
