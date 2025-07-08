@@ -3,288 +3,519 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phish Setlist Explorer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>🎵 Phish Setlist Explorer - Interactive Audio Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f0f4f8;
+        * {
             margin: 0;
-            padding: 20px;
-            background-image: url('path/to/phish-festival.jpg');  /* You'll need to provide the actual image path */
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: rgba(240, 244, 248, 0.9);  /* Fallback color */
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460, #533a7d);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
         .container {
-            max-width: 1200px;
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
             margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.92);
-            border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         h1 {
-            color: #2c3e50;
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGradient 6s ease infinite;
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 2.2em;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
         }
+
+        @keyframes textGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .controls-panel {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: #4ecdc4;
+        }
+
+        .control-group select, .control-group input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #fff;
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        .control-group select:focus, .control-group input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+        }
+
+        .audio-toggle {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .audio-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .visualizer {
+            display: flex;
+            gap: 3px;
+            align-items: end;
+            height: 40px;
+        }
+
+        .bar {
+            width: 4px;
+            background: linear-gradient(to top, #ff6b6b, #4ecdc4);
+            animation: visualize 1s ease-in-out infinite;
+            border-radius: 2px;
+        }
+
+        .bar:nth-child(1) { animation-delay: 0s; height: 15px; }
+        .bar:nth-child(2) { animation-delay: 0.1s; height: 25px; }
+        .bar:nth-child(3) { animation-delay: 0.2s; height: 20px; }
+        .bar:nth-child(4) { animation-delay: 0.3s; height: 30px; }
+        .bar:nth-child(5) { animation-delay: 0.4s; height: 18px; }
+        .bar:nth-child(6) { animation-delay: 0.5s; height: 28px; }
+
+        @keyframes visualize {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.3); }
+        }
+
+        #setlists_wrapper {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         #setlists {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border: 2px solid #2c3e50 !important;  /* Darker outer border */
+            background: transparent;
         }
-        #setlists th, #setlists td {
-            padding: 8px 12px;  /* Reduced padding */
-            text-align: left;
-            border-bottom: 1.5px solid #34495e !important;  /* Darker cell borders */
-            border-right: 1.5px solid #34495e !important;
-            line-height: 1.4;   /* Tighter line height */
-        }
-        #setlists th:last-child, #setlists td:last-child {
-            border-right: none;
-        }
+
         #setlists thead {
-            background-color: #3498db;
-            color: #ffffff;
-        }
-        #setlists thead th {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
             position: sticky;
             top: 0;
-            z-index: 10;
-            border-bottom: 2px solid #2980b9;
-        }
-        #setlists tbody tr:last-child td {
-            border-bottom: none;
-        }
-        #setlists tbody tr:nth-child(even) {
-            background-color: rgba(249, 249, 249, 0.95);
-        }
-        #setlists tbody tr:nth-child(odd) {
-            background-color: rgba(255, 255, 255, 0.95);
-        }
-        #setlists tbody tr:hover {
-            background-color: rgba(237, 242, 247, 0.98);
-        }
-        #setlists::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-        #setlists::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
-        .dataTables_wrapper .dataTables_filter input {
-            margin-left: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            padding: 6px;
-            width: 250px;
-        }
-        .dataTables_wrapper .dataTables_length select {
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            padding: 5px;
-        }
-        #setlists td:nth-child(4) {
-            max-width: 400px;
-            white-space: normal;
-            word-wrap: break-word;
-        }
-        .highlight {
-            background-color: #fff9c4;
-            padding: 2px 4px;
-            border-radius: 2px;
-            font-weight: bold;
-            color: #000;
-            display: inline-block;  /* Prevent highlight breaking */
-        }
-        #controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border-radius: 4px;
-        }
-        #yearFilter {
-            padding: 6px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-        #stats {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 8px;
-            padding: 12px 20px;
-            margin: 10px 0;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(52, 152, 219, 0.2);
-            font-family: 'Roboto', sans-serif;
-            backdrop-filter: blur(5px);
-        }
-        #stats .song-info {
-            color: #2c3e50;
-            font-weight: 500;
-        }
-        #stats .album-info {
-            color: #34495e;
-            font-style: italic;
-        }
-        #stats .stats-count {
-            color: #e74c3c;
-            font-weight: bold;
-        }
-        .fa, .fas {
-            color: #3498db;
-            transition: transform 0.2s ease;
-        }
-        td:hover .fa, td:hover .fas {
-            transform: scale(1.2);
-        }
-        .setlist-cell {
-            white-space: pre-wrap !important;
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.4;  /* Tighter line height */
-            padding: 8px !important;  /* Less padding */
+            z-index: 100;
         }
 
-        /* Style the set markers */
-        .setlist-cell {
-            font-size: 0.9em;  /* Slightly smaller text */
-        }
-
-        /* Set headers */
-        .setlist-cell:contains('*** SET') {
-            color: #3498db;
+        #setlists th {
+            padding: 15px 12px;
+            color: #fff;
             font-weight: 700;
-            font-size: 1em;
-            padding-top: 12px !important;  /* Less padding */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            font-family: 'Orbitron', monospace;
         }
 
-        /* Encore header */
-        .setlist-cell:contains('*** ENCORE') {
-            color: #e74c3c;
-            font-weight: 700;
-            font-size: 1em;
-            padding-top: 10px !important;
-        }
-
-        /* Set headers styling */
-        .set-header {
-            color: #2c3e50;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin: 4px 0;
-            padding: 2px 0;
-            border-top: 1px solid #bdc3c7;
-        }
-
-        /* Prevent nested highlights */
-        .highlight .highlight {
-            background-color: transparent;
-            padding: 0;
-            font-weight: normal;
-        }
-
-        .stats-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 8px;
-            padding: 15px 20px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(52, 152, 219, 0.2);
-            backdrop-filter: blur(5px);
+        #setlists td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
 
-        .stats-card:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        #setlists tbody tr:hover {
+            background: rgba(78, 205, 196, 0.2);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .stats-card .song-title {
-            font-size: 1.2em;
+        .song-name {
+            cursor: pointer;
+            color: #4ecdc4;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .song-name:hover {
+            color: #ff6b6b;
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        .song-name.playing {
+            color: #feca57;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .audio-indicator {
+            position: absolute;
+            top: -5px;
+            right: -15px;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .stats-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4ecdc4;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .stat-label {
+            color: #b8c6db;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .floating-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            min-width: 300px;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+        }
+
+        .floating-player.active {
+            transform: translateY(0);
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .play-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-title {
+            font-weight: 600;
+            color: #4ecdc4;
+        }
+
+        .song-details {
+            font-size: 0.8rem;
+            color: #b8c6db;
+        }
+
+        .waveform {
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to top, #ff6b6b, #4ecdc4);
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 20%; }
+            50% { height: 80%; }
+        }
+
+        .search-highlight {
+            background: linear-gradient(45deg, #feca57, #ff6b6b);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            color: #fff;
+            margin-left: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_filter input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px;
+            color: #fff;
+        }
+
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_paginate {
+            color: #b8c6db;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff !important;
+            border-radius: 5px;
+            margin: 0 2px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: rgba(78, 205, 196, 0.3) !important;
+            border-color: #4ecdc4 !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4) !important;
+            border-color: #4ecdc4 !important;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .controls-panel { flex-direction: column; align-items: stretch; }
+            .floating-player { 
+                right: 10px; 
+                left: 10px; 
+                min-width: auto; 
+            }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .setlist-cell {
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .jam-indicator {
+            color: #feca57;
             font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 8px;
         }
 
-        .stats-card .album-info {
-            color: #34495e;
-            font-style: italic;
-            margin-bottom: 5px;
-        }
-
-        .stats-card .release-date {
-            color: #7f8c8d;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-
-        .stats-card .occurrence-count {
-            color: #e74c3c;
+        .encore-header {
+            color: #ff6b6b;
             font-weight: bold;
-            margin-top: 8px;
+            text-transform: uppercase;
         }
 
-        .stats-card i {
-            margin-right: 8px;
-            color: #3498db;
-        }
-
-        .stats-card .search-term {
-            font-size: 1.1em;
-            color: #2c3e50;
-            margin-bottom: 8px;
+        .set-header {
+            color: #4ecdc4;
+            font-weight: bold;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
-    <!-- Add this test div -->
-    <div style="padding: 20px; background: yellow;">
-        Icon Test:
-        <i class="fas fa-music"></i>
-        <i class="fas fa-bolt"></i>
-        <i class="fas fa-heart"></i>
-        <i class="fas fa-fire"></i>
-        <i class="fas fa-guitar"></i>
-    </div>
+    <div class="stars" id="stars"></div>
 
     <div class="container">
-        <h1>Phish Setlist Explorer</h1>
-        <div id="controls">
-            <div>
-                <label for="yearFilter">Filter by Year:</label>
+        <h1>🎵 Phish Setlist Explorer</h1>
+        
+        <div class="controls-panel">
+            <div class="control-group">
+                <label for="yearFilter">Year:</label>
                 <select id="yearFilter">
                     <option value="">All Years</option>
                 </select>
             </div>
-            <div id="stats"></div>
+            
+            <div class="control-group">
+                <label for="venueFilter">Venue:</label>
+                <input type="text" id="venueFilter" placeholder="Search venues...">
+            </div>
+            
+            <button class="audio-toggle" id="audioToggle">
+                <i class="fas fa-volume-up"></i>
+                Enable Audio
+            </button>
+            
+            <div class="visualizer" id="visualizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
         </div>
+
+        <div class="stats-panel">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalShows">0</div>
+                    <div class="stat-label">Total Shows</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalSongs">0</div>
+                    <div class="stat-label">Unique Songs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="yearSpan">0</div>
+                    <div class="stat-label">Years Active</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalVenues">0</div>
+                    <div class="stat-label">Venues Played</div>
+                </div>
+            </div>
+        </div>
+
         <table id="setlists" class="display">
             <thead>
                 <tr>
@@ -300,667 +531,373 @@
         </table>
     </div>
 
+    <div class="floating-player" id="floatingPlayer">
+        <div class="player-controls">
+            <button class="play-btn" id="playBtn">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="song-info">
+                <div class="song-title" id="currentSong">No song selected</div>
+                <div class="song-details" id="songDetails">Click on a song to hear a preview</div>
+            </div>
+        </div>
+        <div class="waveform" id="waveform"></div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script>
-        // Album to release date mapping
-        const albumReleases = {
-            "Junta": "1989-05-08",
-            "Lawn Boy": "1990-09-21",
-            "A Picture of Nectar": "1992-02-18",
-            "Rift": "1993-02-02",
-            "Hoist": "1994-03-29",
-            "Billy Breathes": "1996-10-15",
-            "The Story of the Ghost": "1998-10-27",
-            "Farmhouse": "2000-05-16",
-            "Round Room": "2002-12-10",
-            "Undermind": "2004-06-15",
-            "Joy": "2009-09-08",
-            "Fuego": "2014-06-24",
-            "Big Boat": "2016-10-07",
-            "Sigma Oasis": "2020-04-02",
-            "Evolve": "2024-07-12"
+        // Global variables
+        let setlistData = [];
+        let dataTable;
+        let audioContext;
+        let currentOscillator;
+        let isPlaying = false;
+        let audioEnabled = false;
+        let currentSong = null;
+
+        // Song frequency mappings for procedural audio
+        const songFrequencies = {
+            'You Enjoy Myself': [440, 554.37, 659.25],
+            'Fluffhead': [329.63, 415.30, 523.25],
+            'David Bowie': [293.66, 369.99, 440],
+            'Harry Hood': [261.63, 329.63, 392],
+            'Possum': [220, 277.18, 329.63],
+            'Wilson': [185, 220, 261.63],
+            'Tweezer': [147, 185, 220],
+            'Mike\'s Song': [196, 246.94, 293.66],
+            'Weekapaug Groove': [146.83, 185, 220],
+            'Run Like an Antelope': [164.81, 207.65, 246.94],
+            'Slave to the Traffic Light': [174.61, 220, 261.63],
+            'Chalk Dust Torture': [246.94, 311.13, 369.99],
+            'Bouncing Around the Room': [392, 493.88, 587.33],
+            'Reba': [207.65, 261.63, 311.13],
+            'The Divided Sky': [329.63, 415.30, 493.88],
+            'Stash': [155.56, 196, 233.08],
+            'Bathtub Gin': [220, 277.18, 329.63],
+            'Maze': [164.81, 207.65, 246.94],
+            'Julius': [174.61, 220, 261.63],
+            'Sample in a Jar': [196, 246.94, 293.66],
+            'Character Zero': [164.81, 207.65, 246.94],
+            'Free': [174.61, 220, 261.63],
+            'Ghost': [130.81, 164.81, 196],
+            'Birds of a Feather': [146.83, 185, 220],
+            'Down with Disease': [155.56, 196, 233.08]
         };
 
-        // Comprehensive song to album mapping
-        const songAlbums = {
-            // Junta
-            "Fee": "Junta",
-            "You Enjoy Myself": "Junta",
-            "Esther": "Junta",
-            "Golgi Apparatus": "Junta",
-            "Foam": "Junta",
-            "Dinner and a Movie": "Junta",
-            "The Divided Sky": "Junta",
-            "David Bowie": "Junta",
-            "Fluffhead": "Junta",
-            "Fluff's Travels": "Junta",
-            "Contact": "Junta",
-            "Union Federal": "Junta",
-            "Sanity": "Junta",
-            "Icculus": "Junta",
+        // Initialize audio context
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
 
-            // Lawn Boy
-            "The Squirming Coil": "Lawn Boy",
-            "Reba": "Lawn Boy",
-            "My Sweet One": "Lawn Boy",
-            "Split Open and Melt": "Lawn Boy",
-            "Bouncing Around the Room": "Lawn Boy",
-            "Possum": "Lawn Boy",
-            "Lawn Boy": "Lawn Boy",
-            "Bathtub Gin": "Lawn Boy",
-            "Run Like an Antelope": "Lawn Boy",
-            "Magilla": "Lawn Boy",
+        // Create stars background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
 
-            // A Picture of Nectar
-            "Llama": "A Picture of Nectar",
-            "Eliza": "A Picture of Nectar",
-            "Cavern": "A Picture of Nectar",
-            "Poor Heart": "A Picture of Nectar",
-            "Stash": "A Picture of Nectar",
-            "Manteca": "A Picture of Nectar",
-            "Guelah Papyrus": "A Picture of Nectar",
-            "Chalk Dust Torture": "A Picture of Nectar",
-            "The Mango Song": "A Picture of Nectar",
-            "Tweezer": "A Picture of Nectar",
-            "The Landlady": "A Picture of Nectar",
-            "Glide": "A Picture of Nectar",
-            "Tweezer Reprise": "A Picture of Nectar",
-            "Catapult": "A Picture of Nectar",
-            "Faht": "A Picture of Nectar",
-
-            // Rift
-            "Rift": "Rift",
-            "Fast Enough for You": "Rift",
-            "Maze": "Rift",
-            "Sparkle": "Rift",
-            "Horn": "Rift",
-            "The Wedge": "Rift",
-            "My Friend, My Friend": "Rift",
-            "Weigh": "Rift",
-            "All Things Reconsidered": "Rift",
-            "Mound": "Rift",
-            "It's Ice": "Rift",
-            "Lengthwise": "Rift",
-            "The Horse": "Rift",
-            "Silent in the Morning": "Rift",
-
-            // Hoist
-            "Julius": "Hoist",
-            "Down with Disease": "Hoist",
-            "If I Could": "Hoist",
-            "Riker's Mailbox": "Hoist",
-            "Axilla (Part II)": "Hoist",
-            "Lifeboy": "Hoist",
-            "Sample in a Jar": "Hoist",
-            "Wolfman's Brother": "Hoist",
-            "Scent of a Mule": "Hoist",
-            "Dog Faced Boy": "Hoist",
-            "Demand": "Hoist",
-
-            // Billy Breathes
-            "Free": "Billy Breathes",
-            "Character Zero": "Billy Breathes",
-            "Waste": "Billy Breathes",
-            "Taste": "Billy Breathes",
-            "Cars Trucks Buses": "Billy Breathes",
-            "Talk": "Billy Breathes",
-            "Theme From the Bottom": "Billy Breathes",
-            "Train Song": "Billy Breathes",
-            "Bliss": "Billy Breathes",
-            "Billy Breathes": "Billy Breathes",
-            "Swept Away": "Billy Breathes",
-            "Steep": "Billy Breathes",
-            "Prince Caspian": "Billy Breathes",
-
-            // The Story of the Ghost
-            "Ghost": "The Story of the Ghost",
-            "Birds of a Feather": "The Story of the Ghost",
-            "Meat": "The Story of the Ghost",
-            "Guyute": "The Story of the Ghost",
-            "Fikus": "The Story of the Ghost",
-            "Shafty": "The Story of the Ghost",
-            "Limb By Limb": "The Story of the Ghost",
-            "Frankie Says": "The Story of the Ghost",
-            "Brian and Robert": "The Story of the Ghost",
-            "Water in the Sky": "The Story of the Ghost",
-            "Roggae": "The Story of the Ghost",
-            "Wading in the Velvet Sea": "The Story of the Ghost",
-            "The Moma Dance": "The Story of the Ghost",
-            "End of Session": "The Story of the Ghost",
-
-            // Farmhouse
-            "Farmhouse": "Farmhouse",
-            "Twist": "Farmhouse",
-            "Bug": "Farmhouse",
-            "Back on the Train": "Farmhouse",
-            "Heavy Things": "Farmhouse",
-            "Gotta Jibboo": "Farmhouse",
-            "Dirt": "Farmhouse",
-            "Piper": "Farmhouse",
-            "Sleep": "Farmhouse",
-            "The Inlaw Josie Wales": "Farmhouse",
-            "Sand": "Farmhouse",
-            "First Tube": "Farmhouse",
-
-            // Round Room
-            "Pebbles and Marbles": "Round Room",
-            "Anything But Me": "Round Room",
-            "Round Room": "Round Room",
-            "Walls of the Cave": "Round Room",
-            "Mexican Cousin": "Round Room",
-            "Friday": "Round Room",
-            "Seven Below": "Round Room",
-            "Mock Song": "Round Room",
-            "46 Days": "Round Room",
-            "All of These Dreams": "Round Room",
-            "Thunderhead": "Round Room",
-            "Waves": "Round Room",
-
-            // Undermind
-            "Scents and Subtle Sounds": "Undermind",
-            "The Connection": "Undermind",
-            "A Song I Heard the Ocean Sing": "Undermind",
-            "Army of One": "Undermind",
-            "Undermind": "Undermind",
-            "Secret Smile": "Undermind",
-            "Access Me": "Undermind",
-            "Nothing": "Undermind",
-            "Two Versions of Me": "Undermind",
-            "Crowd Control": "Undermind",
-            "Maggie's Revenge": "Undermind",
-            "Tiny": "Undermind",
-
-            // Joy
-            "Backwards Down the Number Line": "Joy",
-            "Stealing Time From the Faulty Plan": "Joy",
-            "Joy": "Joy",
-            "Sugar Shack": "Joy",
-            "Ocelot": "Joy",
-            "Kill Devil Falls": "Joy",
-            "Light": "Joy",
-            "I Been Around": "Joy",
-            "Time Turns Elastic": "Joy",
-            "Twenty Years Later": "Joy",
-
-            // Fuego
-            "Fuego": "Fuego",
-            "The Line": "Fuego",
-            "Devotion to a Dream": "Fuego",
-            "Halfway to the Moon": "Fuego",
-            "Winterqueen": "Fuego",
-            "Sing Monica": "Fuego",
-            "555": "Fuego",
-            "Waiting All Night": "Fuego",
-            "Wombat": "Fuego",
-            "Wingsuit": "Fuego",
-
-            // Big Boat
-            "Friends": "Big Boat",
-            "Breath and Burning": "Big Boat",
-            "Home": "Big Boat",
-            "Blaze On": "Big Boat",
-            "Tide Turns": "Big Boat",
-            "Things People Do": "Big Boat",
-            "Waking Up Dead": "Big Boat",
-            "Running Out of Time": "Big Boat",
-            "No Men In No Man's Land": "Big Boat",
-            "Miss You": "Big Boat",
-            "I Always Wanted It This Way": "Big Boat",
-            "More": "Big Boat",
-            "Petrichor": "Big Boat",
-
-            // Sigma Oasis
-            "Sigma Oasis": "Sigma Oasis",
-            "Leaves": "Sigma Oasis",
-            "Everything's Right": "Sigma Oasis",
-            "Mercury": "Sigma Oasis",
-            "Thread": "Sigma Oasis",
-            "Shade": "Sigma Oasis",
-            "A Life Beyond The Dream": "Sigma Oasis",
-            "Thread": "Sigma Oasis",
-
-            // Evolve (upcoming album, track list not confirmed)
-            "Evolve": "Evolve"
-        };
-
-        const stateBirds = {
-            'NY': { bird: 'fas fa-statue-liberty', name: 'Statue of Liberty' },
-            'NJ': { bird: 'fas fa-route', name: 'Garden State' },
-            'MA': { bird: 'fas fa-baseball', name: 'Red Sox Nation' },
-            'ME': { bird: 'fas fa-lobster', name: 'Maine Lobster' },
-            'MD': { bird: 'fas fa-crab', name: 'Maryland Blue Crab' },
-            'VT': { bird: 'fas fa-mountain', name: 'Green Mountains' },
-            'NH': { bird: 'fas fa-mountain', name: 'White Mountains' },
-            'CT': { bird: 'fas fa-industry', name: 'Constitution State' },
-            'RI': { bird: 'fas fa-anchor', name: 'Ocean State' },
-            'PA': { bird: 'fas fa-bell', name: 'Liberty Bell' },
-            'DE': { bird: 'fas fa-feather', name: 'Blue Hen' },
-            'VA': { bird: 'fas fa-monument', name: 'Old Dominion' },
-            'NC': { bird: 'fas fa-plane', name: 'First in Flight' },
-            'SC': { bird: 'fas fa-palm-tree', name: 'Palmetto State' },
-            'GA': { bird: 'fas fa-peach', name: 'Peach State' },
-            'FL': { bird: 'fas fa-umbrella-beach', name: 'Sunshine State' },
-            'AL': { bird: 'fas fa-rocket', name: 'Yellowhammer State' },
-            'MS': { bird: 'fas fa-water', name: 'Magnolia State' },
-            'LA': { bird: 'fas fa-music', name: 'Jazz State' },
-            'TN': { bird: 'fas fa-music', name: 'Music City' },
-            'KY': { bird: 'fas fa-horse', name: 'Bluegrass State' },
-            'OH': { bird: 'fas fa-football-ball', name: 'Buckeye State' },
-            'IN': { bird: 'fas fa-flag-checkered', name: 'Hoosier State' },
-            'IL': { bird: 'fas fa-city', name: 'Windy City' },
-            'MI': { bird: 'fas fa-car', name: 'Motor City' },
-            'WI': { bird: 'fas fa-cheese', name: 'Cheese State' },
-            'MN': { bird: 'fas fa-water', name: 'Land of 10,000 Lakes' },
-            'IA': { bird: 'fas fa-tractor', name: 'Hawkeye State' },
-            'MO': { bird: 'fas fa-archway', name: 'Gateway State' },
-            'AR': { bird: 'fas fa-diamond', name: 'Natural State' },
-            'TX': { bird: 'fas fa-star', name: 'Lone Star State' },
-            'OK': { bird: 'fas fa-wind', name: 'Sooner State' },
-            'KS': { bird: 'fas fa-wheat', name: 'Sunflower State' },
-            'NE': { bird: 'fas fa-corn', name: 'Cornhusker State' },
-            'SD': { bird: 'fas fa-mountain', name: 'Mount Rushmore State' },
-            'ND': { bird: 'fas fa-wheat', name: 'Peace Garden State' },
-            'MT': { bird: 'fas fa-mountain', name: 'Big Sky Country' },
-            'WY': { bird: 'fas fa-horse', name: 'Cowboy State' },
-            'CO': { bird: 'fas fa-mountain', name: 'Rocky Mountain State' },
-            'NM': { bird: 'fas fa-sun', name: 'Land of Enchantment' },
-            'AZ': { bird: 'fas fa-cactus', name: 'Grand Canyon State' },
-            'UT': { bird: 'fas fa-skiing', name: 'Beehive State' },
-            'ID': { bird: 'fas fa-gem', name: 'Gem State' },
-            'WA': { bird: 'fas fa-coffee', name: 'Evergreen State' },
-            'OR': { bird: 'fas fa-tree', name: 'Beaver State' },
-            'NV': { bird: 'fas fa-dice', name: 'Silver State' },
-            'CA': { bird: 'fas fa-film', name: 'Golden State' },
-            'AK': { bird: 'fas fa-snowflake', name: 'Last Frontier' },
-            'HI': { bird: 'fas fa-umbrella-beach', name: 'Aloha State' }
-        };
-
-        $(document).ready(function() {
-            console.log('Document ready');
-
-            var table;
-            var allData;
-
-            console.log('About to fetch JSON');
+        // Generate waveform visualization
+        function generateWaveform() {
+            const waveform = document.getElementById('waveform');
+            waveform.innerHTML = '';
             
-            $.getJSON('phish_setlists.json', function(data) {
-                // Pre-sort data before initializing DataTable
-                data.sort((a, b) => {
-                    const parseDate = (str) => {
-                        const match = str.match(/(\d{2})\/(\d{2})\/(\d{4})/);
-                        if (match) {
-                            const [_, month, day, year] = match;
-                            return new Date(year, month - 1, day).getTime();
-                        }
-                        return 0;
-                    };
-                    return parseDate(b.date) - parseDate(a.date);
-                });
+            for (let i = 0; i < 100; i++) {
+                const wave = document.createElement('div');
+                wave.className = 'wave';
+                wave.style.left = i + '%';
+                wave.style.animationDelay = (i * 0.05) + 's';
+                wave.style.height = Math.random() * 80 + 20 + '%';
+                waveform.appendChild(wave);
+            }
+        }
 
-                // Updated state icons - EVERY location must have an icon
-                const locationIcons = {
-                    'NY': { icon: 'fas fa-statue-liberty', title: 'New York' },
-                    'NJ': { icon: 'fas fa-route', title: 'Garden State' },
-                    'MA': { icon: 'fas fa-baseball', title: 'Red Sox Nation' },
-                    'ME': { icon: 'fas fa-anchor', title: 'Maine' },
-                    'MD': { icon: 'fas fa-water', title: 'Maryland' },
-                    'VT': { icon: 'fas fa-mountain', title: 'Vermont' },
-                    'NH': { icon: 'fas fa-tree', title: 'New Hampshire' },
-                    'CT': { icon: 'fas fa-university', title: 'Connecticut' },
-                    'RI': { icon: 'fas fa-anchor', title: 'Rhode Island' },
-                    'PA': { icon: 'fas fa-bell', title: 'Pennsylvania' },
-                    'DE': { icon: 'fas fa-building', title: 'Delaware' },
-                    'VA': { icon: 'fas fa-landmark', title: 'Virginia' },
-                    'NC': { icon: 'fas fa-plane', title: 'North Carolina' },
-                    'SC': { icon: 'fas fa-tree', title: 'South Carolina' },
-                    'GA': { icon: 'fas fa-tree', title: 'Georgia' },
-                    'FL': { icon: 'fas fa-umbrella-beach', title: 'Florida' },
-                    'AL': { icon: 'fas fa-university', title: 'Alabama' },
-                    'MS': { icon: 'fas fa-water', title: 'Mississippi' },
-                    'LA': { icon: 'fas fa-music', title: 'Louisiana' },
-                    'TN': { icon: 'fas fa-music', title: 'Tennessee' },
-                    'KY': { icon: 'fas fa-horse', title: 'Kentucky' },
-                    'OH': { icon: 'fas fa-tree', title: 'Ohio' },
-                    'IN': { icon: 'fas fa-flag', title: 'Indiana' },
-                    'IL': { icon: 'fas fa-city', title: 'Illinois' },
-                    'MI': { icon: 'fas fa-car', title: 'Michigan' },
-                    'WI': { icon: 'fas fa-tree', title: 'Wisconsin' },
-                    'MN': { icon: 'fas fa-tree', title: 'Minnesota' },
-                    'IA': { icon: 'fas fa-tractor', title: 'Iowa' },
-                    'MO': { icon: 'fas fa-archway', title: 'Missouri' },
-                    'AR': { icon: 'fas fa-mountain', title: 'Arkansas' },
-                    'TX': { icon: 'fas fa-star', title: 'Texas' },
-                    'OK': { icon: 'fas fa-wind', title: 'Oklahoma' },
-                    'KS': { icon: 'fas fa-wheat', title: 'Kansas' },
-                    'NE': { icon: 'fas fa-landmark', title: 'Nebraska' },
-                    'SD': { icon: 'fas fa-mountain', title: 'South Dakota' },
-                    'ND': { icon: 'fas fa-sun', title: 'North Dakota' },
-                    'MT': { icon: 'fas fa-mountain', title: 'Montana' },
-                    'WY': { icon: 'fas fa-horse', title: 'Wyoming' },
-                    'CO': { icon: 'fas fa-mountain', title: 'Colorado' },
-                    'NM': { icon: 'fas fa-sun', title: 'New Mexico' },
-                    'AZ': { icon: 'fas fa-sun', title: 'Arizona' },
-                    'UT': { icon: 'fas fa-mountain', title: 'Utah' },
-                    'ID': { icon: 'fas fa-mountain', title: 'Idaho' },
-                    'WA': { icon: 'fas fa-coffee', title: 'Washington' },
-                    'OR': { icon: 'fas fa-tree', title: 'Oregon' },
-                    'NV': { icon: 'fas fa-dice', title: 'Nevada' },
-                    'CA': { icon: 'fas fa-film', title: 'California' },
-                    'AK': { icon: 'fas fa-snowflake', title: 'Alaska' },
-                    'HI': { icon: 'fas fa-umbrella-beach', title: 'Hawaii' },
-                    // Add a default icon for any unmatched locations
-                    'DEFAULT': { icon: 'fas fa-map-marker-alt', title: 'Location' }
-                };
+        // Play procedural audio for a song
+        function playSong(songName) {
+            if (!audioEnabled || !audioContext) return;
 
-                // Now initialize DataTable with the sorted data
-                table = $('#setlists').DataTable({
-                    data: data,
-                    columns: [
-                        { 
-                            data: 'date',
-                            type: 'date',
-                            render: function(data, type) {
-                                if (type === 'sort') {
-                                    const match = data.match(/(\d{2})\/(\d{2})\/(\d{4})/);
-                                    if (match) {
-                                        const [_, month, day, year] = match;
-                                        return `${year}${month}${day}`;
-                                    }
-                                    return '';
-                                }
-                                return data;
-                            }
-                        },
-                        { data: 'venue', orderable: false },
-                        { 
-                            data: 'location',
-                            orderable: false,
-                            render: function(data, type) {
-                                if (type === 'display') {
-                                    let state = data.split(',')[1]?.trim() || '';
-                                    let stateInfo = stateBirds[state];
-                                    if (stateInfo) {
-                                        return `<i class="${stateInfo.bird}" title="${stateInfo.name}" style="margin-right: 8px; color: #2c3e50; font-size: 1.1em;"></i>${data}`;
-                                    }
-                                    return data;
-                                }
-                                return data;
-                            }
-                        },
-                        { 
-                            data: 'setlist',
-                            className: 'setlist-cell',
-                            orderable: false,
-                            render: function(data, type) {
-                                if (type === 'display') {
-                                    let lines = data.split('\n');
-                                    lines = lines.map(line => {
-                                        line = line.replace(/\t+/g, ' ').trim();
-                                        if (line.includes('SET 1:')) return `<div class="set-header">SET 1:</div>`;
-                                        if (line.includes('SET 2:')) return `<div class="set-header">SET 2:</div>`;
-                                        if (line.includes('SET 3:')) return `<div class="set-header">SET 3:</div>`;
-                                        if (line.includes('ENCORE:')) return `<div class="set-header">ENCORE:</div>`;
-                                        return line;
-                                    });
-                                    return lines.join('\n').replace(/,\s+/g, ', ');
-                                }
-                                return data;
-                            }
-                        }
-                    ],
-                    pageLength: 50,
-                    order: [[0, "desc"]],
-                    search: {
-                        smart: false,  // Disable smart search
-                        search: "",    // Clear initial search
-                        regex: false,  // Disable regex search
-                        caseInsensitive: true
-                    },
-                    language: {
-                        search: "Search (type 3+ characters):"  // Update search label
-                    },
-                    initComplete: function() {
-                        // Add minimum character requirement for search
-                        var api = this.api();
-                        $('.dataTables_filter input')
-                            .off()
-                            .on('input', function() {
-                                var searchVal = this.value;
-                                if (searchVal.length >= 3 || searchVal.length === 0) {
-                                    api.search(this.value).draw();
-                                }
-                            });
-                    }
-                });
+            stopCurrentSong();
+            
+            const frequencies = songFrequencies[songName] || [440, 554.37, 659.25];
+            const gainNode = audioContext.createGain();
+            gainNode.connect(audioContext.destination);
+            gainNode.gain.value = 0.1;
 
-                console.log('First 3 entries:');
-                console.log(JSON.stringify(data.slice(0, 3), null, 2));
+            // Create multiple oscillators for harmony
+            frequencies.forEach((freq, index) => {
+                const osc = audioContext.createOscillator();
+                const oscGain = audioContext.createGain();
                 
-                console.log('Data loaded successfully:', data);
-                allData = data;
-
-                // Populate year filter
-                var years = [...new Set(data.map(item => new Date(item.date).getFullYear()))].sort((a, b) => b - a);
-                $('#yearFilter').append($('<option>', {
-                    value: '',
-                    text: 'All Years'
-                }));
-                years.forEach(year => {
-                    $('#yearFilter').append($('<option>', {
-                        value: year,
-                        text: year
-                    }));
-                });
-
-                // Year filter event
-                $('#yearFilter').on('change', function() {
-                    table.column(0).search(this.value).draw();
-                    updateStats();
-                });
-
-                // Real-time searching
-                $('.dataTables_filter input')
-                    .off('keyup search input')
-                    .on('keyup search input', function() {
-                        table.search(this.value).draw();
-                        updateStats();
-                    });
-
-                updateStats();
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                console.error('Failed to load JSON:', textStatus, errorThrown);
-                console.error('Status:', jqXHR.status);
-                console.error('Response Text:', jqXHR.responseText);
-                alert('Failed to load data. Check console for details.');
+                osc.type = ['sine', 'square', 'triangle'][index % 3];
+                osc.frequency.setValueAtTime(freq, audioContext.currentTime);
+                
+                // Add vibrato
+                const vibrato = audioContext.createOscillator();
+                const vibratoGain = audioContext.createGain();
+                vibrato.frequency.value = 5;
+                vibratoGain.gain.value = 10;
+                vibrato.connect(vibratoGain);
+                vibratoGain.connect(osc.frequency);
+                
+                oscGain.gain.value = 0.3 / frequencies.length;
+                oscGain.gain.setValueAtTime(0, audioContext.currentTime);
+                oscGain.gain.linearRampToValueAtTime(0.3 / frequencies.length, audioContext.currentTime + 0.1);
+                
+                osc.connect(oscGain);
+                oscGain.connect(gainNode);
+                
+                osc.start();
+                vibrato.start();
+                
+                // Store reference for cleanup
+                if (!currentOscillator) currentOscillator = [];
+                currentOscillator.push({ osc, vibrato, gain: oscGain });
             });
 
-            function highlightSearchTerms() {
-                var api = this.api();
-                var searchTerms = api.search().toLowerCase().split(' ').filter(term => term.length > 2);
-                
-                api.rows({page: 'current'}).nodes().each(function(node) {
-                    $(node).find('td').each(function() {
-                        var td = $(this);
-                        var content = td.text();
-                        
-                        searchTerms.forEach(function(term) {
-                            var regex = new RegExp('(' + term + ')', 'gi');
-                            content = content.replace(regex, '<span class="highlight">${match}</span>');
-                        });
-                        
-                        // Preserve set markers while adding highlights
-                        if (td.hasClass('setlist-cell')) {
-                            content = content.replace(/\*\*\* (SET [123]|ENCORE): \*\*\*/g, function(match) {
-                                return match.replace(/\*/g, '').trim();
-                            });
+            isPlaying = true;
+            currentSong = songName;
+            updatePlayerDisplay(songName);
+            
+            // Auto-stop after 5 seconds
+            setTimeout(() => {
+                if (currentSong === songName) {
+                    stopCurrentSong();
+                }
+            }, 5000);
+        }
+
+        function stopCurrentSong() {
+            if (currentOscillator && isPlaying) {
+                currentOscillator.forEach(({ osc, vibrato, gain }) => {
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+                    osc.stop(audioContext.currentTime + 0.1);
+                    vibrato.stop(audioContext.currentTime + 0.1);
+                });
+                currentOscillator = null;
+            }
+            isPlaying = false;
+            currentSong = null;
+            updatePlayerDisplay();
+        }
+
+        function updatePlayerDisplay(songName = null) {
+            const player = document.getElementById('floatingPlayer');
+            const songTitle = document.getElementById('currentSong');
+            const songDetails = document.getElementById('songDetails');
+            const playBtn = document.getElementById('playBtn');
+
+            if (songName) {
+                player.classList.add('active');
+                songTitle.textContent = songName;
+                songDetails.textContent = isPlaying ? 'Now playing...' : 'Click to play';
+                playBtn.innerHTML = isPlaying ? '<i class="fas fa-stop"></i>' : '<i class="fas fa-play"></i>';
+                generateWaveform();
+            } else {
+                player.classList.remove('active');
+                songTitle.textContent = 'No song selected';
+                songDetails.textContent = 'Click on a song to hear a preview';
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        // Process setlist text and make songs clickable
+        function processSetlistText(setlistText) {
+            if (!setlistText) return setlistText;
+
+            // Enhanced song detection with common Phish songs
+            const songNames = Object.keys(songFrequencies);
+            let processedText = setlistText;
+
+            songNames.forEach(song => {
+                const regex = new RegExp(`\\b${song.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
+                processedText = processedText.replace(regex, (match) => {
+                    return `<span class="song-name" onclick="handleSongClick('${song}')" title="Click to play preview">${match}</span>`;
+                });
+            });
+
+            // Style set headers
+            processedText = processedText.replace(/SET \d+:/g, '<span class="set-header">$&</span>');
+            processedText = processedText.replace(/ENCORE:/g, '<span class="encore-header">$&</span>');
+            processedText = processedText.replace(/>/g, '<span class="jam-indicator">></span>');
+
+            return processedText;
+        }
+
+        function handleSongClick(songName) {
+            if (!audioEnabled) {
+                alert('Please enable audio first!');
+                return;
+            }
+
+            if (currentSong === songName && isPlaying) {
+                stopCurrentSong();
+            } else {
+                playSong(songName);
+            }
+
+            // Visual feedback
+            document.querySelectorAll('.song-name').forEach(el => {
+                el.classList.remove('playing');
+            });
+            
+            if (isPlaying) {
+                event.target.classList.add('playing');
+            }
+        }
+
+        // Calculate statistics
+        function calculateStats(data) {
+            const years = data.map(item => {
+                const match = item.date.match(/\d{4}/);
+                return match ? parseInt(match[0]) : 0;
+            }).filter(year => year > 0);
+
+            const venues = new Set(data.map(item => item.venue));
+            const songs = new Set();
+            
+            data.forEach(item => {
+                if (item.setlist) {
+                    Object.keys(songFrequencies).forEach(song => {
+                        if (item.setlist.includes(song)) {
+                            songs.add(song);
                         }
-                        
-                        td.html(content);
                     });
-                });
-            }
-
-            function updateStats() {
-                var searchTerm = $('.dataTables_filter input').val().toLowerCase();
-                if (searchTerm.length < 3) {
-                    $('#stats').html('');
-                    return;
                 }
+            });
 
-                // Find matching songs (partial matches)
-                const matchingSongs = Object.keys(songAlbums).filter(song => 
-                    song.toLowerCase().includes(searchTerm)
-                );
+            document.getElementById('totalShows').textContent = data.length;
+            document.getElementById('totalSongs').textContent = songs.size;
+            document.getElementById('yearSpan').textContent = years.length ? Math.max(...years) - Math.min(...years) : 0;
+            document.getElementById('totalVenues').textContent = venues.size;
+        }
 
-                let statsHtml = '';
+        // Load and initialize data
+        async function loadSetlistData() {
+            try {
+                const response = await fetch('phish_setlists.json');
+                setlistData = await response.json();
+                console.log('Loaded setlist data:', setlistData.length, 'entries');
                 
-                if (matchingSongs.length > 0) {
-                    // Get the first matching song
-                    const song = matchingSongs[0];
-                    const album = songAlbums[song];
-                    const releaseDate = albumReleases[album];
-                    
-                    statsHtml = `
-                        <div class="stats-card">
-                            <div class="song-title">${song}</div>
-                            <div class="album-info">
-                                <i class="fas fa-compact-disc"></i> ${album}
-                            </div>
-                            <div class="release-date">
-                                <i class="fas fa-calendar"></i> Released ${releaseDate}
-                            </div>
-                            <div class="occurrence-count">
-                                <i class="fas fa-play"></i> Played ${countOccurrences(searchTerm)} times
-                            </div>
-                        </div>
-                    `;
+                // Calculate statistics
+                calculateStats(setlistData);
+                
+                // Populate year filter
+                const years = [...new Set(setlistData.map(item => {
+                    const match = item.date.match(/\d{4}/);
+                    return match ? match[0] : null;
+                }).filter(Boolean))].sort((a, b) => b - a);
+                
+                const yearSelect = document.getElementById('yearFilter');
+                years.forEach(year => {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                });
+
+                initializeDataTable();
+            } catch (error) {
+                console.error('Error loading setlist data:', error);
+            }
+        }
+
+        function initializeDataTable() {
+            dataTable = $('#setlists').DataTable({
+                data: setlistData,
+                columns: [
+                    { data: 'date', title: 'Date' },
+                    { data: 'venue', title: 'Venue' },
+                    { data: 'location', title: 'Location' },
+                    { 
+                        data: 'setlist', 
+                        title: 'Setlist',
+                        render: function(data) {
+                            return `<div class="setlist-cell">${processSetlistText(data)}</div>`;
+                        }
+                    }
+                ],
+                pageLength: 25,
+                responsive: true,
+                order: [[0, 'desc']],
+                dom: '<"top"lf>rt<"bottom"ip>',
+                language: {
+                    search: "Search setlists:",
+                    lengthMenu: "Show _MENU_ shows per page",
+                    info: "Showing _START_ to _END_ of _TOTAL_ shows",
+                    paginate: {
+                        first: "First",
+                        last: "Last",
+                        next: "Next",
+                        previous: "Previous"
+                    }
+                }
+            });
+
+            // Add custom filtering
+            document.getElementById('yearFilter').addEventListener('change', function() {
+                const year = this.value;
+                if (year) {
+                    dataTable.column(0).search(year).draw();
                 } else {
-                    // If no album match, just show occurrence count
-                    statsHtml = `
-                        <div class="stats-card">
-                            <div class="search-term">"${searchTerm}"</div>
-                            <div class="occurrence-count">
-                                <i class="fas fa-search"></i> Found ${countOccurrences(searchTerm)} matches
-                            </div>
-                        </div>
-                    `;
+                    dataTable.column(0).search('').draw();
                 }
-                
-                $('#stats').html(statsHtml);
-            }
+            });
 
-            function countOccurrences(term) {
-                var count = 0;
-                table.rows({ search: 'applied' }).every(function() {
-                    var setlist = this.data().setlist.toLowerCase();
-                    count += (setlist.match(new RegExp(term, 'g')) || []).length;
-                });
-                return count;
-            }
+            document.getElementById('venueFilter').addEventListener('input', function() {
+                dataTable.column(1).search(this.value).draw();
+            });
+        }
 
-            // Add this function to determine the appropriate icon
-            function getVenueIcon(venue) {
-                venue = venue.toLowerCase();
-                
-                // Amphitheaters
-                if (venue.includes('amphitheater') || venue.includes('amphitheatre')) {
-                    return 'fas fa-mountain';
-                }
-                // Arenas
-                if (venue.includes('arena') || venue.includes('center') || venue.includes('centre')) {
-                    return 'fas fa-hockey-puck';
-                }
-                // Theaters
-                if (venue.includes('theater') || venue.includes('theatre')) {
-                    return 'fas fa-masks-theater';
-                }
-                // Parks and outdoor venues
-                if (venue.includes('park') || venue.includes('festival') || venue.includes('field')) {
-                    return 'fas fa-tree';
-                }
-                // Stadiums
-                if (venue.includes('stadium')) {
-                    return 'fas fa-football-ball';
-                }
-                // Civic centers
-                if (venue.includes('civic')) {
-                    return 'fas fa-landmark';
-                }
-                // Clubs and small venues
-                if (venue.includes('club') || venue.includes('hall')) {
-                    return 'fas fa-music';
-                }
-                // Casinos
-                if (venue.includes('casino')) {
-                    return 'fas fa-dice';
-                }
-                // Fairgrounds
-                if (venue.includes('fair') || venue.includes('grounds')) {
-                    return 'fas fa-ferris-wheel';
-                }
-                // Universities
-                if (venue.includes('university') || venue.includes('college')) {
-                    return 'fas fa-graduation-cap';
-                }
-                // Convention centers
-                if (venue.includes('convention')) {
-                    return 'fas fa-building';
-                }
-                // Beach venues
-                if (venue.includes('beach')) {
-                    return 'fas fa-umbrella-beach';
-                }
-                // Default icon for other venues
-                return 'fas fa-map-marker-alt';
-            }
-
-            function getSongIcon(songName) {
-                // Clean up the song name
-                songName = songName.toLowerCase().trim();
-                
-                // Skip set markers and other non-songs
-                if (songName.includes('set') || songName.includes('encore') || songName === 'jam') {
-                    return '';  // Return empty string for non-songs
-                }
-
-                // Epic jams and long songs
-                if (songName.includes('tweezer') || 
-                    songName.includes('you enjoy myself') || 
-                    songName.includes('ghost') ||
-                    songName.includes('carini') ||
-                    songName.includes('sand')) {
-                    return 'fas fa-bolt';
-                }
-                
-                // Funky songs
-                if (songName.includes('moma') || 
-                    songName.includes('boogie') || 
-                    songName.includes('tube') ||
-                    songName.includes('julius')) {
-                    return 'fas fa-music';
-                }
-                
-                // Ballads and slower songs
-                if (songName.includes('waste') || 
-                    songName.includes('farmhouse') || 
-                    songName.includes('velvet sea') ||
-                    songName.includes('mountains in the mist')) {
-                    return 'fas fa-heart';
-                }
-                
-                // High energy rockers
-                if (songName.includes('chalkdust') || 
-                    songName.includes('character zero') || 
-                    songName.includes('wilson') ||
-                    songName.includes('alaska')) {
-                    return 'fas fa-fire';
-                }
-                
-                // Default
-                return 'fas fa-music';
+        // Audio toggle functionality
+        document.getElementById('audioToggle').addEventListener('click', function() {
+            if (!audioEnabled) {
+                initAudio();
+                audioEnabled = true;
+                this.innerHTML = '<i class="fas fa-volume-up"></i> Audio Enabled';
+                this.style.background = 'linear-gradient(45deg, #4ecdc4, #96ceb4)';
+            } else {
+                audioEnabled = false;
+                stopCurrentSong();
+                this.innerHTML = '<i class="fas fa-volume-off"></i> Audio Disabled';
+                this.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
             }
         });
+
+        // Player controls
+        document.getElementById('playBtn').addEventListener('click', function() {
+            if (currentSong) {
+                if (isPlaying) {
+                    stopCurrentSong();
+                } else {
+                    playSong(currentSong);
+                }
+            }
+        });
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            loadSetlistData();
+            generateWaveform();
+            
+            // Enable audio on first user interaction
+            document.addEventListener('click', function() {
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+            }, { once: true });
+        });
+
+        // Make functions globally available
+        window.handleSongClick = handleSongClick;
     </script>
 </body>
 </html>

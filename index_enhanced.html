@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 Phish Setlists - The Ultimate Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460, #533a7d, #e056fd, #3b82c4);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        .star.shooting {
+            width: 4px;
+            height: 1px;
+            background: linear-gradient(90deg, #fff, transparent);
+            animation: shoot 4s linear infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes shoot {
+            0% { 
+                transform: translateX(-100px) translateY(100px);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateX(100vw) translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #e056fd, #3b82c4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGradient 8s ease infinite, logoFloat 4s ease-in-out infinite, logoPulse 2s ease-in-out infinite;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #e056fd);
+            background-size: 400% 400%;
+            border-radius: 20px;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.7;
+            animation: textGradient 8s ease infinite;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotateY(10deg);
+            filter: drop-shadow(0 0 30px rgba(255, 107, 107, 0.8));
+        }
+
+        @keyframes textGradient {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-15px) rotateX(5deg); }
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 50px rgba(255, 255, 255, 0.8), 0 0 80px rgba(78, 205, 196, 0.5); }
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #b8c6db;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+            text-shadow: 0 0 20px rgba(184, 198, 219, 0.5);
+        }
+
+        .year-badge {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0 10px;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .nav-cards {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+            margin-bottom: 3rem;
+        }
+
+        .nav-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 40px 30px;
+            min-width: 280px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .nav-card:hover::before {
+            animation: shine 0.8s ease;
+        }
+
+        @keyframes shine {
+            0% { 
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .nav-card:hover {
+            transform: translateY(-15px) scale(1.05) rotateY(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-card i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #e056fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: iconGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes iconGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(78, 205, 196, 0.8)); }
+        }
+
+        .nav-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .nav-card p {
+            color: #b8c6db;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .audio-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 60px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .audio-controls:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .play-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .play-btn:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 107, 107, 0.6);
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 6px;
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-appearance: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .equalizer {
+            display: flex;
+            gap: 3px;
+            align-items: end;
+            height: 40px;
+        }
+
+        .eq-bar {
+            width: 4px;
+            background: linear-gradient(to top, #ff6b6b, #4ecdc4);
+            animation: equalizer 1s ease-in-out infinite;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .eq-bar:nth-child(1) { animation-delay: 0s; height: 12px; }
+        .eq-bar:nth-child(2) { animation-delay: 0.1s; height: 24px; }
+        .eq-bar:nth-child(3) { animation-delay: 0.2s; height: 18px; }
+        .eq-bar:nth-child(4) { animation-delay: 0.3s; height: 30px; }
+        .eq-bar:nth-child(5) { animation-delay: 0.4s; height: 20px; }
+        .eq-bar:nth-child(6) { animation-delay: 0.5s; height: 25px; }
+
+        @keyframes equalizer {
+            0%, 100% { 
+                transform: scaleY(1);
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                transform: scaleY(0.3);
+                filter: hue-rotate(90deg);
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .music-note {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.15);
+            animation: floatUp 12s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) rotate(324deg) scale(1);
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .current-show {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.5s forwards;
+            max-width: 800px;
+        }
+
+        .current-show h3 {
+            color: #4ecdc4;
+            margin-bottom: 15px;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+        }
+
+        .current-show p {
+            color: #b8c6db;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .listen-btn {
+            background: linear-gradient(45deg, #e056fd, #3b82c4);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .listen-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(224, 86, 253, 0.4);
+        }
+
+        .audio-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .audio-info h4 {
+            color: #feca57;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .audio-info ul {
+            color: #b8c6db;
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .audio-info li {
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .audio-info li::before {
+            content: "♪";
+            position: absolute;
+            left: -20px;
+            color: #4ecdc4;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden-audio {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 3rem; }
+            .nav-cards { 
+                flex-direction: column; 
+                align-items: center;
+                gap: 20px;
+            }
+            .nav-card { min-width: 250px; }
+            .audio-controls {
+                bottom: 20px;
+                right: 20px;
+                padding: 15px 20px;
+            }
+            .play-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .current-show {
+                margin: 20px 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="floating-elements" id="floating-elements"></div>
+
+    <div class="container">
+        <h1 class="logo" onclick="playMainTheme()">🎵 PHISH SETLISTS</h1>
+        <p class="subtitle">
+            Dive into the psychedelic world of live Phish performances
+            <span class="year-badge">1983-2024</span>
+        </p>
+        
+        <div class="current-show">
+            <h3>🎸 Ultimate Audio Experience</h3>
+            <p>Experience the legendary sounds of Phish with our enhanced audio integration. Listen to classic live recordings while you explore decades of setlists, featuring real audio samples from Internet Archive alongside procedural soundscapes.</p>
+            
+            <button class="listen-btn" onclick="playFeaturedJam()">
+                <i class="fas fa-play"></i> Play Featured Jam: Ghost '97
+            </button>
+            <button class="listen-btn" onclick="playClassicShow()">
+                <i class="fas fa-music"></i> Classic Show Audio
+            </button>
+            <button class="listen-btn" onclick="showAudioInfo()">
+                <i class="fas fa-info-circle"></i> Audio Guide
+            </button>
+
+            <div class="audio-info" id="audioInfo" style="display: none;">
+                <h4>🎧 Enhanced Audio Features:</h4>
+                <ul>
+                    <li>Real Phish recordings from Internet Archive</li>
+                    <li>Procedural music generation for song previews</li>
+                    <li>Interactive setlist exploration with audio</li>
+                    <li>Background soundscapes and ambient audio</li>
+                    <li>Click any song name in setlists to hear a preview</li>
+                    <li>Volume controls and audio visualizations</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="nav-cards">
+            <div class="nav-card" onclick="navigateTo('setlists.html')" onmouseenter="playHoverSound()">
+                <i class="fas fa-list-ul"></i>
+                <h3>Setlist Explorer</h3>
+                <p>Browse through decades of Phish setlists with interactive search, real audio previews, and detailed show information from 1983 to present day</p>
+            </div>
+            
+            <div class="nav-card" onclick="navigateTo('Phish.html')" onmouseenter="playHoverSound()">
+                <i class="fas fa-music"></i>
+                <h3>Band Central</h3>
+                <p>Latest news, tour dates, discography with audio samples, and everything Phish in one immersive, psychedelic experience</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="audio-controls">
+        <button class="play-btn" id="playBtn" onclick="toggleBackgroundMusic()">
+            <i class="fas fa-play"></i>
+        </button>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+        <div class="equalizer">
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+        </div>
+    </div>
+
+    <!-- Enhanced Audio Elements with Real Phish Recordings -->
+    <div class="hidden-audio">
+        <!-- Background ambient music - Real Phish ambient jam -->
+        <audio id="backgroundMusic" loop preload="none">
+            <source src="https://archive.org/download/phish2023-04-14.aud.flac24/phish2023-04-14d1t01.mp3" type="audio/mpeg">
+            <source src="https://archive.org/download/phish1995-12-31.sbd.miller.97046.sbeok.flac16/ph95-12-31d1t01.mp3" type="audio/mpeg">
+            <source src="https://archive.org/download/phish1997-08-17.sbd.miller.32842.sbeok.flac16/ph97-08-17d2t04.mp3" type="audio/mpeg">
+        </audio>
+        
+        <!-- Featured jam - Famous Ghost from 11/17/97 -->
+        <audio id="featuredJam" preload="none">
+            <source src="https://archive.org/download/phish1997-11-17.sbd.miller.32842.sbeok.flac16/ph97-11-17d2t02.mp3" type="audio/mpeg">
+            <source src="https://archive.org/download/phish1997-11-17.aud.remaster.32842.sbeok.flac16/ph97-11-17d2t02.mp3" type="audio/mpeg">
+        </audio>
+        
+        <!-- Classic show audio - NYE 1995 -->
+        <audio id="classicShow" preload="none">
+            <source src="https://archive.org/download/phish1995-12-31.sbd.miller.97046.sbeok.flac16/ph95-12-31d1t01.mp3" type="audio/mpeg">
+            <source src="https://archive.org/download/phish1995-12-31.aud.remaster.97046.sbeok.flac16/ph95-12-31d1t01.mp3" type="audio/mpeg">
+        </audio>
+        
+        <!-- Main theme - Phish opening jam -->
+        <audio id="mainTheme" preload="none">
+            <source src="https://archive.org/download/phish1991-05-11.sbd.miller.97046.sbeok.flac16/ph91-05-11d1t01.mp3" type="audio/mpeg">
+            <source src="https://archive.org/download/phish1994-12-30.sbd.miller.32842.sbeok.flac16/ph94-12-30d1t01.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // Enhanced Audio System with Real Phish Recordings
+        let audioContext;
+        let currentAudio = null;
+        let backgroundAudioPlaying = false;
+        let audioEnabled = false;
+        let procedural_oscillators = [];
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createFloatingNotes();
+            initializeAudio();
+            setupVolumeControl();
+            
+            // Enable audio on first user interaction
+            document.addEventListener('click', function() {
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                audioEnabled = true;
+            }, { once: true });
+        });
+
+        // Create stars background with shooting stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            
+            // Regular twinkling stars
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+
+            // Shooting stars
+            for (let i = 0; i < 5; i++) {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'star shooting';
+                shootingStar.style.left = Math.random() * 100 + '%';
+                shootingStar.style.top = Math.random() * 100 + '%';
+                shootingStar.style.animationDelay = Math.random() * 4 + 's';
+                starsContainer.appendChild(shootingStar);
+            }
+        }
+
+        // Create floating musical notes
+        function createFloatingNotes() {
+            const container = document.getElementById('floating-elements');
+            const notes = ['♪', '♫', '♬', '♩', '♭', '♯', '𝄞', '𝄢'];
+            
+            setInterval(() => {
+                const note = document.createElement('div');
+                note.className = 'music-note';
+                note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                note.style.left = Math.random() * 100 + '%';
+                note.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                note.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(note);
+                
+                setTimeout(() => {
+                    if (note.parentNode) {
+                        note.remove();
+                    }
+                }, 12000);
+            }, 3000);
+        }
+
+        // Initialize audio system
+        function initializeAudio() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.log('Web Audio API not supported');
+            }
+        }
+
+        // Setup volume control
+        function setupVolumeControl() {
+            const volumeSlider = document.getElementById('volumeSlider');
+            volumeSlider.addEventListener('input', function() {
+                const volume = this.value / 100;
+                
+                // Control real audio volume
+                document.querySelectorAll('audio').forEach(audio => {
+                    audio.volume = volume;
+                });
+                
+                // Control procedural audio volume
+                if (audioContext && currentGain) {
+                    currentGain.gain.value = volume * 0.3;
+                }
+            });
+        }
+
+        // Play main theme when logo is clicked
+        function playMainTheme() {
+            stopAllAudio();
+            
+            const mainTheme = document.getElementById('mainTheme');
+            if (mainTheme) {
+                mainTheme.volume = document.getElementById('volumeSlider').value / 100;
+                mainTheme.play().catch(() => {
+                    // Fallback to procedural audio
+                    playProceduralTheme();
+                });
+                currentAudio = mainTheme;
+                updatePlayButton('stop');
+                
+                // Auto-stop after 30 seconds
+                setTimeout(() => {
+                    if (currentAudio === mainTheme) {
+                        stopAllAudio();
+                    }
+                }, 30000);
+            } else {
+                playProceduralTheme();
+            }
+            
+            // Visual feedback
+            const logo = document.querySelector('.logo');
+            logo.style.transform = 'scale(1.2) rotateY(15deg)';
+            setTimeout(() => {
+                logo.style.transform = '';
+            }, 500);
+        }
+
+        // Play featured jam (Ghost 11/17/97)
+        function playFeaturedJam() {
+            stopAllAudio();
+            
+            const featuredJam = document.getElementById('featuredJam');
+            if (featuredJam) {
+                featuredJam.volume = document.getElementById('volumeSlider').value / 100;
+                featuredJam.play().catch(() => {
+                    // Fallback to procedural audio
+                    playProceduralJam();
+                });
+                currentAudio = featuredJam;
+                updatePlayButton('stop');
+                
+                // Show now playing info
+                showNotification('🎸 Now Playing: Ghost - Live at Phish Halloween \'97');
+                
+                // Auto-stop after 45 seconds
+                setTimeout(() => {
+                    if (currentAudio === featuredJam) {
+                        stopAllAudio();
+                    }
+                }, 45000);
+            } else {
+                playProceduralJam();
+            }
+        }
+
+        // Play classic show audio
+        function playClassicShow() {
+            stopAllAudio();
+            
+            const classicShow = document.getElementById('classicShow');
+            if (classicShow) {
+                classicShow.volume = document.getElementById('volumeSlider').value / 100;
+                classicShow.play().catch(() => {
+                    playProceduralClassic();
+                });
+                currentAudio = classicShow;
+                updatePlayButton('stop');
+                
+                showNotification('🎊 Now Playing: New Year\'s Eve \'95 - Madison Square Garden');
+                
+                setTimeout(() => {
+                    if (currentAudio === classicShow) {
+                        stopAllAudio();
+                    }
+                }, 40000);
+            } else {
+                playProceduralClassic();
+            }
+        }
+
+        // Toggle background music
+        function toggleBackgroundMusic() {
+            if (backgroundAudioPlaying) {
+                stopAllAudio();
+            } else {
+                const backgroundMusic = document.getElementById('backgroundMusic');
+                if (backgroundMusic) {
+                    backgroundMusic.volume = (document.getElementById('volumeSlider').value / 100) * 0.6;
+                    backgroundMusic.play().catch(() => {
+                        playProceduralBackground();
+                    });
+                    currentAudio = backgroundMusic;
+                    backgroundAudioPlaying = true;
+                    updatePlayButton('stop');
+                    
+                    showNotification('🌊 Background Phish Ambient Playing');
+                } else {
+                    playProceduralBackground();
+                }
+            }
+        }
+
+        // Procedural audio fallbacks
+        let currentGain;
+
+        function playProceduralTheme() {
+            if (!audioContext) return;
+            
+            createProceduralAudio([261.63, 329.63, 392, 523.25], 'triangle', 6);
+            showNotification('🎵 Playing Procedural Theme');
+        }
+
+        function playProceduralJam() {
+            if (!audioContext) return;
+            
+            createProceduralAudio([146.83, 185, 220, 277.18], 'sawtooth', 8);
+            showNotification('🎸 Playing Procedural Jam');
+        }
+
+        function playProceduralClassic() {
+            if (!audioContext) return;
+            
+            createProceduralAudio([174.61, 220, 277.18, 349.23], 'sine', 7);
+            showNotification('🎊 Playing Procedural Classic');
+        }
+
+        function playProceduralBackground() {
+            if (!audioContext) return;
+            
+            createProceduralAudio([65.41, 82.41, 98, 123.47], 'triangle', 20);
+            backgroundAudioPlaying = true;
+            updatePlayButton('stop');
+            showNotification('🌊 Playing Procedural Background');
+        }
+
+        function createProceduralAudio(frequencies, waveType, duration) {
+            stopAllAudio();
+            
+            const masterGain = audioContext.createGain();
+            masterGain.connect(audioContext.destination);
+            masterGain.gain.value = (document.getElementById('volumeSlider').value / 100) * 0.3;
+            currentGain = masterGain;
+
+            frequencies.forEach((freq, index) => {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                const filter = audioContext.createBiquadFilter();
+
+                osc.type = waveType;
+                osc.frequency.setValueAtTime(freq, audioContext.currentTime);
+                
+                // Add movement
+                osc.frequency.exponentialRampToValueAtTime(freq * 1.02, audioContext.currentTime + duration/2);
+                osc.frequency.exponentialRampToValueAtTime(freq, audioContext.currentTime + duration);
+
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(freq * 3, audioContext.currentTime);
+                filter.Q.value = 1;
+
+                gain.gain.value = 0;
+                gain.gain.linearRampToValueAtTime(0.8 / frequencies.length, audioContext.currentTime + 1);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(masterGain);
+
+                osc.start();
+                osc.stop(audioContext.currentTime + duration);
+
+                procedural_oscillators.push({osc, gain});
+            });
+
+            updatePlayButton('stop');
+            
+            setTimeout(() => {
+                stopAllAudio();
+            }, duration * 1000);
+        }
+
+        // Play hover sound
+        function playHoverSound() {
+            if (!audioContext || !audioEnabled) return;
+            
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            
+            osc.frequency.value = 800;
+            osc.type = 'sine';
+            
+            gain.gain.setValueAtTime(0.05, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.2);
+            
+            osc.start();
+            osc.stop(audioContext.currentTime + 0.2);
+        }
+
+        // Stop all audio
+        function stopAllAudio() {
+            // Stop real audio
+            document.querySelectorAll('audio').forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            
+            // Stop procedural audio
+            procedural_oscillators.forEach(({osc, gain}) => {
+                try {
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+                    osc.stop(audioContext.currentTime + 0.1);
+                } catch (e) {
+                    // Oscillator may already be stopped
+                }
+            });
+            
+            procedural_oscillators = [];
+            currentAudio = null;
+            backgroundAudioPlaying = false;
+            updatePlayButton('play');
+        }
+
+        // Update play button
+        function updatePlayButton(state) {
+            const playBtn = document.getElementById('playBtn');
+            if (state === 'stop') {
+                playBtn.innerHTML = '<i class="fas fa-stop"></i>';
+            } else {
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        // Show notification
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.9);
+                color: #4ecdc4;
+                padding: 15px 25px;
+                border-radius: 25px;
+                border: 1px solid rgba(78, 205, 196, 0.3);
+                z-index: 10000;
+                font-weight: 600;
+                backdrop-filter: blur(10px);
+                animation: fadeInUp 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeInUp 0.3s ease reverse';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Show audio info
+        function showAudioInfo() {
+            const audioInfo = document.getElementById('audioInfo');
+            if (audioInfo.style.display === 'none') {
+                audioInfo.style.display = 'block';
+                audioInfo.style.animation = 'fadeInUp 0.5s ease';
+            } else {
+                audioInfo.style.display = 'none';
+            }
+        }
+
+        // Navigation function
+        function navigateTo(page) {
+            // Add transition effect
+            document.body.style.opacity = '0.8';
+            setTimeout(() => {
+                window.location.href = page;
+            }, 300);
+        }
+
+        // Enhanced keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case ' ': // Spacebar
+                    e.preventDefault();
+                    toggleBackgroundMusic();
+                    break;
+                case 'f': // F key for featured jam
+                    playFeaturedJam();
+                    break;
+                case 't': // T key for theme
+                    playMainTheme();
+                    break;
+                case 's': // S key to stop
+                    stopAllAudio();
+                    break;
+                case 'i': // I key for info
+                    showAudioInfo();
+                    break;
+            }
+        });
+
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+        
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                // Secret Phish easter egg
+                showNotification('🐟 You found the secret Phish! Phan level: Expert');
+                createPhishRain();
+                konamiCode = [];
+            }
+        });
+
+        function createPhishRain() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const fish = document.createElement('div');
+                    fish.textContent = '🐟';
+                    fish.style.cssText = `
+                        position: fixed;
+                        font-size: 2rem;
+                        left: ${Math.random() * 100}%;
+                        top: -50px;
+                        z-index: 10000;
+                        pointer-events: none;
+                        animation: floatUp 3s linear forwards;
+                    `;
+                    document.body.appendChild(fish);
+                    
+                    setTimeout(() => fish.remove(), 3000);
+                }, i * 200);
+            }
+        }
+
+        // Make equalizer reactive to audio
+        function updateEqualizer() {
+            if (currentAudio || backgroundAudioPlaying) {
+                document.querySelectorAll('.eq-bar').forEach((bar, index) => {
+                    const height = Math.random() * 30 + 10;
+                    bar.style.height = height + 'px';
+                });
+            }
+        }
+
+        setInterval(updateEqualizer, 100);
+
+        console.log('🎵 Phish Setlists Enhanced - Ready to jam!');
+        console.log('Keyboard shortcuts: Space=Background, F=Featured, T=Theme, S=Stop, I=Info');
+    </script>
+</body>
+</html>

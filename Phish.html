@@ -3,225 +3,927 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phish - Official Band Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>🎸 Phish - Interactive Band Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        .container {
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460, #533a7d);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .floating-notes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .floating-note {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.1);
+            animation: floatUp 15s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        header {
+            position: relative;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
         }
-        header {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 1rem;
-            text-align: center;
+
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGradient 6s ease infinite, logoFloat 4s ease-in-out infinite;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
+
+        h1:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.8));
+        }
+
+        @keyframes textGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #b8c6db;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
         nav {
-            background-color: #34495e;
-            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 50px;
+            margin: 2rem auto;
+            max-width: 800px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+            list-style: none;
             display: flex;
             justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
-        nav ul li {
-            margin: 0 10px;
-        }
+
         nav ul li a {
-            color: #ecf0f1;
+            color: #fff;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
+        nav ul li a:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
         .main-content {
-            flex: 1;
-            min-width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
-        .sidebar {
-            flex: 0 0 25%;
-            margin-left: 20px;
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .tour-dates, .music, .news {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin-bottom: 20px;
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
         }
+
+        .content-card:hover::before {
+            animation: shine 0.8s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes shine {
+            0% { 
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+            font-family: 'Orbitron', monospace;
+            color: #4ecdc4;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+
+        h2 i {
+            color: #ff6b6b;
+        }
+
+        .tour-dates {
+            display: grid;
+            gap: 1rem;
+        }
+
         .tour-date {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #ecf0f1;
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #4ecdc4;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
+
+        .tour-date:hover {
+            background: rgba(78, 205, 196, 0.2);
+            transform: translateX(10px);
+            border-left-color: #ff6b6b;
+        }
+
+        .tour-date strong {
+            color: #feca57;
+            font-size: 1.1rem;
+        }
+
+        .tour-date .venue {
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+
+        .tour-date .location {
+            color: #b8c6db;
+            font-size: 0.9rem;
+        }
+
         .album-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
         }
+
         .album {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
             text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
+        .album:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(78, 205, 196, 0.2);
+        }
+
         .album img {
-            max-width: 100%;
-            border-radius: 5px;
-            transition: transform 0.3s ease;
+            width: 100%;
+            max-width: 150px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            filter: grayscale(0.3);
         }
-        .album img:hover {
+
+        .album:hover img {
+            filter: grayscale(0) brightness(1.1);
             transform: scale(1.05);
         }
-        .btn {
-            display: inline-block;
-            background-color: #3498db;
-            color: #fff;
+
+        .album h3 {
+            color: #4ecdc4;
+            margin: 1rem 0 0.5rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .album p {
+            color: #b8c6db;
+            font-size: 0.9rem;
+        }
+
+        .play-album {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 25px;
             padding: 10px 20px;
+            color: white;
+            font-weight: 600;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-album:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar-card h3 {
+            color: #4ecdc4;
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-card a {
+            color: #b8c6db;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #2980b9;
-        }
-        .tpcsidebar {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .tpcsidebar .header {
-            font-size: 1.2em;
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
             display: block;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-card a:hover {
+            color: #4ecdc4;
+            transform: translateX(10px);
+            border-bottom-color: #4ecdc4;
+        }
+
+        .sidebar-card a i {
+            margin-right: 8px;
+            color: #ff6b6b;
+        }
+
+        .news-article {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid #4ecdc4;
+            transition: all 0.3s ease;
+        }
+
+        .news-article:hover {
+            background: rgba(78, 205, 196, 0.1);
+            transform: translateX(5px);
+        }
+
+        .news-article h3 {
+            color: #feca57;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-article .date {
+            color: #b8c6db;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .audio-visualizer {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+        }
+
+        .visualizer-bars {
+            display: flex;
+            gap: 3px;
+            align-items: end;
+            height: 40px;
             margin-bottom: 10px;
         }
-        .tpcsidebar .box-body a {
-            color: #2c3e50;
-            text-decoration: none;
-            transition: color 0.3s ease;
+
+        .bar {
+            width: 4px;
+            background: linear-gradient(to top, #ff6b6b, #4ecdc4);
+            animation: visualize 1s ease-in-out infinite;
+            border-radius: 2px;
         }
-        .tpcsidebar .box-body a:hover {
-            color: #3498db;
+
+        .bar:nth-child(1) { animation-delay: 0s; height: 15px; }
+        .bar:nth-child(2) { animation-delay: 0.1s; height: 25px; }
+        .bar:nth-child(3) { animation-delay: 0.2s; height: 20px; }
+        .bar:nth-child(4) { animation-delay: 0.3s; height: 30px; }
+        .bar:nth-child(5) { animation-delay: 0.4s; height: 18px; }
+        .bar:nth-child(6) { animation-delay: 0.5s; height: 28px; }
+        .bar:nth-child(7) { animation-delay: 0.6s; height: 22px; }
+        .bar:nth-child(8) { animation-delay: 0.7s; height: 26px; }
+
+        @keyframes visualize {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.3); }
         }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .play-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+        }
+
+        .now-playing {
+            color: #4ecdc4;
+            font-size: 0.8rem;
+        }
+
         footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
             text-align: center;
-            padding: 1rem;
-            margin-top: 20px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            h1 { font-size: 2.5rem; }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .album-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .audio-visualizer {
+                left: 10px;
+                right: 10px;
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-notes" id="floating-notes"></div>
+
     <header>
-        <h1>Phish</h1>
+        <div class="header-content">
+            <h1 onclick="playRandomSong()">🎸 PHISH</h1>
+            <p class="tagline">Explore the psychedelic journey through sound and time</p>
+        </div>
     </header>
+    
     <nav>
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#tour">Tour</a></li>
-            <li><a href="#music">Music</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#tour"><i class="fas fa-calendar"></i> Tour</a></li>
+            <li><a href="#music"><i class="fas fa-compact-disc"></i> Music</a></li>
+            <li><a href="#news"><i class="fas fa-newspaper"></i> News</a></li>
+            <li><a href="setlists.html"><i class="fas fa-list"></i> Setlists</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
         </ul>
     </nav>
+    
     <div class="container">
         <div class="main-content">
-            <section id="tour" class="tour-dates">
-                <h2>Upcoming Tour Dates</h2>
-                <div class="tour-date">
-                    <strong>July 15, 2024</strong> - Madison Square Garden, New York, NY
+            <section id="tour" class="content-card">
+                <h2><i class="fas fa-route"></i> Upcoming Tour Dates</h2>
+                <div class="tour-dates">
+                    <div class="tour-date" onclick="playTourSound()">
+                        <strong>December 28-31, 2024</strong>
+                        <div class="venue">Madison Square Garden</div>
+                        <div class="location">New York, NY</div>
+                    </div>
+                    <div class="tour-date" onclick="playTourSound()">
+                        <strong>Summer 2025</strong>
+                        <div class="venue">Festival Tour</div>
+                        <div class="location">Various Locations</div>
+                    </div>
+                    <div class="tour-date" onclick="playTourSound()">
+                        <strong>Fall 2025</strong>
+                        <div class="venue">West Coast Run</div>
+                        <div class="location">CA, OR, WA</div>
+                    </div>
                 </div>
-                <div class="tour-date">
-                    <strong>July 17, 2024</strong> - Fenway Park, Boston, MA
-                </div>
-                <div class="tour-date">
-                    <strong>July 20, 2024</strong> - Alpine Valley Music Theatre, East Troy, WI
-                </div>
-                <a href="#" class="btn">View All Tour Dates</a>
+                <a href="#" class="btn" style="margin-top: 1rem;">
+                    <i class="fas fa-ticket-alt"></i> Get Tickets
+                </a>
             </section>
-            <section id="music" class="music">
-                <h2>Music</h2>
+            
+            <section id="music" class="content-card">
+                <h2><i class="fas fa-music"></i> Discography</h2>
                 <div class="album-grid">
-                    <div class="album">
-                        <img src="https://via.placeholder.com/150" alt="Album 1">
-                        <p>Album 1</p>
+                    <div class="album" onclick="playAlbum('Junta')">
+                        <img src="https://via.placeholder.com/150/4ecdc4/ffffff?text=JUNTA" alt="Junta">
+                        <h3>Junta</h3>
+                        <p>1989 • Studio Album</p>
+                        <button class="play-album">▶ Play</button>
                     </div>
-                    <div class="album">
-                        <img src="https://via.placeholder.com/150" alt="Album 2">
-                        <p>Album 2</p>
+                    <div class="album" onclick="playAlbum('Lawn Boy')">
+                        <img src="https://via.placeholder.com/150/ff6b6b/ffffff?text=LAWN+BOY" alt="Lawn Boy">
+                        <h3>Lawn Boy</h3>
+                        <p>1990 • Studio Album</p>
+                        <button class="play-album">▶ Play</button>
                     </div>
-                    <div class="album">
-                        <img src="https://via.placeholder.com/150" alt="Album 3">
-                        <p>Album 3</p>
+                    <div class="album" onclick="playAlbum('A Picture of Nectar')">
+                        <img src="https://via.placeholder.com/150/feca57/ffffff?text=NECTAR" alt="A Picture of Nectar">
+                        <h3>A Picture of Nectar</h3>
+                        <p>1992 • Studio Album</p>
+                        <button class="play-album">▶ Play</button>
                     </div>
-                    <div class="album">
-                        <img src="https://via.placeholder.com/150" alt="Album 4">
-                        <p>Album 4</p>
+                    <div class="album" onclick="playAlbum('Rift')">
+                        <img src="https://via.placeholder.com/150/96ceb4/ffffff?text=RIFT" alt="Rift">
+                        <h3>Rift</h3>
+                        <p>1993 • Studio Album</p>
+                        <button class="play-album">▶ Play</button>
+                    </div>
+                    <div class="album" onclick="playAlbum('Hoist')">
+                        <img src="https://via.placeholder.com/150/45b7d1/ffffff?text=HOIST" alt="Hoist">
+                        <h3>Hoist</h3>
+                        <p>1994 • Studio Album</p>
+                        <button class="play-album">▶ Play</button>
+                    </div>
+                    <div class="album" onclick="playAlbum('Billy Breathes')">
+                        <img src="https://via.placeholder.com/150/a29bfe/ffffff?text=BILLY" alt="Billy Breathes">
+                        <h3>Billy Breathes</h3>
+                        <p>1996 • Studio Album</p>
+                        <button class="play-album">▶ Play</button>
                     </div>
                 </div>
             </section>
-            <section id="news" class="news">
-                <h2>Latest News</h2>
-                <article>
-                    <h3>New Album Announcement</h3>
-                    <p>Phish is excited to announce their upcoming album, set to release this fall...</p>
-                    <a href="#" class="btn">Read More</a>
-                </article>
+            
+            <section id="news" class="content-card">
+                <h2><i class="fas fa-newspaper"></i> Latest News</h2>
+                <div class="news-article">
+                    <h3>New Year's Run 2024 Announced</h3>
+                    <div class="date">November 15, 2024</div>
+                    <p>Phish announces their traditional New Year's Eve run at Madison Square Garden, featuring four nights of music to close out 2024...</p>
+                    <a href="#" class="btn" style="margin-top: 1rem;">
+                        <i class="fas fa-arrow-right"></i> Read More
+                    </a>
+                </div>
+                <div class="news-article">
+                    <h3>Summer Festival Circuit Confirmed</h3>
+                    <div class="date">October 30, 2024</div>
+                    <p>The band will be headlining several major festivals during the 2025 summer season, bringing their legendary improvisational style...</p>
+                    <a href="#" class="btn" style="margin-top: 1rem;">
+                        <i class="fas fa-arrow-right"></i> Read More
+                    </a>
+                </div>
             </section>
         </div>
-       <!-- ... (previous code remains the same) ... -->
-
-<div class="sidebar">
-    <div class="tpcsidebar">
-        <strong class="header">Setlists</strong>
-        <div class="box-body">
-            <i class="fa fa-minus"></i> <a href="/setlists/phish">Phish Setlists</a><br>
-            <i class="fa fa-minus"></i> <a href="/sideshows">Sideshow Setlists</a><br>
-            <i class="fa fa-minus"></i> <a href="/gap-finder">Gap Finder</a><br>
-            <i class="fa fa-minus"></i> <a href="/setlists/jump/random">Random Show</a><br>
-            <i class="fa fa-minus"></i> <a href="setlists.html">All Setlists</a><br>
-        </div>
-    </div>
-    <!-- ... (rest of the sidebar content) ... -->
-</div>
-
-<!-- ... (rest of the file remains the same) ... -->
-            <div class="tpcsidebar">
-                <strong class="header">Latest News</strong>
-                <div class="box-body">
-                    <p>Stay updated with the latest Phish news and tour information.</p>
-                    <form>
-                        <input type="email" placeholder="Enter your email" required>
-                        <button type="submit" class="btn">Subscribe</button>
-                    </form>
-                </div>
+        
+        <div class="sidebar">
+            <div class="sidebar-card">
+                <h3><i class="fas fa-list"></i> Setlists</h3>
+                <a href="setlists.html"><i class="fas fa-music"></i> Phish Setlists</a>
+                <a href="#"><i class="fas fa-shuffle"></i> Random Show</a>
+                <a href="#"><i class="fas fa-search"></i> Song Search</a>
+                <a href="#"><i class="fas fa-chart-line"></i> Statistics</a>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3><i class="fas fa-users"></i> Community</h3>
+                <a href="#"><i class="fas fa-comments"></i> Forum</a>
+                <a href="#"><i class="fas fa-photo-video"></i> Photos</a>
+                <a href="#"><i class="fas fa-video"></i> Videos</a>
+                <a href="#"><i class="fas fa-podcast"></i> Podcasts</a>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3><i class="fas fa-link"></i> Quick Links</h3>
+                <a href="#"><i class="fas fa-ticket-alt"></i> Tickets</a>
+                <a href="#"><i class="fas fa-shopping-cart"></i> Merchandise</a>
+                <a href="#"><i class="fas fa-envelope"></i> Newsletter</a>
+                <a href="#"><i class="fas fa-rss"></i> RSS Feed</a>
             </div>
         </div>
     </div>
+    
+    <div class="audio-visualizer" id="audioVisualizer">
+        <div class="visualizer-bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div class="audio-controls">
+            <button class="play-button" id="globalPlayBtn" onclick="toggleGlobalAudio()">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="now-playing" id="nowPlaying">Click to start audio experience</div>
+        </div>
+    </div>
+    
     <footer>
-        <p>&copy; 2024 Phish. All rights reserved.</p>
+        <p>&copy; 2024 Phish. All rights reserved. Experience the music, live the journey.</p>
     </footer>
+
+    <script>
+        // Audio context and variables
+        let audioContext;
+        let currentOscillators = [];
+        let isGlobalAudioPlaying = false;
+        let currentAudioType = null;
+
+        // Song frequency mappings
+        const songFrequencies = {
+            'Junta': [220, 293.66, 369.99, 440],
+            'Lawn Boy': [174.61, 220, 277.18, 329.63],
+            'A Picture of Nectar': [196, 246.94, 311.13, 369.99],
+            'Rift': [164.81, 207.65, 261.63, 329.63],
+            'Hoist': [146.83, 185, 233.08, 293.66],
+            'Billy Breathes': [130.81, 164.81, 207.65, 261.63],
+            'tour': [440, 554.37, 659.25, 783.99],
+            'random': [329.63, 415.30, 523.25, 659.25]
+        };
+
+        // Initialize audio context
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioContext;
+        }
+
+        // Create stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create floating notes
+        function createFloatingNotes() {
+            const container = document.getElementById('floating-notes');
+            const notes = ['♪', '♫', '♬', '♩', '♭', '♯', '𝄞', '𝄢'];
+            
+            setInterval(() => {
+                const note = document.createElement('div');
+                note.className = 'floating-note';
+                note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                note.style.left = Math.random() * 100 + '%';
+                note.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                note.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(note);
+                
+                setTimeout(() => {
+                    note.remove();
+                }, 15000);
+            }, 3000);
+        }
+
+        // Stop all current audio
+        function stopAllAudio() {
+            if (currentOscillators.length > 0) {
+                currentOscillators.forEach(({ osc, gain }) => {
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+                    osc.stop(audioContext.currentTime + 0.1);
+                });
+                currentOscillators = [];
+            }
+        }
+
+        // Play procedural music
+        function playProceduralMusic(frequencies, type) {
+            const context = initAudio();
+            stopAllAudio();
+
+            const masterGain = context.createGain();
+            masterGain.connect(context.destination);
+            masterGain.gain.value = 0.15;
+
+            frequencies.forEach((freq, index) => {
+                const osc = context.createOscillator();
+                const gain = context.createGain();
+                const filter = context.createBiquadFilter();
+
+                // Different waveforms for harmony
+                osc.type = ['sine', 'triangle', 'sawtooth', 'square'][index % 4];
+                osc.frequency.setValueAtTime(freq, context.currentTime);
+
+                // Add some movement to the frequency
+                osc.frequency.exponentialRampToValueAtTime(freq * 1.05, context.currentTime + 2);
+                osc.frequency.exponentialRampToValueAtTime(freq, context.currentTime + 4);
+
+                // Filter for texture
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(freq * 4, context.currentTime);
+                filter.Q.value = 1;
+
+                // Gain envelope
+                gain.gain.value = 0;
+                gain.gain.linearRampToValueAtTime(0.2 / frequencies.length, context.currentTime + 0.5);
+                gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 8);
+
+                // Connect the chain
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(masterGain);
+
+                osc.start();
+                osc.stop(context.currentTime + 8);
+
+                currentOscillators.push({ osc, gain });
+            });
+
+            // Update UI
+            isGlobalAudioPlaying = true;
+            currentAudioType = type;
+            document.getElementById('globalPlayBtn').innerHTML = '<i class="fas fa-stop"></i>';
+            document.getElementById('nowPlaying').textContent = `Playing: ${type}`;
+
+            // Auto-stop after 8 seconds
+            setTimeout(() => {
+                if (currentAudioType === type) {
+                    stopGlobalAudio();
+                }
+            }, 8000);
+        }
+
+        // Individual play functions
+        function playAlbum(albumName) {
+            const frequencies = songFrequencies[albumName] || songFrequencies['random'];
+            playProceduralMusic(frequencies, albumName);
+        }
+
+        function playTourSound() {
+            playProceduralMusic(songFrequencies['tour'], 'Tour Announcement');
+        }
+
+        function playRandomSong() {
+            const albums = Object.keys(songFrequencies);
+            const randomAlbum = albums[Math.floor(Math.random() * albums.length)];
+            playProceduralMusic(songFrequencies[randomAlbum], 'Random Phish');
+        }
+
+        function toggleGlobalAudio() {
+            if (isGlobalAudioPlaying) {
+                stopGlobalAudio();
+            } else {
+                playRandomSong();
+            }
+        }
+
+        function stopGlobalAudio() {
+            stopAllAudio();
+            isGlobalAudioPlaying = false;
+            currentAudioType = null;
+            document.getElementById('globalPlayBtn').innerHTML = '<i class="fas fa-play"></i>';
+            document.getElementById('nowPlaying').textContent = 'Click to start audio experience';
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createFloatingNotes();
+
+            // Enable audio on first user interaction
+            document.addEventListener('click', function() {
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+            }, { once: true });
+        });
+
+        // Add some interactivity to content cards
+        document.querySelectorAll('.content-card, .album, .tour-date').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                // Add a subtle audio feedback for hover
+                if (audioContext && !isGlobalAudioPlaying) {
+                    const osc = audioContext.createOscillator();
+                    const gain = audioContext.createGain();
+                    
+                    osc.connect(gain);
+                    gain.connect(audioContext.destination);
+                    
+                    osc.frequency.value = 800;
+                    osc.type = 'sine';
+                    
+                    gain.gain.setValueAtTime(0.02, audioContext.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+                    
+                    osc.start();
+                    osc.stop(audioContext.currentTime + 0.1);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
