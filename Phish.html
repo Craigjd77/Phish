@@ -80,6 +80,21 @@
         }
         .album {
             text-align: center;
+            position: relative; /* NEW: to position play icon */
+            cursor: pointer;    /* NEW: indicate interactivity */
+        }
+        .album .play-icon {     /* NEW: overlay play button */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5em;
+            color: rgba(255, 255, 255, 0.85);
+            display: none;
+            pointer-events: none;
+        }
+        .album:hover .play-icon {
+            display: block;     /* NEW: show icon on hover */
         }
         .album img {
             max-width: 100%;
@@ -164,20 +179,24 @@
             <section id="music" class="music">
                 <h2>Music</h2>
                 <div class="album-grid">
-                    <div class="album">
+                    <div class="album" data-audio="https://samplelib.com/lib/preview/mp3/sample-3s.mp3"> <!-- NEW data-audio attribute -->
                         <img src="https://via.placeholder.com/150" alt="Album 1">
+                        <i class="fas fa-play-circle play-icon"></i> <!-- NEW overlay icon -->
                         <p>Album 1</p>
                     </div>
-                    <div class="album">
+                    <div class="album" data-audio="https://samplelib.com/lib/preview/mp3/sample-6s.mp3"> <!-- NEW -->
                         <img src="https://via.placeholder.com/150" alt="Album 2">
+                        <i class="fas fa-play-circle play-icon"></i>
                         <p>Album 2</p>
                     </div>
-                    <div class="album">
+                    <div class="album" data-audio="https://samplelib.com/lib/preview/mp3/sample-12s.mp3"> <!-- NEW -->
                         <img src="https://via.placeholder.com/150" alt="Album 3">
+                        <i class="fas fa-play-circle play-icon"></i>
                         <p>Album 3</p>
                     </div>
-                    <div class="album">
+                    <div class="album" data-audio="https://samplelib.com/lib/preview/mp3/sample-15s.mp3"> <!-- NEW -->
                         <img src="https://via.placeholder.com/150" alt="Album 4">
+                        <i class="fas fa-play-circle play-icon"></i>
                         <p>Album 4</p>
                     </div>
                 </div>
@@ -223,5 +242,53 @@
     <footer>
         <p>&copy; 2024 Phish. All rights reserved.</p>
     </footer>
+    <!-- NEW: interactive album audio script -->
+    <script>
+        document.querySelectorAll('.album').forEach(album => {
+            const src = album.getAttribute('data-audio');
+            if (!src) return;
+            const audio = new Audio(src);
+            const icon = album.querySelector('.play-icon');
+            let playing = false;
+
+            album.addEventListener('click', () => {
+                if (playing) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    playing = false;
+                    icon.classList.remove('fa-pause-circle');
+                    icon.classList.add('fa-play-circle');
+                } else {
+                    // Pause any other playing clips first
+                    document.querySelectorAll('.album').forEach(other => {
+                        if (other !== album && other._audioInstance) {
+                            other._audioInstance.pause();
+                            other._audioInstance.currentTime = 0;
+                            other._playing = false;
+                            const otherIcon = other.querySelector('.play-icon');
+                            if (otherIcon) {
+                                otherIcon.classList.remove('fa-pause-circle');
+                                otherIcon.classList.add('fa-play-circle');
+                            }
+                        }
+                    });
+                    audio.play();
+                    playing = true;
+                    icon.classList.remove('fa-play-circle');
+                    icon.classList.add('fa-pause-circle');
+                }
+            });
+
+            audio.addEventListener('ended', () => {
+                playing = false;
+                icon.classList.remove('fa-pause-circle');
+                icon.classList.add('fa-play-circle');
+            });
+
+            // Store references on element for cross-control
+            album._audioInstance = audio;
+            album._playing = playing;
+        });
+    </script>
 </body>
 </html>
