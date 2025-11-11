@@ -105,6 +105,39 @@
             padding: 6px;
             width: 250px;
         }
+        #setlists_filter {
+            position: relative;
+        }
+        .typeahead-suggestions {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            z-index: 25;
+            max-height: 260px;
+            overflow-y: auto;
+            display: none;
+        }
+        .typeahead-suggestion {
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.95em;
+            line-height: 1.4;
+            color: #2c3e50;
+        }
+        .typeahead-suggestion:hover,
+        .typeahead-suggestion.active {
+            background-color: #eef6ff;
+        }
+        .typeahead-hint {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            padding-left: 4px;
+        }
         .dataTables_wrapper .dataTables_length select {
             border-radius: 4px;
             border: 1px solid #ccc;
@@ -136,6 +169,50 @@
             padding: 6px;
             border-radius: 4px;
             border: 1px solid #ccc;
+        }
+        #resultsSummary {
+            margin-top: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            padding: 10px 14px;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .result-item {
+            padding: 8px 6px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .result-item:hover,
+        .result-item:focus {
+            background-color: rgba(231, 246, 255, 0.8);
+            outline: none;
+        }
+        .result-item .result-date {
+            font-weight: 600;
+            color: #2c3e50;
+            display: block;
+        }
+        .result-item .result-venue {
+            color: #34495e;
+            font-size: 0.9em;
+        }
+        .result-item .result-location {
+            color: #7f8c8d;
+            font-size: 0.85em;
+        }
+        .highlighted-row {
+            animation: rowFlash 1.2s ease;
+        }
+        @keyframes rowFlash {
+            0% { background-color: rgba(255, 241, 118, 0.9); }
+            100% { background-color: transparent; }
         }
         #stats {
             background: rgba(255, 255, 255, 0.95);
@@ -285,6 +362,7 @@
             </div>
             <div id="stats"></div>
         </div>
+        <div id="resultsSummary" aria-live="polite"></div>
         <table id="setlists" class="display">
             <thead>
                 <tr>
@@ -581,6 +659,7 @@
 
             var table;
             var allData;
+            var suggestionItems = [];
 
             console.log('About to fetch JSON');
             
@@ -739,6 +818,19 @@
                 
                 console.log('Data loaded successfully:', data);
                 allData = data;
+                suggestionItems = buildSuggestionList(data);
+
+                const $searchInput = $('.dataTables_filter input');
+                const $filterWrapper = $('#setlists_filter');
+                let $typeaheadBox = $('#typeaheadSuggestions');
+                if (!$typeaheadBox.length) {
+                    $typeaheadBox = $('<div>', {
+                        id: 'typeaheadSuggestions',
+                        class: 'typeahead-suggestions',
+                        role: 'listbox',
+                        'aria-label': 'Search suggestions'
+                    }).appendTo($filterWrapper);
+                }
 
                 // Populate year filter
                 var years = [...new Set(data.map(item => new Date(item.date).getFullYear()))].sort((a, b) => b - a);
@@ -760,12 +852,13 @@
                 });
 
                 // Real-time searching
-                $('.dataTables_filter input')
+                $searchInput
                     .off('keyup search input')
                     .on('keyup search input', function() {
-                        table.search(this.value).draw();
-                        updateStats();
+                        triggerSearch(this.value);
                     });
+
+                initTypeahead($searchInput, $typeaheadBox);
 
                 updateStats();
             }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -786,7 +879,7 @@
                         
                         searchTerms.forEach(function(term) {
                             var regex = new RegExp('(' + term + ')', 'gi');
-                            content = content.replace(regex, '<span class="highlight">${match}</span>');
+                            content = content.replace(regex, '<span class="highlight">$1</span>');
                         });
                         
                         // Preserve set markers while adding highlights
@@ -805,6 +898,7 @@
                 var searchTerm = $('.dataTables_filter input').val().toLowerCase();
                 if (searchTerm.length < 3) {
                     $('#stats').html('');
+                    $('#resultsSummary').html('');
                     return;
                 }
 
@@ -848,6 +942,7 @@
                 }
                 
                 $('#stats').html(statsHtml);
+                updateResultsList(searchTerm);
             }
 
             function countOccurrences(term) {
@@ -857,6 +952,276 @@
                     count += (setlist.match(new RegExp(term, 'g')) || []).length;
                 });
                 return count;
+            }
+
+            function triggerSearch(value) {
+                if (!table) return;
+                table.search(value).draw();
+                updateStats();
+                updateResultsList();
+            }
+
+            function initTypeahead($input, $suggestionsBox) {
+                if (!$input.length || !$suggestionsBox.length) {
+                    return;
+                }
+
+                let currentMatches = [];
+                let activeIndex = -1;
+
+                const hideSuggestions = () => {
+                    currentMatches = [];
+                    activeIndex = -1;
+                    $suggestionsBox.empty().hide();
+                };
+
+                const highlightTerm = (text, term) => {
+                    if (!term) return text;
+                    const regex = new RegExp('(' + escapeRegex(term) + ')', 'ig');
+                    return text.replace(regex, '<span class="highlight">$1</span>');
+                };
+
+                const renderMatches = (term, matches) => {
+                    if (!matches.length) {
+                        hideSuggestions();
+                        return;
+                    }
+
+                    currentMatches = matches;
+                    activeIndex = 0;
+
+                    const fragment = document.createDocumentFragment();
+
+                    matches.forEach((item, idx) => {
+                        const option = document.createElement('div');
+                        option.className = 'typeahead-suggestion' + (idx === 0 ? ' active' : '');
+                        option.setAttribute('role', 'option');
+                        option.setAttribute('data-value', item.value);
+                        option.innerHTML = `
+                            ${highlightTerm(item.value, term)}
+                            <span class="typeahead-hint">${item.type}</span>
+                        `;
+                        fragment.appendChild(option);
+                    });
+
+                    $suggestionsBox.empty().append(fragment).show();
+                };
+
+                const setActiveSuggestion = (index) => {
+                    if (!currentMatches.length) return;
+                    if (index < 0) {
+                        index = currentMatches.length - 1;
+                    } else if (index >= currentMatches.length) {
+                        index = 0;
+                    }
+                    activeIndex = index;
+                    const children = $suggestionsBox.children();
+                    children.removeClass('active');
+                    const activeItem = children.eq(activeIndex);
+                    activeItem.addClass('active');
+                    const containerTop = $suggestionsBox.scrollTop();
+                    const containerBottom = containerTop + $suggestionsBox.outerHeight();
+                    const elementTop = activeItem.position().top + containerTop;
+                    const elementBottom = elementTop + activeItem.outerHeight();
+                    if (elementBottom > containerBottom) {
+                        $suggestionsBox.scrollTop(elementBottom - $suggestionsBox.outerHeight());
+                    } else if (elementTop < containerTop) {
+                        $suggestionsBox.scrollTop(elementTop);
+                    }
+                };
+
+                const applySuggestion = (value) => {
+                    if (!value) return;
+                    $input.val(value);
+                    hideSuggestions();
+                    triggerSearch(value);
+                };
+
+                const handleInput = () => {
+                    const rawTerm = $input.val();
+                    const term = rawTerm.trim();
+                    if (term.length < 2) {
+                        hideSuggestions();
+                        return;
+                    }
+
+                    const lowerTerm = term.toLowerCase();
+                    const startsWith = suggestionItems.filter(item => item.valueLower.startsWith(lowerTerm));
+                    const contains = suggestionItems.filter(item => !item.valueLower.startsWith(lowerTerm) && item.valueLower.includes(lowerTerm));
+                    const matches = [...startsWith, ...contains].slice(0, 12);
+                    renderMatches(term, matches);
+                };
+
+                $input.on('input.typeahead', handleInput);
+
+                $input.on('keydown.typeahead', function(event) {
+                    if (!$suggestionsBox.is(':visible')) {
+                        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                            handleInput();
+                            return;
+                        }
+                        return;
+                    }
+
+                    if (event.key === 'ArrowDown') {
+                        event.preventDefault();
+                        setActiveSuggestion(activeIndex + 1);
+                    } else if (event.key === 'ArrowUp') {
+                        event.preventDefault();
+                        setActiveSuggestion(activeIndex - 1);
+                    } else if (event.key === 'Enter') {
+                        if (activeIndex >= 0 && currentMatches[activeIndex]) {
+                            event.preventDefault();
+                            applySuggestion(currentMatches[activeIndex].value);
+                        }
+                    } else if (event.key === 'Escape') {
+                        hideSuggestions();
+                    }
+                });
+
+                $input.on('blur.typeahead', function() {
+                    setTimeout(() => {
+                        hideSuggestions();
+                    }, 120);
+                });
+
+                $suggestionsBox.on('mouseenter', '.typeahead-suggestion', function() {
+                    const index = $(this).index();
+                    setActiveSuggestion(index);
+                });
+
+                $suggestionsBox.on('mousedown', '.typeahead-suggestion', function(event) {
+                    event.preventDefault();
+                    const value = $(this).data('value');
+                    applySuggestion(value);
+                });
+            }
+
+            function buildSuggestionList(dataSet) {
+                const songSet = new Set();
+                const venueSet = new Set();
+                const ignorePattern = /^(set\s*\d+:?|encore:?|soundcheck:?|notes?:|jam|pre-show|post-show|unknown)$/i;
+
+                dataSet.forEach(item => {
+                    if (item.venue) {
+                        const venue = item.venue.trim();
+                        if (venue.length > 1) {
+                            venueSet.add(venue);
+                        }
+                    }
+
+                    const setlist = (item.setlist || '').replace(/\*/g, '');
+                    setlist.split(/\n/).forEach(line => {
+                        const cleanedLine = line.replace(/\t+/g, ' ').trim();
+                        if (!cleanedLine) return;
+
+                        cleanedLine.split(/\s*(?:,|->|→|›|>)+\s*/).forEach(entry => {
+                            let song = entry.trim();
+                            if (!song) return;
+
+                            song = song.replace(/^SET\s*\d+:?/i, '').trim();
+                            song = song.replace(/^ENCORE:?/i, '').trim();
+                            song = song.replace(/^Soundcheck:?/i, '').trim();
+                            song = song.replace(/^Notes:?/i, '').trim();
+                            song = song.replace(/^\d+\.\s*/, '').trim();
+
+                            if (!song || ignorePattern.test(song)) return;
+                            if (song.length < 2) return;
+
+                            songSet.add(song);
+                        });
+                    });
+                });
+
+                const suggestions = [
+                    ...Array.from(songSet).map(value => ({ value, type: 'Song' })),
+                    ...Array.from(venueSet).map(value => ({ value, type: 'Venue' }))
+                ];
+
+                suggestions.sort((a, b) => a.value.localeCompare(b.value));
+
+                return suggestions.map(item => ({
+                    value: item.value,
+                    valueLower: item.value.toLowerCase(),
+                    type: item.type
+                }));
+            }
+
+            function escapeRegex(str) {
+                return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
+            function updateResultsList(term = '') {
+                const $container = $('#resultsSummary');
+                if (!table) {
+                    $container.html('');
+                    return;
+                }
+
+                const appliedRows = table.rows({ search: 'applied' }).data();
+                if (!appliedRows || appliedRows.length === 0) {
+                    $container.html('');
+                    return;
+                }
+
+                const maxItems = 12;
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < Math.min(appliedRows.length, maxItems); i++) {
+                    const row = appliedRows[i];
+                    const div = document.createElement('div');
+                    div.className = 'result-item';
+                    div.setAttribute('tabindex', '0');
+                    div.setAttribute('data-row-global-index', i);
+                    div.innerHTML = `
+                        <span class="result-date">${row.date}</span>
+                        <span class="result-venue">${row.venue}</span>
+                        <span class="result-location">${row.location}</span>
+                    `;
+                    fragment.appendChild(div);
+                }
+
+                $container.empty().append(fragment);
+
+                const remainder = appliedRows.length - Math.min(appliedRows.length, maxItems);
+                if (remainder > 0) {
+                    const moreDiv = document.createElement('div');
+                    moreDiv.className = 'result-item';
+                    moreDiv.style.cursor = 'default';
+                    moreDiv.setAttribute('tabindex', '-1');
+                    moreDiv.innerHTML = `…and ${remainder} more results. Use the table below to browse all matches.`;
+                    $container.append(moreDiv);
+                }
+
+                $container.find('.result-item').not(':last-child').on('click keypress', function(event) {
+                    if (event.type === 'click' || (event.type === 'keypress' && (event.key === 'Enter' || event.key === ' '))) {
+                        event.preventDefault();
+                        const globalIndex = Number($(this).attr('data-row-global-index'));
+                        focusTableRow(globalIndex);
+                    }
+                });
+            }
+
+            function focusTableRow(globalIndex) {
+                if (!table) return;
+                const rowsData = table.rows({ search: 'applied' });
+                if (!rowsData || globalIndex < 0 || globalIndex >= rowsData.data().length) {
+                    return;
+                }
+
+                const pageLength = table.page.len();
+                const targetPage = Math.floor(globalIndex / pageLength);
+                table.page(targetPage).draw(false);
+
+                setTimeout(() => {
+                    const relativeIndex = globalIndex % pageLength;
+                    const rowNodes = table.rows({ page: 'current' }).nodes();
+                    const targetNode = rowNodes[relativeIndex];
+                    if (targetNode) {
+                        targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        $(targetNode).addClass('highlighted-row');
+                        setTimeout(() => $(targetNode).removeClass('highlighted-row'), 1200);
+                    }
+                }, 150);
             }
 
             // Add this function to determine the appropriate icon
