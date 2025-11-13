@@ -32,6 +32,142 @@
             overflow: hidden;
             backdrop-filter: blur(5px);
         }
+        .banner {
+            background: linear-gradient(180deg, #f0f5f2 0%, #dbe7df 100%);
+            border-bottom: 1px solid rgba(44, 62, 80, 0.25);
+            padding: 18px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .banner-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .banner-title {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .banner-prefix {
+            font-size: 0.9em;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #7b6f41;
+        }
+        .banner h1 {
+            margin: 0;
+            font-size: 2.4em;
+            letter-spacing: 0.03em;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        .banner-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95em;
+            color: #4d5b75;
+            background: rgba(255,255,255,0.75);
+            padding: 6px 12px;
+            border: 1.5px solid #2c3e50;
+            border-radius: 4px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
+        }
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 260px;
+            gap: 24px;
+            align-items: start;
+        }
+        .main-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .margin-notes {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .margin-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(44, 62, 80, 0.15);
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        .margin-card h3 {
+            margin: 0 0 8px;
+            font-size: 0.95em;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #2c3e50;
+        }
+        .margin-card figure {
+            margin: 0;
+        }
+        .margin-card img {
+            width: 100%;
+            border-radius: 6px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .margin-note-title {
+            font-weight: 600;
+            color: #1f2a3d;
+            margin-bottom: 4px;
+        }
+        .margin-note-body {
+            color: #4b596e;
+        }
+        .margin-digest-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 6px;
+        }
+        .margin-digest-list li span {
+            display: block;
+            color: #4b596e;
+        }
+        @media (max-width: 1080px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            .margin-notes {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .margin-card {
+                flex: 1 1 260px;
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+            .margin-notes {
+                flex-direction: column;
+            }
+        }
+        .meta-label {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+        .meta-separator {
+            color: #2c3e50;
+            opacity: 0.6;
+            padding: 0 2px;
+        }
         h1 {
             color: #2c3e50;
             text-align: center;
@@ -170,6 +306,107 @@
             border-radius: 4px;
             border: 1px solid #ccc;
         }
+        #dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+        .tour-tape {
+            background: rgba(44, 62, 80, 0.06);
+            border: 1px solid rgba(44, 62, 80, 0.15);
+            border-radius: 999px;
+            padding: 8px 12px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .tour-tape-track {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            width: 100%;
+        }
+        .tour-tape-year {
+            flex: 1 1 0;
+            min-width: 40px;
+            text-align: center;
+            font-size: 0.78em;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 4px 6px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.7);
+            color: #2c3e50;
+            border: 1px solid rgba(44, 62, 80, 0.12);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            line-height: 1.2;
+        }
+        .tour-tape-year:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.3);
+        }
+        .tour-tape-year:hover {
+            background: rgba(44, 62, 80, 0.12);
+        }
+        .tour-tape-year.is-active {
+            background: rgba(44, 62, 80, 0.8);
+            color: #f5f5f5;
+            border-color: rgba(44, 62, 80, 0.8);
+        }
+        .tour-tape-year.is-muted {
+            opacity: 0.45;
+        }
+        .tour-tape-empty {
+            font-size: 0.85em;
+            text-align: center;
+            color: #4b596e;
+            width: 100%;
+        }
+        .dashboard-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(247,247,247,0.96) 100%);
+            border: 2px solid rgba(44, 62, 80, 0.85);
+            border-radius: 6px;
+            padding: 14px 18px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .dashboard-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+        .dashboard-card .card-label {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #5b6578;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .dashboard-card .card-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1f2a3d;
+            line-height: 1.2;
+        }
+        .dashboard-card .card-subtext {
+            margin-top: 6px;
+            font-size: 0.9em;
+            color: #53627a;
+        }
+        .dashboard-card .card-footnote {
+            margin-top: 8px;
+            font-size: 0.8em;
+            color: #7b8a9b;
+            font-style: italic;
+        }
         #resultsSummary {
             margin-top: 12px;
             background: rgba(255, 255, 255, 0.95);
@@ -214,6 +451,16 @@
             0% { background-color: rgba(255, 241, 118, 0.9); }
             100% { background-color: transparent; }
         }
+        .photo-caption {
+            font-size: 0.85em;
+            color: #4b596e;
+        }
+        .photo-credit {
+            display: block;
+            font-size: 0.75em;
+            color: #7b8a9b;
+            margin-top: 4px;
+        }
         #stats {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
@@ -253,6 +500,58 @@
         /* Style the set markers */
         .setlist-cell {
             font-size: 0.9em;  /* Slightly smaller text */
+        }
+        .song-line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            margin: 2px 0;
+        }
+        .song-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(44, 62, 80, 0.25);
+            background: rgba(255, 255, 255, 0.85);
+            font-size: 0.9em;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .song-chip:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        .song-chip a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .song-chip .song-badge {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8e5a0c;
+            background: rgba(255, 208, 99, 0.4);
+            padding: 2px 6px;
+            border-radius: 999px;
+            border: 1px solid rgba(142,90,12,0.3);
+        }
+        .song-connector {
+            font-size: 0.9em;
+            color: #2c3e50;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .song-note {
+            font-style: italic;
+            color: #5c6b80;
+            font-size: 0.9em;
+        }
+        .song-icon {
+            color: #2c7cb0;
         }
 
         /* Set headers */
@@ -341,41 +640,78 @@
     </style>
 </head>
 <body>
-    <!-- Add this test div -->
-    <div style="padding: 20px; background: yellow;">
-        Icon Test:
-        <i class="fas fa-music"></i>
-        <i class="fas fa-bolt"></i>
-        <i class="fas fa-heart"></i>
-        <i class="fas fa-fire"></i>
-        <i class="fas fa-guitar"></i>
-    </div>
+    <header class="banner">
+        <div class="banner-inner">
+            <div class="banner-title">
+                <span class="banner-prefix">Mockingbird Institute • Field Notes</span>
+                <h1>Phish Setlist Explorer</h1>
+            </div>
+            <div class="banner-meta">
+                <span class="meta-label">Edition:</span>
+                <span id="bannerEdition">Live Archives</span>
+                <span class="meta-separator">•</span>
+                <span class="meta-label">Updated:</span>
+                <span id="bannerUpdated">Loading…</span>
+            </div>
+        </div>
+    </header>
 
     <div class="container">
-        <h1>Phish Setlist Explorer</h1>
-        <div id="controls">
-            <div>
-                <label for="yearFilter">Filter by Year:</label>
-                <select id="yearFilter">
-                    <option value="">All Years</option>
-                </select>
+        <div class="layout">
+            <div class="main-panel">
+                <div id="controls">
+                    <div>
+                        <label for="yearFilter">Filter by Year:</label>
+                        <select id="yearFilter">
+                            <option value="">All Years</option>
+                        </select>
+                    </div>
+                    <div id="stats"></div>
+                </div>
+                <div id="dashboard" aria-live="polite"></div>
+                <div class="tour-tape" id="tourTape" aria-live="polite" aria-label="Tour year tape">
+                    <div class="tour-tape-track tour-tape-empty">Loading tour tape…</div>
+                </div>
+                <div id="resultsSummary" aria-live="polite"></div>
+                <table id="setlists" class="display">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Venue</th>
+                            <th>Location</th>
+                            <th>Setlist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be loaded here by JavaScript -->
+                    </tbody>
+                </table>
             </div>
-            <div id="stats"></div>
+            <aside class="margin-notes">
+                <div class="margin-card" id="marginDigest">
+                    <h3>Tour Digest</h3>
+                    <ul class="margin-digest-list" id="marginDigestList">
+                        <li><strong>Total Shows</strong><span>—</span></li>
+                        <li><strong>Unique Songs</strong><span>—</span></li>
+                        <li><strong>Top Song</strong><span>—</span></li>
+                        <li><strong>Top Venue</strong><span>—</span></li>
+                    </ul>
+                </div>
+                <div class="margin-card" id="marginVenueCard">
+                    <h3>Venue Note</h3>
+                    <div class="margin-note-title" id="marginVenueTitle">Select a show for a venue note.</div>
+                    <div class="margin-note-body" id="marginVenueFact">Use the search or results list to explore Phish lore tied to each location.</div>
+                </div>
+                <div class="margin-card" id="marginPhotoCard">
+                    <h3>Spotlight</h3>
+                    <figure>
+                        <img src="" alt="Phish live" id="marginPhotoImage">
+                        <figcaption class="photo-caption" id="marginPhotoCaption"></figcaption>
+                    </figure>
+                    <span class="photo-credit" id="marginPhotoCredit"></span>
+                </div>
+            </aside>
         </div>
-        <div id="resultsSummary" aria-live="polite"></div>
-        <table id="setlists" class="display">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Venue</th>
-                    <th>Location</th>
-                    <th>Setlist</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data will be loaded here by JavaScript -->
-            </tbody>
-        </table>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -602,6 +938,66 @@
             "Evolve": "Evolve"
         };
 
+        const ignoreEntryPattern = /^(set\s*\d+:?|encore:?|soundcheck:?|notes?:|jam|pre-show|post-show|unknown)$/i;
+
+        const photoGallery = [
+            {
+                src: "https://phish.com/wp-content/uploads/2024/01/Phish-Riviera-Maya-2024-photo-by-Rene-Huemer-1024x683.jpg",
+                title: "Moon Palace, Riviera Maya • Jan 2024",
+                caption: "The band kicks up the surf during the Riviera Maya run, with the Caribbean twilight wrapping the stage.",
+                credit: "Photo © René Huemer / Phish"
+            },
+            {
+                src: "https://phish.com/wp-content/uploads/2023/12/123123_rene_huemer-1024x683.jpg",
+                title: "Madison Square Garden • Dec 31, 2023",
+                caption: "New Year’s confetti cascades as Gamehendge returns to Madison Square Garden for the first time since 1994.",
+                credit: "Photo © René Huemer / Phish"
+            },
+            {
+                src: "https://phish.com/wp-content/uploads/2023/08/Phish_Denver-08-31-2023_Rene_Huemer_002-1024x683.jpg",
+                title: "Dick’s Sporting Goods Park • Aug 31, 2023",
+                caption: "Opening night fireworks at Dick’s, where the summer tour’s final stretch turned into four improv clinics.",
+                credit: "Photo © René Huemer / Phish"
+            },
+            {
+                src: "https://phish.com/wp-content/uploads/2022/08/072422_WillByington-1024x683.jpg",
+                title: "Bethel Woods • July 24, 2022",
+                caption: "Phish returns to the Woodstock hillside, channeling the amphitheater’s historic resonance.",
+                credit: "Photo © Will Byington / Phish"
+            }
+        ];
+
+        const venueInsights = {
+            "HAMPTON COLISEUM|Hampton, VA": {
+                title: "Hampton Coliseum",
+                fact: "Affectionately dubbed the 'Mothership' by Phish fans, Hampton hosted the legendary 2009 reunion shows and continues to be a portal for deep improvisation."
+            },
+            "MADISON SQUARE GARDEN|New York, NY": {
+                title: "Madison Square Garden",
+                fact: "MSG has welcomed Phish over 80 times, including every New Year’s run since 2011 and the first full Gamehendge performance in 30 years on 12/31/23."
+            },
+            "DICK'S SPORTING GOODS PARK|Commerce City, CO": {
+                title: "Dick’s Sporting Goods Park",
+                fact: "Since 2011, the Labor Day tradition at Dick’s has birthed gag-filled setlists, from the famous 'S' show to the spelling of 'THANK YOU' across an entire weekend."
+            },
+            "BETHEL WOODS CENTER FOR THE ARTS|Bethel, NY": {
+                title: "Bethel Woods",
+                fact: "Built on the original Woodstock grounds, Bethel’s natural bowl has amplified some of Phish’s most scenic summer shows."
+            },
+            "MOON PALACE|Cancun, Quintana Roo, Mexico": {
+                title: "Moon Palace Riviera Maya",
+                fact: "The band’s tropical residency began in 2016, turning the Caribbean coastline into a four-night beachfront festival every winter."
+            },
+            "ALPINE VALLEY MUSIC THEATRE|East Troy, WI": {
+                title: "Alpine Valley",
+                fact: "Alpine’s sweeping lawn has hosted Phish since 1992, including the storied 1998 'Terrapin Station' encore with Steve Miller."
+            },
+            "THE GORGE AMPHITHEATRE|George, WA": {
+                title: "The Gorge",
+                fact: "Phish’s Gorge visits harness the Columbia River vista; the 1998 'ambient' second set helped usher in a new improvisational era."
+            }
+        };
+
         const stateBirds = {
             'NY': { bird: 'fas fa-statue-liberty', name: 'Statue of Liberty' },
             'NJ': { bird: 'fas fa-route', name: 'Garden State' },
@@ -676,6 +1072,30 @@
                     };
                     return parseDate(b.date) - parseDate(a.date);
                 });
+
+                initMarginPhoto();
+
+                if (data.length) {
+                    const newest = data[0].date.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+                    const oldest = data[data.length - 1].date.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+                    if (oldest && newest) {
+                        $('#bannerEdition').text(`${oldest[3]}–${newest[3]}`);
+                        const formattedNewest = new Date(newest[3], newest[1] - 1, newest[2]).toLocaleDateString(undefined, {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                        $('#bannerUpdated').text(formattedNewest);
+                    } else {
+                        $('#bannerUpdated').text('Current');
+                    }
+                } else {
+                    $('#bannerUpdated').text('No data');
+                }
+
+                const initialMetrics = computeDashboardMetrics(data);
+                renderDashboard(initialMetrics);
+                renderTourTape(data, $('#yearFilter').val());
 
                 // Updated state icons - EVERY location must have an icon
                 const locationIcons = {
@@ -773,16 +1193,7 @@
                             orderable: false,
                             render: function(data, type) {
                                 if (type === 'display') {
-                                    let lines = data.split('\n');
-                                    lines = lines.map(line => {
-                                        line = line.replace(/\t+/g, ' ').trim();
-                                        if (line.includes('SET 1:')) return `<div class="set-header">SET 1:</div>`;
-                                        if (line.includes('SET 2:')) return `<div class="set-header">SET 2:</div>`;
-                                        if (line.includes('SET 3:')) return `<div class="set-header">SET 3:</div>`;
-                                        if (line.includes('ENCORE:')) return `<div class="set-header">ENCORE:</div>`;
-                                        return line;
-                                    });
-                                    return lines.join('\n').replace(/,\s+/g, ', ');
+                                    return formatSetlistHtml(data);
                                 }
                                 return data;
                             }
@@ -849,6 +1260,20 @@
                 $('#yearFilter').on('change', function() {
                     table.column(0).search(this.value).draw();
                     updateStats();
+                    updateResultsList();
+                });
+
+                $('#tourTape').on('click', '.tour-tape-year', function() {
+                    const year = String($(this).data('year'));
+                    if (!year) return;
+                    const $filter = $('#yearFilter');
+                    const current = $filter.val();
+                    if (current === year) {
+                        $filter.val('');
+                    } else {
+                        $filter.val(year);
+                    }
+                    $filter.trigger('change');
                 });
 
                 // Real-time searching
@@ -861,6 +1286,7 @@
                 initTypeahead($searchInput, $typeaheadBox);
 
                 updateStats();
+                updateResultsList();
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 console.error('Failed to load JSON:', textStatus, errorThrown);
                 console.error('Status:', jqXHR.status);
@@ -1100,7 +1526,6 @@
             function buildSuggestionList(dataSet) {
                 const songSet = new Set();
                 const venueSet = new Set();
-                const ignorePattern = /^(set\s*\d+:?|encore:?|soundcheck:?|notes?:|jam|pre-show|post-show|unknown)$/i;
 
                 dataSet.forEach(item => {
                     if (item.venue) {
@@ -1125,7 +1550,7 @@
                             song = song.replace(/^Notes:?/i, '').trim();
                             song = song.replace(/^\d+\.\s*/, '').trim();
 
-                            if (!song || ignorePattern.test(song)) return;
+                            if (!song || ignoreEntryPattern.test(song)) return;
                             if (song.length < 2) return;
 
                             songSet.add(song);
@@ -1151,23 +1576,385 @@
                 return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             }
 
+            function computeDashboardMetrics(dataSet) {
+                if (!dataSet || !dataSet.length) return null;
+
+                const songCounts = new Map();
+                const venueCounts = new Map();
+
+                dataSet.forEach(item => {
+                    const venue = (item.venue || '').trim();
+                    if (venue) {
+                        venueCounts.set(venue, (venueCounts.get(venue) || 0) + 1);
+                    }
+
+                    extractSongsFromSetlist(item.setlist).forEach(song => {
+                        songCounts.set(song, (songCounts.get(song) || 0) + 1);
+                    });
+                });
+
+                const topSong = Array.from(songCounts.entries()).sort((a, b) => b[1] - a[1])[0] || [null, 0];
+                const topVenue = Array.from(venueCounts.entries()).sort((a, b) => b[1] - a[1])[0] || [null, 0];
+
+                return {
+                    totalShows: dataSet.length,
+                    uniqueSongs: songCounts.size,
+                    topSong: topSong[0],
+                    topSongCount: topSong[1],
+                    topSongAlbum: topSong[0] ? songAlbums[topSong[0]] : null,
+                    topVenue: topVenue[0],
+                    topVenueCount: topVenue[1],
+                    latestShow: dataSet[0]
+                };
+            }
+
+            function renderDashboard(metrics) {
+                const $dashboard = $('#dashboard');
+                if (!metrics) {
+                    $dashboard.html('');
+                    updateMarginDigest(null);
+                    return;
+                }
+
+                const latest = metrics.latestShow || {};
+                const latestDate = formatShowDate(latest.date);
+                const latestVenue = latest.venue || 'Unknown venue';
+                const latestLocation = latest.location || 'Unknown location';
+
+                const songAlbum = metrics.topSongAlbum ? `<span class="card-footnote">${metrics.topSongAlbum}</span>` : '';
+
+                const cardsHtml = `
+                    <div class="dashboard-card">
+                        <span class="card-label">Latest Performance</span>
+                        <div class="card-value">${latestDate}</div>
+                        <div class="card-subtext">${latestVenue}</div>
+                        <div class="card-footnote">${latestLocation}</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="card-label">Most Played Song</span>
+                        <div class="card-value">${metrics.topSong || '—'}</div>
+                        <div class="card-subtext">Appeared ${metrics.topSongCount} times</div>
+                        ${songAlbum}
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="card-label">Most Visited Venue</span>
+                        <div class="card-value">${metrics.topVenue || '—'}</div>
+                        <div class="card-subtext">${metrics.topVenueCount} shows logged</div>
+                        <div class="card-footnote">${metrics.totalShows} shows • ${metrics.uniqueSongs} unique songs</div>
+                    </div>
+                `;
+
+                $dashboard.html(cardsHtml);
+                updateMarginDigest(metrics);
+            }
+
+            function extractSongsFromSetlist(setlist = '') {
+                const songs = [];
+                if (!setlist) return songs;
+
+                const cleaned = setlist.replace(/\*/g, '');
+                cleaned.split(/\n/).forEach(line => {
+                    const trimmedLine = line.replace(/\t+/g, ' ').trim();
+                    if (!trimmedLine) return;
+
+                    trimmedLine.split(/\s*(?:,|->|→|›|>)+\s*/).forEach(entry => {
+                        let song = entry.trim();
+                        if (!song) return;
+
+                        song = song.replace(/^SET\s*\d+:?/i, '').trim();
+                        song = song.replace(/^ENCORE:?/i, '').trim();
+                        song = song.replace(/^Soundcheck:?/i, '').trim();
+                        song = song.replace(/^Notes:?/i, '').trim();
+                        song = song.replace(/^\d+\.\s*/, '').trim();
+
+                        if (!song || ignoreEntryPattern.test(song)) return;
+                        if (song.length < 2) return;
+
+                        songs.push(song);
+                    });
+                });
+
+                return songs;
+            }
+
+            function formatShowDate(raw = '') {
+                const match = raw.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+                if (!match) {
+                    return raw.replace(/PHISH,\s*/i, '').replace(/\s+/g, ' ').trim() || 'Date unavailable';
+                }
+
+                const [_, month, day, year] = match;
+                const date = new Date(year, month - 1, day);
+                return date.toLocaleDateString(undefined, {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+            }
+
+            function formatSetlistHtml(setlist = '') {
+                if (!setlist) return '';
+                const blocks = [];
+
+                setlist.split(/\n/).forEach(rawLine => {
+                    const line = rawLine.replace(/\t+/g, ' ').trim();
+                    if (!line) return;
+
+                    if (/^SET\s*\d+:?/i.test(line)) {
+                        blocks.push(`<div class="set-header">${line.replace(/:/, '').replace(/\s+/g, ' ').toUpperCase()}:</div>`);
+                        return;
+                    }
+
+                    if (/^ENCORE:?/i.test(line)) {
+                        blocks.push(`<div class="set-header">ENCORE:</div>`);
+                        return;
+                    }
+
+                     if (/^SOUNDCHECK:?/i.test(line)) {
+                        blocks.push(`<div class="set-header">SOUNDCHECK:</div>`);
+                        return;
+                    }
+
+                    const songLine = buildSongLine(line);
+                    if (songLine) {
+                        blocks.push(songLine);
+                    }
+                });
+
+                return blocks.join('');
+            }
+
+            function buildSongLine(line) {
+                const parts = line.split(/\s*(,|->|→|›|>)\s*/).filter(Boolean);
+                if (!parts.length) return '';
+
+                const fragments = parts.map(part => {
+                    if (isConnectorToken(part)) {
+                        return formatConnector(part);
+                    }
+
+                    if (isNoteEntry(part)) {
+                        return `<span class="song-note">${part}</span>`;
+                    }
+
+                    return createSongChip(part);
+                });
+
+                return `<div class="song-line">${fragments.join('')}</div>`;
+            }
+
+            function isConnectorToken(token) {
+                return token === ',' || token === '->' || token === '→' || token === '›' || token === '>';
+            }
+
+            function formatConnector(token) {
+                if (token === ',') {
+                    return `<span class="song-connector">•</span>`;
+                }
+                return `<span class="song-connector"><i class="fas fa-angle-right"></i></span>`;
+            }
+
+            function createSongChip(songName) {
+                const album = songAlbums[songName] || null;
+                const slug = songToSlug(songName);
+                const href = `https://phish.net/song/${slug}`;
+                const badge = album ? `<span class="song-badge">${album}</span>` : '';
+                const title = album ? `Appears on ${album}` : `View ${songName} history on Phish.net`;
+                return `
+                    <span class="song-chip" title="${title.replace(/"/g, '&quot;')}">
+                        <i class="fas fa-music song-icon" aria-hidden="true"></i>
+                        <a href="${href}" target="_blank" rel="noopener">${songName}</a>
+                        ${badge}
+                    </span>
+                `;
+            }
+
+            function songToSlug(songName = '') {
+                return songName
+                    .toLowerCase()
+                    .replace(/&/g, 'and')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .trim()
+                    .replace(/\s+/g, '-');
+            }
+
+            function isNoteEntry(entry = '') {
+                const trimmed = entry.trim();
+                if (!trimmed) return true;
+                if (ignoreEntryPattern.test(trimmed)) return true;
+                return /jam|tease|notes?/i.test(trimmed);
+            }
+
+            function updateMarginDigest(metrics) {
+                const list = $('#marginDigestList');
+                if (!list.length) return;
+                if (!metrics) {
+                    list.html(`
+                        <li><strong>Total Shows</strong><span>—</span></li>
+                        <li><strong>Unique Songs</strong><span>—</span></li>
+                        <li><strong>Top Song</strong><span>—</span></li>
+                        <li><strong>Top Venue</strong><span>—</span></li>
+                    `);
+                    return;
+                }
+
+                const topSongLine = metrics.topSong
+                    ? `${metrics.topSong} (${metrics.topSongCount})`
+                    : '—';
+                const topVenueLine = metrics.topVenue
+                    ? `${metrics.topVenue} (${metrics.topVenueCount})`
+                    : '—';
+
+                list.html(`
+                        <li><strong>Total Shows</strong><span>${metrics.totalShows}</span></li>
+                        <li><strong>Unique Songs</strong><span>${metrics.uniqueSongs}</span></li>
+                        <li><strong>Top Song</strong><span>${topSongLine}</span></li>
+                        <li><strong>Top Venue</strong><span>${topVenueLine}</span></li>
+                    `);
+            }
+
+            function initMarginPhoto() {
+                if (!photoGallery.length) return;
+                const entry = photoGallery[Math.floor(Math.random() * photoGallery.length)];
+                updateMarginPhoto(entry);
+            }
+
+            function updateMarginPhoto(entry) {
+                const $img = $('#marginPhotoImage');
+                const $caption = $('#marginPhotoCaption');
+                const $credit = $('#marginPhotoCredit');
+                if (!$img.length) return;
+
+                if (!entry) {
+                    $img.attr('src', '');
+                    $img.attr('alt', 'Phish live');
+                    $caption.text('');
+                    $credit.text('');
+                    return;
+                }
+
+                $img.attr('src', entry.src);
+                $img.attr('alt', entry.title);
+                $caption.text(entry.caption);
+                $credit.text(entry.credit);
+            }
+
+            function updateMarginVenue(show) {
+                const $title = $('#marginVenueTitle');
+                const $fact = $('#marginVenueFact');
+                if (!$title.length) return;
+
+                if (!show) {
+                    $title.text('Select a show for a venue note.');
+                    $fact.text('Use the search or results list to explore Phish lore tied to each location.');
+                    return;
+                }
+
+                const key = buildVenueKey(show);
+                const insight = venueInsights[key];
+                if (insight) {
+                    $title.text(insight.title);
+                    $fact.text(insight.fact);
+                } else {
+                    const fallbackVenue = (show.venue || '').trim();
+                    const fallbackLocation = (show.location || '').trim();
+                    $title.text(fallbackVenue || 'Venue Note');
+                    $fact.text(`This show touched down in ${fallbackLocation}. Keep exploring—more lore is on the way.`);
+                }
+            }
+
+            function renderTourTape(dataSet = [], activeYear = '') {
+                const $tape = $('#tourTape');
+                if (!$tape.length) return;
+
+                if (!dataSet || !dataSet.length) {
+                    $tape.html('<div class="tour-tape-track tour-tape-empty">Tour tape will appear when shows are in view.</div>');
+                    return;
+                }
+
+                const yearCounts = new Map();
+                dataSet.forEach(item => {
+                    const match = item.date.match(/(\d{4})/);
+                    if (!match) return;
+                    const year = Number(match[0]);
+                    yearCounts.set(year, (yearCounts.get(year) || 0) + 1);
+                });
+
+                const years = Array.from(yearCounts.keys()).sort((a, b) => a - b);
+                if (!years.length) {
+                    $tape.html('<div class="tour-tape-track tour-tape-empty">Tour tape will appear when shows are in view.</div>');
+                    return;
+                }
+
+                const maxCount = Math.max(...yearCounts.values(), 1);
+                const track = $('<div>', { class: 'tour-tape-track' });
+                const activeStr = activeYear ? String(activeYear) : '';
+
+                years.forEach(year => {
+                    const count = yearCounts.get(year) || 0;
+                    const intensity = Math.min(1, count / maxCount);
+                    const alpha = 0.18 + intensity * 0.5;
+                    const button = $('<button>', {
+                        type: 'button',
+                        class: 'tour-tape-year',
+                        text: year,
+                        'data-year': year,
+                        title: `${count} show${count === 1 ? '' : 's'} in ${year}`
+                    });
+
+                    button.css({
+                        background: `rgba(44, 62, 80, ${alpha.toFixed(3)})`,
+                        color: alpha > 0.45 ? '#f4f7f9' : '#2c3e50'
+                    });
+
+                    if (activeStr && activeStr === String(year)) {
+                        button.addClass('is-active');
+                        button.css({ background: `rgba(44, 62, 80, 0.85)`, color: '#f4f7f9' });
+                    } else if (activeStr) {
+                        button.addClass('is-muted');
+                    }
+
+                    track.append(button);
+                });
+
+                $tape.empty().append(track);
+            }
+
+            function buildVenueKey(show) {
+                const venue = (show.venue || '').toUpperCase().trim();
+                const location = (show.location || '').split(',').map(part => part.trim()).filter(Boolean);
+                const city = location[0] ? location[0].replace(/\s+/g, ' ') : '';
+                const region = location[1] ? location[1].toUpperCase() : (location[2] ? location[2].toUpperCase() : '');
+                return `${venue}|${city}${region ? `, ${region}` : ''}`;
+            }
+
             function updateResultsList(term = '') {
                 const $container = $('#resultsSummary');
                 if (!table) {
                     $container.html('');
+                    updateMarginVenue(null);
+                    updateMarginDigest(null);
                     return;
                 }
 
-                const appliedRows = table.rows({ search: 'applied' }).data();
-                if (!appliedRows || appliedRows.length === 0) {
+                const appliedApi = table.rows({ search: 'applied' });
+                const appliedData = appliedApi ? appliedApi.data().toArray() : [];
+                if (!appliedData.length) {
                     $container.html('');
+                    updateMarginVenue(null);
+                    updateMarginDigest(null);
+                    renderTourTape([], $('#yearFilter').val());
                     return;
                 }
+
+                updateMarginDigest(computeDashboardMetrics(appliedData));
+                renderTourTape(appliedData, $('#yearFilter').val());
 
                 const maxItems = 12;
                 const fragment = document.createDocumentFragment();
-                for (let i = 0; i < Math.min(appliedRows.length, maxItems); i++) {
-                    const row = appliedRows[i];
+                for (let i = 0; i < Math.min(appliedData.length, maxItems); i++) {
+                    const row = appliedData[i];
                     const div = document.createElement('div');
                     div.className = 'result-item';
                     div.setAttribute('tabindex', '0');
@@ -1182,7 +1969,7 @@
 
                 $container.empty().append(fragment);
 
-                const remainder = appliedRows.length - Math.min(appliedRows.length, maxItems);
+                const remainder = appliedData.length - Math.min(appliedData.length, maxItems);
                 if (remainder > 0) {
                     const moreDiv = document.createElement('div');
                     moreDiv.className = 'result-item';
@@ -1192,11 +1979,16 @@
                     $container.append(moreDiv);
                 }
 
+                updateMarginVenue(appliedData[0]);
+
                 $container.find('.result-item').not(':last-child').on('click keypress', function(event) {
                     if (event.type === 'click' || (event.type === 'keypress' && (event.key === 'Enter' || event.key === ' '))) {
                         event.preventDefault();
                         const globalIndex = Number($(this).attr('data-row-global-index'));
+                        const applied = table.rows({ search: 'applied' }).data();
+                        const target = applied[globalIndex];
                         focusTableRow(globalIndex);
+                        updateMarginVenue(target);
                     }
                 });
             }
@@ -1217,12 +2009,21 @@
                     const rowNodes = table.rows({ page: 'current' }).nodes();
                     const targetNode = rowNodes[relativeIndex];
                     if (targetNode) {
+                        const data = table.row(targetNode).data();
+                        updateMarginVenue(data);
                         targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         $(targetNode).addClass('highlighted-row');
                         setTimeout(() => $(targetNode).removeClass('highlighted-row'), 1200);
                     }
                 }, 150);
             }
+
+            $('#setlists tbody').on('click', 'tr', function() {
+                const rowData = table.row(this).data();
+                if (rowData) {
+                    updateMarginVenue(rowData);
+                }
+            });
 
             // Add this function to determine the appropriate icon
             function getVenueIcon(venue) {
