@@ -6963,12 +6963,6 @@
         "date": "PHISH,\n\tFRIDAY 07/30/1999",
         "venue": "NAEBA SKI RESORT",
         "location": "Niigata,\n\t\t\tJapan",
-        "setlist": "SET 1:\n\t\t\t\tChalk Dust Torture, \t\tGuyute, \t\tWolfman's Brother, \t\tTaste, \t\tPunch You in the Eye > \t\tWaste, \t\tHello My Baby"
-    },
-    {
-        "date": "PHISH,\n\tFRIDAY 07/30/1999",
-        "venue": "NAEBA SKI RESORT",
-        "location": "Niigata,\n\t\t\tJapan",
         "setlist": "SET 1:\n\t\t\t\tBirds of a Feather, \t\tSample in a Jar, \t\tBeauty of My Dreams, \t\tStash, \t\tNICU, \t\tFunky Bitch > \t\tGhost > \t\tAxilla \nSET 2:\n\t\t\t\t\t\t\t\t\t\tDown with Disease, \t\tMy Soul, \t\tReba, \t\tHold Your Head Up > \t\tBike > \t\tHold Your Head Up, \t\tRunaway Jim > \t\tCavern \nENCORE:\n\t\t\t\t\t\t\t\t\t\tJulius"
     },
     {
@@ -7425,12 +7419,6 @@
         "date": "PHISH,\n\tFRIDAY 05/19/2000",
         "venue": "KEY CLUB",
         "location": "Los Angeles,\n\t\t\tCA",
-        "setlist": "SET 1:\n\t\t\t\tFunky Bitch, \t\tMy Soul, \t\tGotta Jibboo, \t\tFirst Tube, \t\tBug, \t\tHeavy Things, \t\tTwist > \t\tTube > \t\tPiper -> \t\tLlama, \t\tBrian and Robert, \t\tMagilla"
-    },
-    {
-        "date": "PHISH,\n\tFRIDAY 05/19/2000",
-        "venue": "KEY CLUB",
-        "location": "Los Angeles,\n\t\t\tCA",
         "setlist": "SET 1:\n\t\t\t\tBack on the Train, \t\tHeavy Things, \t\tFirst Tube"
     },
     {
@@ -7444,12 +7432,6 @@
         "venue": "ED SULLIVAN THEATER",
         "location": "New York,\n\t\t\tNY",
         "setlist": "SET 1:\n\t\t\t\tHeavy Things"
-    },
-    {
-        "date": "PHISH,\n\tMONDAY 05/15/2000",
-        "venue": "SONIC STUDIOS",
-        "location": "Philadelphia,\n\t\t\tPA",
-        "setlist": "SET 1:\n\t\t\t\tFirst Tube, \t\tFarmhouse, \t\tTwist, \t\tHeavy Things, \t\tBack on the Train, \t\tPiper, \t\tThe Inlaw Josie Wales, \t\tBug, \t\tGotta Jibboo"
     },
     {
         "date": "PHISH,\n\tMONDAY 05/15/2000",
@@ -9454,12 +9436,6 @@
         "venue": "XFINITY CENTER",
         "location": "Mansfield,\n\t\t\tMA",
         "setlist": "SET 1:\n\t\t\t\tStealing Time From the Faulty Plan, \t\tFuego, \t\tBack on the Train, \t\tHalfway to the Moon, \t\tThe Wedge, \t\t555, \t\tStash, \t\tBouncing Around the Room, \t\tBirds of a Feather, \t\tWingsuit \nSET 2:\n\t\t\t\t\t\t\t\t\t\tMike's Song > \t\tSimple > \t\tFree, \t\tWaiting All Night > \t\tGhost -> \t\tWeekapaug Groove, \t\tHarry Hood, \t\tCavern \nENCORE:\n\t\t\t\t\t\t\t\t\t\tJulius"
-    },
-    {
-        "date": "PHISH,\n\tTUESDAY 06/24/2014",
-        "venue": "ED SULLIVAN THEATER",
-        "location": "New York,\n\t\t\tNY",
-        "setlist": "SET 1:\n\t\t\t\tThe Line"
     },
     {
         "date": "PHISH,\n\tTUESDAY 06/24/2014",
@@ -11962,5 +11938,377 @@
         "venue": "MOON PALACE",
         "location": "Cancun, Quintana Roo,\n\t\t\tMexico",
         "setlist": "SET 1:\n\t\t\t\tJam, \t\tMy Soul, \t\tOcelot, \t\tJam"
+    },
+    {
+        "date": "PHISH,\n\t\t\tWEDNESDAY 12/31/2025",
+        "venue": "MADISON SQUARE GARDENMSG",
+        "location": "New York,\n\t\tNY",
+        "setlist": "SET 1:\n\t\tFree, \tBirds of a Feather, \tBouncing Around the Room, \tStash, \tWaste, \tMy Friend, My Friend, \tA Life Beyond The Dream, \tKill Devil Falls, \tMore, \tMonsters, \tLife Saving Gun \nSET 2:\n\t\t\t\t\t\t\t\tSand > \tFuego > \tNo Men In No Man's Land, \tWhat's Going Through Your Mind, \tYou Enjoy Myself, \tIt's Ice[1] > \tCream[2] \nSET 3:\n\t\t\t\t\t\t\t\tHarry Hood[1], \tAlso Sprach Zarathustra[3] > \tAuld Lang Syne > \tTweezer[4] > \tPiper > \tSay It To Me S.A.N.T.O.S. \nENCORE:\n\t\t\t\t\t\t\t\tSincere[5], \tSpock's Brain > \tTweezer Reprise"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTUESDAY 12/30/2025",
+        "venue": "MADISON SQUARE GARDENMSG",
+        "location": "New York,\n\t\tNY",
+        "setlist": "SET 1:\n\t\tChalk Dust Torture > \tThe Moma Dance[1] > \tChalk Dust Torture, \tBack on the Train, \tAxilla (Part II) > \tDivided Sky, \tBlaze On > \tTube > \tReba[2], \tSplit Open and Melt \nSET 2:\n\t\t\t\t\t\t\t\tGhost > \tRuby Waves[1] > \tLight > \tCrosseyed and Painless -> \tTwist, \tCavern, \tFirst Tube \nENCORE:\n\t\t\t\t\t\t\t\tDrift While You're Sleeping"
+    },
+    {
+        "date": "PHISH,\n\t\t\tMONDAY 12/29/2025",
+        "venue": "MADISON SQUARE GARDENMSG",
+        "location": "New York,\n\t\tNY",
+        "setlist": "SET 1:\n\t\tCarini -> \tPlasma > \tCarini, \tQuadrophonic Toppling, \tThe Curtain With > \tBathtub Gin, \tNICU, \tEvolve, \tMountains in the Mist, \tFluffhead \nSET 2:\n\t\t\t\t\t\t\t\tMike's Song > \tThe Final Hurrah > \tWeekapaug Groove, \tA Wave of Hope, \tTwenty Years Later > \tGolden Age > \tCharacter Zero \nENCORE:\n\t\t\t\t\t\t\t\tThe Lizards, \tPossum"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSUNDAY 12/28/2025",
+        "venue": "MADISON SQUARE GARDENMSG",
+        "location": "New York,\n\t\tNY",
+        "setlist": "SET 1:\n\t\tBuried Alive > \tAC/DC Bag, \tRoggae, \tRift, \tWolfman's Brother[1] > \tPunch You in the Eye > \tSigma Oasis > \tTaste, \tSleep[2], \tRun Like an Antelope \nSET 2:\n\t\t\t\t\t\t\t\tOblivion > \tDown with Disease[1] -> \tSimple -> \tGotta Jibboo, \tTheme from the Bottom[1] -> \tSimple > \tEverything's Right \nENCORE:\n\t\t\t\t\t\t\t\tSlave to the Traffic Light"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSUNDAY 09/21/2025",
+        "venue": "HAMPTON COLISEUMHAMPTON COLISEUM",
+        "location": "Hampton,\n\t\tVA",
+        "setlist": "SET 1:\n\t\tFirst Tube, \tTwenty Years Later, \tAC/DC Bag > \tFoam, \tLife Saving Gun, \tRoggae, \tAlso Sprach Zarathustra > \tMeat, \tSplit Open and Melt, \tGolgi Apparatus > \tMost Events Aren't Planned \nSET 2:\n\t\t\t\t\t\t\t\tMike's Song > \tI Am Hydrogen > \tWeekapaug Groove, \tWhat's Going Through Your Mind -> \tScents and Subtle Sounds > \tLonely Trip, \tGhost > \tChalk Dust Torture \nENCORE:\n\t\t\t\t\t\t\t\tA Life Beyond The Dream > \tHarry Hood"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 09/20/2025",
+        "venue": "HAMPTON COLISEUMHAMPTON COLISEUM",
+        "location": "Hampton,\n\t\tVA",
+        "setlist": "SET 1:\n\t\tBoogie On Reggae Woman, \tUndermind, \tBouncing Around the Room > \tBirds of a Feather, \tEsther, \tFunky Bitch, \tIt's Ice > \tEther Edge, \tMoonage Daydream \nSET 2:\n\t\t\t\t\t\t\t\tEverything's Right -> \tSimple > \tA Wave of Hope -> \tSimple > \tBeneath a Sea of Stars Part 1 -> \tGotta Jibboo, \tSuzy Greenberg > \tJulius \nENCORE:\n\t\t\t\t\t\t\t\tIzabella > \tPossum"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 09/19/2025",
+        "venue": "HAMPTON COLISEUMHAMPTON COLISEUM",
+        "location": "Hampton,\n\t\tVA",
+        "setlist": "SET 1:\n\t\tFluffhead, \t46 Days, \tMy Friend, My Friend > \tRift, \tGumbo, \tPebbles and Marbles, \tArmy of One > \tYa Mar, \tThe Wedge, \tWalls of the Cave \nSET 2:\n\t\t\t\t\t\t\t\tEnergy > \tTweezer > \tRuby Waves[1] > \tNo Men In No Man's Land > \tTweezer > \tWaste > \tRock and Roll \nENCORE:\n\t\t\t\t\t\t\t\tPrince Caspian > \tBug > \tTweezer Reprise"
+    },
+    {
+        "date": "PHISH,\n\t\t\tWEDNESDAY 09/17/2025",
+        "venue": "AMERIS BANK AMPHITHEATREAMERIS BANK AMPHITHEATRE",
+        "location": "Alpharetta,\n\t\tGA",
+        "setlist": "SET 1:\n\t\tWolfman's Brother, \tLlama, \tMartian Monster, \tDevotion to a Dream, \tDivided Sky, \tAxilla (Part II) > \tHey Stranger, \tSteam > \tWilson > \tTaste \nSET 2:\n\t\t\t\t\t\t\t\tCarini > \tLight > \tCarini > \tSand -> \tPiper > \tThe Lizards, \tYou Enjoy Myself \nENCORE:\n\t\t\t\t\t\t\t\tMeatstick"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTUESDAY 09/16/2025",
+        "venue": "AMERIS BANK AMPHITHEATREAMERIS BANK AMPHITHEATRE",
+        "location": "Alpharetta,\n\t\tGA",
+        "setlist": "Soundcheck:  Twenty Years Later \r\n\n\t\t\t\t\t\tSET 1:\n\t\tBuried Alive, \tAC/DC Bag > \tSlave to the Traffic Light, \tPeaches en Regalia, \tTube, \t555 > \tMy Soul, \tReba[1], \tMaze, \tHorn, \tThe Squirming Coil \nSET 2:\n\t\t\t\t\t\t\t\tOblivion, \tDavid Bowie, \tFuego > \tLeaves > \tSneakin' Sally Thru the Alley > \tThe Howling > \tBackwards Down the Number Line, \tDrift While You're Sleeping \nENCORE:\n\t\t\t\t\t\t\t\tMonsters, \tRun Like an Antelope"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSUNDAY 09/14/2025",
+        "venue": "COCA-COLA AMPHITHEATERCOCA-COLA AMPHITHEATER",
+        "location": "Birmingham,\n\t\tAL",
+        "setlist": "SET 1:\n\t\tPunch You in the Eye, \tMike's Song > \tOcelot, \tKill Devil Falls, \tGinseng Sullivan, \tHalley's Comet > \tWeekapaug Groove, \tStash, \tCavern \nSET 2:\n\t\t\t\t\t\t\t\tA Wave of Hope > \tWhat's Going Through Your Mind > \tMercury > \tGolden Age > \tWhat's the Use? > \tGood Times Bad Times \nENCORE:\n\t\t\t\t\t\t\t\tFee[1] > \tTwist, \tMore"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 09/13/2025",
+        "venue": "COCA-COLA AMPHITHEATERCOCA-COLA AMPHITHEATER",
+        "location": "Birmingham,\n\t\tAL",
+        "setlist": "Soundcheck:  Funky Bitch, The Well \r\n\n\t\t\t\t\t\tSET 1:\n\t\tBack on the Train, \tCities > \tSample in a Jar, \tTheme from the Bottom, \tThe Old Home Place, \tBathtub Gin, \tRunaway Jim \nSET 2:\n\t\t\t\t\t\t\t\tSigma Oasis > \tDown with Disease[1] > \tLife Saving Gun > \tPillow Jets > \tMountains in the Mist, \tBlaze On, \tGhost \nENCORE:\n\t\t\t\t\t\t\t\tShine a Light > \tSay It To Me S.A.N.T.O.S."
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 09/12/2025",
+        "venue": "HIGHLAND FESTIVAL GROUNDS AT KENTUCKY EXPO CENTERHIGHLAND FESTIVAL GROUNDS AT KENTUCKY EXPO CENTER",
+        "location": "Louisville,\n\t\tKY",
+        "setlist": "SET 1:\n\t\t46 Days, \tThe Moma Dance, \tFree, \tWolfman's Brother, \tTimber (Jerry the Mule), \tEvolve, \tA Day in the Life > \tPossum \nSET 2:\n\t\t\t\t\t\t\t\tSand > \tChalk Dust Torture[1] > \tLight -> \tYa Mar, \tAlso Sprach Zarathustra > \tCarini > \tEverything's Right > \tHarry Hood \nENCORE:\n\t\t\t\t\t\t\t\tCharacter Zero, \tFirst Tube"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSUNDAY 07/27/2025",
+        "venue": "BROADVIEW STAGE AT SPACBROADVIEW STAGE AT SPAC",
+        "location": "Saratoga Springs,\n\t\tNY",
+        "setlist": "Soundcheck:  Jam \n\t\t\t\t\t\tSET 1:\n\t\tBuried Alive > \tTweezer Reprise > \tReba[1] -> \tTweezer Reprise > \tFunky Bitch, \tRoses Are Free -> \tTweezer Reprise > \t46 Days, \tAbout to Run, \tSplit Open and Melt[2] -> \tTweezer Reprise \nSET 2:\n\t\t\t\t\t\t\t\tKill Devil Falls[2] > \tTwist, \tGolden Age -> \tTweezer Reprise -> \tBoogie On Reggae Woman, \tYou Enjoy Myself -> \tTweezer Reprise \nENCORE:\n\t\t\t\t\t\t\t\tTweezer, \tHarry Hood"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 07/26/2025",
+        "venue": "BROADVIEW STAGE AT SPACBROADVIEW STAGE AT SPAC",
+        "location": "Saratoga Springs,\n\t\tNY",
+        "setlist": "SET 1:\n\t\tMartian Monster > \tAlso Sprach Zarathustra > \tMike's Song > \tWading in the Velvet Sea > \tWeekapaug Groove, \tSand, \tEvolve, \tMy Friend, My Friend > \tNo Men In No Man's Land \nSET 2:\n\t\t\t\t\t\t\t\tOblivion > \tDown with Disease[1] > \tLight > \tLife Saving Gun -> \tWaste > \tFluffhead \nENCORE:\n\t\t\t\t\t\t\t\tGolgi Apparatus, \tRock and Roll"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 07/25/2025",
+        "venue": "BROADVIEW STAGE AT SPACBROADVIEW STAGE AT SPAC",
+        "location": "Saratoga Springs,\n\t\tNY",
+        "setlist": "SET 1:\n\t\tFirst Tube, \tBathtub Gin, \tDevotion to a Dream, \tThe Well, \tBirds of a Feather, \tStrawberry Letter 23, \tLawn Boy, \tThe Old Home Place, \tHey Stranger, \tWalls of the Cave \nSET 2:\n\t\t\t\t\t\t\t\tSet Your Soul Free > \tChalk Dust Torture -> \tBeneath a Sea of Stars Part 1 -> \tPiper > \tEverything's Right \nENCORE:\n\t\t\t\t\t\t\t\tLoving Cup > \tRun Like an Antelope"
+    },
+    {
+        "date": "PHISH,\n\t\t\tWEDNESDAY 07/23/2025",
+        "venue": "FOREST HILLS STADIUMFOREST HILLS STADIUM",
+        "location": "Forest Hills,\n\t\tNY",
+        "setlist": "SET 1:\n\t\tFree, \tBack on the Train, \tTheme from the Bottom, \tCities[1], \tDivided Sky, \tTimber (Jerry the Mule), \tEther Edge, \tThe Squirming Coil \nSET 2:\n\t\t\t\t\t\t\t\tPunch You in the Eye > \tGhost > \tA Wave of Hope > \tWhat's the Use? > \tRuby Waves > \tBackwards Down the Number Line > \tCharacter Zero \nENCORE:\n\t\t\t\t\t\t\t\tSneakin' Sally Thru the Alley > \tWilson > \tRocky Top"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTUESDAY 07/22/2025",
+        "venue": "FOREST HILLS STADIUMFOREST HILLS STADIUM",
+        "location": "Forest Hills,\n\t\tNY",
+        "setlist": "SET 1:\n\t\tThe Moma Dance > \tRift, \tSigma Oasis > \tPossum, \tWolfman's Brother, \tStash, \tBlaze On, \tMonsters, \tI Am the Walrus \nSET 2:\n\t\t\t\t\t\t\t\tCarini -> \tTweezer > \tWhat's Going Through Your Mind > \tA Life Beyond The Dream, \tHarry Hood \nENCORE:\n\t\t\t\t\t\t\t\tSlave to the Traffic Light > \tMore, \tTweezer Reprise"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSUNDAY 07/20/2025",
+        "venue": "UNITED CENTERUNITED CENTER",
+        "location": "Chicago,\n\t\tIL",
+        "setlist": "SET 1:\n\t\tCars Trucks Buses, \tAC/DC Bag > \tFunky Bitch, \tAlaska, \tMike's Song > \tHorn > \tReba[1], \tLeaves, \tTaste, \tIzabella \nSET 2:\n\t\t\t\t\t\t\t\tGotta Jibboo, \tFuego > \tSparkle, \tScents and Subtle Sounds -> \tTwist > \tThe Lizards, \tShine a Light > \tKill Devil Falls \nENCORE:\n\t\t\t\t\t\t\t\tFee[2], \tWeekapaug Groove > \tSay It To Me S.A.N.T.O.S."
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 07/19/2025",
+        "venue": "UNITED CENTERUNITED CENTER",
+        "location": "Chicago,\n\t\tIL",
+        "setlist": "SET 1:\n\t\tLife Saving Gun > \tSteam, \tMcGrupp and the Watchful Hosemasters, \tThe Line, \tSeven Below[1], \tOcelot, \tYa Mar, \tMountains in the Mist, \tGolgi Apparatus, \tMost Events Aren't Planned \nSET 2:\n\t\t\t\t\t\t\t\tTube, \tA Song I Heard the Ocean Sing[2] > \tDown with Disease -> \tSeven Below[3] > \tDown with Disease, \tPillow Jets > \tAlso Sprach Zarathustra > \tChalk Dust Torture \nENCORE:\n\t\t\t\t\t\t\t\tWhile My Guitar Gently Weeps, \tFirst Tube"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 07/18/2025",
+        "venue": "UNITED CENTERUNITED CENTER",
+        "location": "Chicago,\n\t\tIL",
+        "setlist": "SET 1:\n\t\tHarry Hood, \tOblivion, \tHeavy Things, \tBathtub Gin, \tOn Your Way Down, \tLimb By Limb, \tHey Stranger > \tCharacter Zero \nSET 2:\n\t\t\t\t\t\t\t\tNo Men In No Man's Land > \tWhat's Going Through Your Mind > \tCrosseyed and Painless > \tFarmhouse, \tLight > \tBackwards Down the Number Line > \tCavern \nENCORE:\n\t\t\t\t\t\t\t\tThe Horse > \tSilent in the Morning, \t46 Days"
+    },
+    {
+        "date": "PHISH,\n\t\t\tWEDNESDAY 07/16/2025",
+        "venue": "TD PAVILION AT THE MANNTHE MANN",
+        "location": "Philadelphia,\n\t\tPA",
+        "setlist": "Soundcheck:  My Soul \r\n\n\t\t\t\t\t\tSET 1:\n\t\tThe Dogs, \tEvolve, \tFluffhead, \tGumbo, \tPebbles and Marbles, \tRoggae, \tGinseng Sullivan, \tGuelah Papyrus, \tJulius, \tSplit Open and Melt \nSET 2:\n\t\t\t\t\t\t\t\tThe Curtain With, \tA Wave of Hope -> \tMercy > \tSimple > \tEther Edge -> \tMaze, \tTwenty Years Later[1] > \tRun Like an Antelope \nENCORE:\n\t\t\t\t\t\t\t\tYou Enjoy Myself"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTUESDAY 07/15/2025",
+        "venue": "TD PAVILION AT THE MANNTHE MANN",
+        "location": "Philadelphia,\n\t\tPA",
+        "setlist": "Soundcheck:  I Never Needed You Like This Before (x7) \r\n\n\t\t\t\t\t\tSET 1:\n\t\tPunch You in the Eye > \tEverything's Right, \tCamel Walk, \tTheme from the Bottom > \tPrince Caspian > \tIt's Ice, \tAbout to Run, \tDavid Bowie \nSET 2:\n\t\t\t\t\t\t\t\tSand, \tMy Friend, My Friend, \tBoogie On Reggae Woman, \tBlaze On > \tCarini \nENCORE:\n\t\t\t\t\t\t\t\tShade, \tI Didn't Know[1], \tWilson > \tPossum"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSUNDAY 07/13/2025",
+        "venue": "NORTH CHARLESTON COLISEUMNORTH CHARLESTON COLISEUM",
+        "location": "North Charleston,\n\t\tSC",
+        "setlist": "SET 1:\n\t\tRunaway Jim, \tFoam, \tWolfman's Brother, \tThread, \tStash, \t555 > \tWalk Away, \tDrift While You're Sleeping \nSET 2:\n\t\t\t\t\t\t\t\tSet Your Soul Free, \tTweezer -> \tGhost, \tGolden Age, \tA Life Beyond The Dream, \tSlave to the Traffic Light \nENCORE:\n\t\t\t\t\t\t\t\tMeatstick, \tTurtle in the Clouds, \tTweezer Reprise"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 07/12/2025",
+        "venue": "NORTH CHARLESTON COLISEUMNORTH CHARLESTON COLISEUM",
+        "location": "North Charleston,\n\t\tSC",
+        "setlist": "SET 1:\n\t\tThe Moma Dance, \tNICU, \tJesus Just Left Chicago, \tDivided Sky, \tDestiny Unbound, \tMonsters, \tPlasma, \tBathtub Gin \nSET 2:\n\t\t\t\t\t\t\t\tMike's Song > \tI Am Hydrogen > \tWeekapaug Groove, \tMercury > \tSoul Planet, \tJoy, \tHarry Hood, \tI Am the Walrus \nENCORE:\n\t\t\t\t\t\t\t\tCarolina, \tSay It To Me S.A.N.T.O.S."
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 07/11/2025",
+        "venue": "NORTH CHARLESTON COLISEUMNORTH CHARLESTON COLISEUM",
+        "location": "North Charleston,\n\t\tSC",
+        "setlist": "SET 1:\n\t\tFree, \tRift, \tSpanish Moon, \tReba[1], \tDevotion to a Dream, \tThe Final Hurrah, \tMy Mind's Got a Mind of its Own, \tHey Stranger, \tTaste, \tWalls of the Cave \nSET 2:\n\t\t\t\t\t\t\t\tLlama[2] > \tDown with Disease > \tTwist, \tThe Well, \tSightless Escape -> \tChalk Dust Torture, \tSuzy Greenberg \nENCORE:\n\t\t\t\t\t\t\t\tWhen the Circus Comes, \tFirst Tube"
+    },
+    {
+        "date": "PHISH,\n\t\t\tWEDNESDAY 07/09/2025",
+        "venue": "JEROME SCHOTTENSTEIN CENTERJEROME SCHOTTENSTEIN CENTER",
+        "location": "Columbus,\n\t\tOH",
+        "setlist": "SET 1:\n\t\tAC/DC Bag, \tRoggae, \tVultures, \tMartian Monster, \tMull, \tStrawberry Letter 23 > \tUndermind, \tPetrichor, \tLife Saving Gun \nSET 2:\n\t\t\t\t\t\t\t\tSample in a Jar > \tA Wave of Hope, \tWaiting All Night, \tAxilla (Part II) -> \tPiper > \tLonely Trip, \tBackwards Down the Number Line, \tLoving Cup \nENCORE:\n\t\t\t\t\t\t\t\tBug, \tThe Mango Song > \tRun Like an Antelope"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 07/05/2025",
+        "venue": "FOLSOM FIELDFOLSOM FIELD",
+        "location": "Boulder,\n\t\tCO",
+        "setlist": "SET 1:\n\t\tBuried Alive > \t46 Days, \tBirds of a Feather, \tSigma Oasis, \tDavid Bowie, \tEvolve, \tBlaze On, \tThe Lizards, \tA Day in the Life \nSET 2:\n\t\t\t\t\t\t\t\tWilson, \tFuego -> \tMy Friend, My Friend[1] -> \tFuego > \tCrosseyed and Painless > \tEverything's Right, \tMore, \tSlave to the Traffic Light \nENCORE:\n\t\t\t\t\t\t\t\tBuffalo Bill, \tHarry Hood"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 07/04/2025",
+        "venue": "FOLSOM FIELDFOLSOM FIELD",
+        "location": "Boulder,\n\t\tCO",
+        "setlist": "Soundcheck:  Evolve, My Soul \r\n\n\t\t\t\t\t\tSET 1:\n\t\tBathtub Gin, \tThe Moma Dance, \tBeauty of My Dreams, \tTheme from the Bottom, \tRift, \tOblivion, \tTimber (Jerry the Mule), \tGuyute, \tBack on the Train, \tMost Events Aren't Planned \nSET 2:\n\t\t\t\t\t\t\t\tSimple -> \tWhat's Going Through Your Mind > \tTweezer > \tNo Quarter > \tDown with Disease > \tGhost \nENCORE:\n\t\t\t\t\t\t\t\tCharacter Zero > \tTweezer Reprise"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTHURSDAY 07/03/2025",
+        "venue": "FOLSOM FIELDFOLSOM FIELD",
+        "location": "Boulder,\n\t\tCO",
+        "setlist": "Soundcheck:  The Well \r\n\n\t\t\t\t\t\tSET 1:\n\t\tWolfman's Brother, \tTube, \tRoses Are Free > \tMaze, \tBouncing Around the Room, \tNellie Kane, \tKill Devil Falls, \tSand > \tFluffhead \nSET 2:\n\t\t\t\t\t\t\t\tCarini > \tYou Enjoy Myself > \tSneakin' Sally Thru the Alley, \tLight > \tWhat's the Use?, \tPillow Jets > \tAlso Sprach Zarathustra > \tPossum \nENCORE:\n\t\t\t\t\t\t\t\tStash, \tRocky Top"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 06/28/2025",
+        "venue": "MOODY CENTERMOODY CENTER",
+        "location": "Austin,\n\t\tTX",
+        "setlist": "SET 1:\n\t\tPunch You in the Eye > \tFree, \tMy Soul, \t555, \tReba[1], \tHey Stranger, \tPlasma, \tGuelah Papyrus, \tMoonage Daydream \nSET 2:\n\t\t\t\t\t\t\t\tChalk Dust Torture[2] > \tTwist > \tRuby Waves[2] > \tMonsters, \tLimb By Limb, \tSplit Open and Melt, \tRock and Roll \nENCORE:\n\t\t\t\t\t\t\t\tWaste, \tSay It To Me S.A.N.T.O.S."
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 06/27/2025",
+        "venue": "MOODY CENTERMOODY CENTER",
+        "location": "Austin,\n\t\tTX",
+        "setlist": "SET 1:\n\t\tCrowd Control, \tMike's Song > \tCities, \tDivided Sky, \tThe Well, \tDaniel Saw the Stone, \tTaste, \tDirt, \tWeekapaug Groove \nSET 2:\n\t\t\t\t\t\t\t\tNo Men In No Man's Land, \tFuego > \tGolden Age, \tThe Squirming Coil, \tSand, \tCharacter Zero \nENCORE:\n\t\t\t\t\t\t\t\tA Life Beyond The Dream, \tFirst Tube"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTUESDAY 06/24/2025",
+        "venue": "PETERSEN EVENTS CENTERPETERSEN EVENTS CENTER",
+        "location": "Pittsburgh,\n\t\tPA",
+        "setlist": "Soundcheck:  Paul and Silas, I Always Wanted It This Way, Dogs Stole Things, Water in the Sky, Stealing Time From the Faulty Plan (this soundcheck may be incomplete) \r\n\n\t\t\t\t\t\tSET 1:\n\t\tAC/DC Bag > \tDogs Stole Things, \tPaul and Silas, \tI Always Wanted It This Way, \tWater in the Sky, \tStealing Time From the Faulty Plan, \tYa Mar, \tGumbo, \tWalls of the Cave \nSET 2:\n\t\t\t\t\t\t\t\tYou Enjoy Myself -> \tWhat's Going Through Your Mind, \tPrince Caspian > \tJulius > \tBlaze On \nENCORE:\n\t\t\t\t\t\t\t\tThe Howling > \tGhost"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSUNDAY 06/22/2025",
+        "venue": "SNHU ARENASNHU ARENA",
+        "location": "Manchester,\n\t\tNH",
+        "setlist": "SET 1:\n\t\tRunaway Jim, \tOblivion, \tThe Curtain With, \tLlama, \tFast Enough for You, \tThe Wedge, \tPebbles and Marbles, \tMy Friend, My Friend[1] -> \tEgg in a Hole, \tFluffhead \nSET 2:\n\t\t\t\t\t\t\t\tAxilla (Part II) > \tTweezer > \tMercury > \tTweezer > \tPillow Jets > \tTweezer > \tGolgi Apparatus \nENCORE:\n\t\t\t\t\t\t\t\tBug > \tTweezer Reprise"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 06/21/2025",
+        "venue": "SNHU ARENASNHU ARENA",
+        "location": "Manchester,\n\t\tNH",
+        "setlist": "SET 1:\n\t\tFree > \tReba, \tHalfway to the Moon, \tHalley's Comet > \tStash, \tMeat, \tDown with Disease \nSET 2:\n\t\t\t\t\t\t\t\tDrift While You're Sleeping > \tCarini > \tA Wave of Hope > \tBilly Breathes, \tAlso Sprach Zarathustra > \tMeatstick > \tAbout to Run > \tPossum \nENCORE:\n\t\t\t\t\t\t\t\tBold As Love > \tDavid Bowie, \tWilson"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 06/20/2025",
+        "venue": "SNHU ARENASNHU ARENA",
+        "location": "Manchester,\n\t\tNH",
+        "setlist": "SET 1:\n\t\tThe Moma Dance, \tBack on the Train, \tWolfman's Brother, \tTheme from the Bottom, \tThe Old Home Place, \t46 Days, \tBirds of a Feather, \tSlave to the Traffic Light \nSET 2:\n\t\t\t\t\t\t\t\tBouncing Around the Room, \tSample in a Jar, \tLife Saving Gun[1] > \tTwist[1] > \tPiper > \tEverything's Right \nENCORE:\n\t\t\t\t\t\t\t\tStrange Design > \tHarry Hood > \tSuzy Greenberg"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSUNDAY 04/27/2025",
+        "venue": "HOLLYWOOD BOWLHOLLYWOOD BOWL",
+        "location": "Hollywood,\n\t\tCA",
+        "setlist": "SET 1:\n\t\tThe Landlady, \tCavern > \tLlama, \tSand, \tThe Lizards, \tHey Stranger > \tTimber (Jerry the Mule), \tJoy, \tMost Events Aren't Planned \nSET 2:\n\t\t\t\t\t\t\t\tMore, \tYou Enjoy Myself -> \tTwist > \tKill Devil Falls > \tLifeboy > \tAlso Sprach Zarathustra > \tSay It To Me S.A.N.T.O.S. \nENCORE:\n\t\t\t\t\t\t\t\tFuego"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 04/26/2025",
+        "venue": "HOLLYWOOD BOWLHOLLYWOOD BOWL",
+        "location": "Hollywood,\n\t\tCA",
+        "setlist": "SET 1:\n\t\tRunaway Jim, \tBlaze On, \tMartian Monster > \tBirds of a Feather, \t555, \tDivided Sky, \tEther Edge > \tThe Squirming Coil \nSET 2:\n\t\t\t\t\t\t\t\tAC/DC Bag > \tLife Saving Gun > \tThe Howling > \tOblivion -> \tRun Like an Antelope, \tBeneath a Sea of Stars Part 1 > \tEverything's Right \nENCORE:\n\t\t\t\t\t\t\t\tTaste, \tAbout to Run, \tSlave to the Traffic Light"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 04/25/2025",
+        "venue": "HOLLYWOOD BOWLHOLLYWOOD BOWL",
+        "location": "Hollywood,\n\t\tCA",
+        "setlist": "SET 1:\n\t\t46 Days, \tRift, \tThe Moma Dance > \tChalk Dust Torture, \tEvolve, \tStash, \tWolfman's Brother > \tHarry Hood \nSET 2:\n\t\t\t\t\t\t\t\tWhat's Going Through Your Mind > \tCarini > \tLight > \tMercury > \tPiper > \tA Life Beyond The Dream, \tGhost \nENCORE:\n\t\t\t\t\t\t\t\tPossum > \tTweezer Reprise"
+    },
+    {
+        "date": "PHISH,\n\t\t\tWEDNESDAY 04/23/2025",
+        "venue": "BILL GRAHAM CIVIC AUDITORIUMBILL GRAHAM CIVIC AUDITORIUM",
+        "location": "San Francisco,\n\t\tCA",
+        "setlist": "SET 1:\n\t\tSimple -> \tPunch You in the Eye > \tGumbo > \tReba, \tThe Well > \tDavid Bowie, \tCharacter Zero \nSET 2:\n\t\t\t\t\t\t\t\tSample in a Jar > \tTweezer > \tLonely Trip, \tCrosseyed and Painless > \tPillow Jets, \tYou Enjoy Myself \nENCORE:\n\t\t\t\t\t\t\t\tWading in the Velvet Sea, \tFirst Tube"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTUESDAY 04/22/2025",
+        "venue": "BILL GRAHAM CIVIC AUDITORIUMBILL GRAHAM CIVIC AUDITORIUM",
+        "location": "San Francisco,\n\t\tCA",
+        "setlist": "SET 1:\n\t\tBuried Alive, \tAxilla (Part II) > \tMike's Song > \tI Am Hydrogen > \tWeekapaug Groove, \tMy Soul, \tHalley's Comet, \tRoggae > \tMaze, \tSplit Open and Melt \nSET 2:\n\t\t\t\t\t\t\t\tCarini, \tNo Men In No Man's Land > \tRuby Waves, \tWaste > \tWhat's the Use? > \tDown with Disease \nENCORE:\n\t\t\t\t\t\t\t\tFluffhead"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSUNDAY 04/20/2025",
+        "venue": "MODA CENTERMODA CENTER",
+        "location": "Portland,\n\t\tOR",
+        "setlist": "SET 1:\n\t\t46 Days, \tThe Moma Dance > \tCities -> \tPlasma, \tBouncing Around the Room, \tSigma Oasis, \tRun Like an Antelope > \tSay It To Me S.A.N.T.O.S. \nSET 2:\n\t\t\t\t\t\t\t\tA Wave of Hope > \tTwist > \tScents and Subtle Sounds > \tEverything's Right -> \tBoogie On Reggae Woman > \tAlso Sprach Zarathustra > \tA Life Beyond The Dream > \tHarry Hood \nENCORE:\n\t\t\t\t\t\t\t\tWilson > \tSlave to the Traffic Light"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 04/19/2025",
+        "venue": "CLIMATE PLEDGE ARENACLIMATE PLEDGE ARENA",
+        "location": "Seattle,\n\t\tWA",
+        "setlist": "SET 1:\n\t\tFree, \tBathtub Gin, \tEvolve, \tStash, \tPebbles and Marbles, \tFarmhouse, \tSuzy Greenberg > \tWalls of the Cave \nSET 2:\n\t\t\t\t\t\t\t\tChalk Dust Torture > \tLight > \tChalk Dust Torture > \tFuego -> \tMonsters, \tPiper > \tBackwards Down the Number Line \nENCORE:\n\t\t\t\t\t\t\t\tSleeping Monkey, \tMy Friend, My Friend[1]"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 04/18/2025",
+        "venue": "CLIMATE PLEDGE ARENACLIMATE PLEDGE ARENA",
+        "location": "Seattle,\n\t\tWA",
+        "setlist": "SET 1:\n\t\tSand, \tKill Devil Falls, \tTheme from the Bottom > \tBack on the Train, \tIf I Could, \tTube, \tMull, \tWolfman's Brother \nSET 2:\n\t\t\t\t\t\t\t\tBlaze On -> \tGolden Age -> \tWhat's Going Through Your Mind, \tI Always Wanted It This Way -> \tGhost \nENCORE:\n\t\t\t\t\t\t\t\tBug > \tPossum"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 02/01/2025",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tBathtub Gin, \tSoul Shakedown Party, \tMartian Monster, \tStash, \tFarmhouse, \tReba, \tGolden Age, \tMy Friend, My Friend[1] \nSET 2:\n\t\t\t\t\t\t\t\tWhat's Going Through Your Mind, \tCrosseyed and Painless, \tTweezer -> \tMercy, \tAlso Sprach Zarathustra > \tMore \nENCORE:\n\t\t\t\t\t\t\t\tA Life Beyond The Dream, \tFirst Tube > \tTweezer Reprise"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 01/31/2025",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tCars Trucks Buses, \tThe Moma Dance, \tSigma Oasis, \tTube, \tWolfman's Brother, \tMaze, \tLonely Trip, \tPossum \nSET 2:\n\t\t\t\t\t\t\t\tOblivion, \tSightless Escape, \tPrince Caspian > \tFuego, \tBeneath a Sea of Stars Part 1, \tChalk Dust Torture > \tMost Events Aren't Planned \nENCORE:\n\t\t\t\t\t\t\t\tSaw It Again > \tSay It To Me S.A.N.T.O.S."
+    },
+    {
+        "date": "PHISH,\n\t\t\tTHURSDAY 01/30/2025",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tBlaze On, \tPlasma, \tHalfway to the Moon, \t46 Days, \tBack on the Train, \tGumbo > \tFunky Bitch, \tRoggae, \tHalley's Comet > \tRunaway Jim > \tCavern \nSET 2:\n\t\t\t\t\t\t\t\tEverything's Right > \tNo Men In No Man's Land, \tTwenty Years Later > \tPiper > \tTaste, \tShade, \tThe Wedge, \tCharacter Zero[1] \nENCORE:\n\t\t\t\t\t\t\t\tHarry Hood"
+    },
+    {
+        "date": "PHISH,\n\t\t\tWEDNESDAY 01/29/2025",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tSand, \tTheme from the Bottom, \tFree, \tMull, \tKill Devil Falls, \tGhost, \tEvolve, \tRun Like an Antelope \nSET 2:\n\t\t\t\t\t\t\t\tSet Your Soul Free > \tCities > \tLight > \tMike's Song > \tI Am Hydrogen > \tWeekapaug Groove, \tTwist > \tBackwards Down the Number Line \nENCORE:\n\t\t\t\t\t\t\t\tMy Sweet One > \tCarini"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTUESDAY 01/28/2025",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tJam, \tMy Soul, \tOcelot, \tJam"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 05/02/2026",
+        "venue": "SPHERESPHERE",
+        "location": "Las Vegas,\n\t\tNV",
+        "setlist": "Soundcheck:  Farmhouse, Frankenstein (this soundcheck is possibly incomplete) \r\n\n\t\t\t\t\t\tSET 1:\n\t\tFarmhouse[1], \tUndermind, \tOcelot, \tBack on the Train, \tEther Edge > \tLlama, \tThe Horse > \tSilent in the Morning, \tTaste, \tJulius \nSET 2:\n\t\t\t\t\t\t\t\tFrankenstein[2], \tKill Devil Falls, \tRuby Waves, \tMeatstick, \tMy Friend, My Friend[3] > \tA Life Beyond The Dream, \tCharacter Zero \nENCORE:\n\t\t\t\t\t\t\t\tWading in the Velvet Sea, \tFluffhead"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 05/01/2026",
+        "venue": "SPHERESPHERE",
+        "location": "Las Vegas,\n\t\tNV",
+        "setlist": "Soundcheck:  Wingsuit, Saw It Again (this soundcheck is possibly incomplete and may be out of order) \r\n\n\t\t\t\t\t\tSET 1:\n\t\tSample in a Jar, \tBoogie On Reggae Woman, \tHeavy Things, \tBouncing Around the Room, \tMound, \tMountains in the Mist, \tStealing Time From the Faulty Plan, \tTela, \tMcGrupp and the Watchful Hosemasters, \tWingsuit, \tDavid Bowie \nSET 2:\n\t\t\t\t\t\t\t\tWilson, \tSeven Below > \tPlasma[1] > \tCrosseyed and Painless > \tPillow Jets, \tShade, \tSand \nENCORE:\n\t\t\t\t\t\t\t\tI Didn't Know, \tSaw It Again[2], \tRock and Roll"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTHURSDAY 04/30/2026",
+        "venue": "SPHERESPHERE",
+        "location": "Las Vegas,\n\t\tNV",
+        "setlist": "SET 1:\n\t\tThe Wedge, \tNICU, \tHalfway to the Moon, \tLeaves, \t555, \tDirt, \tPunch You in the Eye, \tGolgi Apparatus \nSET 2:\n\t\t\t\t\t\t\t\tA Song I Heard the Ocean Sing > \tA Wave of Hope > \tPrince Caspian > \tLonely Trip, \tRunaway Jim, \tSneakin' Sally Thru the Alley, \tDrift While You're Sleeping \nENCORE:\n\t\t\t\t\t\t\t\tThe Sloth[1], \tThe Squirming Coil"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 04/25/2026",
+        "venue": "SPHERESPHERE",
+        "location": "Las Vegas,\n\t\tNV",
+        "setlist": "SET 1:\n\t\tTimber (Jerry the Mule), \tThe Moma Dance, \tThe Final Hurrah, \tAxilla (Part II)[1] > \tCities, \tHorn, \tThe Well, \tMy Soul \nSET 2:\n\t\t\t\t\t\t\t\tHalley's Comet > \tBlaze On, \tChalk Dust Torture[2], \tMercury > \tWaves > \tAbout to Run, \tGhost \nENCORE:\n\t\t\t\t\t\t\t\tBug > \tFirst Tube"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 04/24/2026",
+        "venue": "SPHERESPHERE",
+        "location": "Las Vegas,\n\t\tNV",
+        "setlist": "SET 1:\n\t\tThe Man Who Stepped Into Yesterday > \tThe Lizards, \tSet Your Soul Free, \tRoggae, \tYa Mar, \tThe Dogs, \tBilly Breathes, \tIt's Ice, \tWalls of the Cave \nSET 2:\n\t\t\t\t\t\t\t\tPebbles and Marbles, \tWhat's Going Through Your Mind -> \tPiper > \tMonsters, \tLife Saving Gun, \tWhat's the Use?, \tVultures, \tSay It To Me S.A.N.T.O.S. \nENCORE:\n\t\t\t\t\t\t\t\tSlave to the Traffic Light"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTHURSDAY 04/23/2026",
+        "venue": "SPHERESPHERE",
+        "location": "Las Vegas,\n\t\tNV",
+        "setlist": "SET 1:\n\t\t46 Days, \tGuyute, \tMaze, \tEsther, \tGumbo, \tBrian and Robert[1], \tStash, \tMoonage Daydream \nSET 2:\n\t\t\t\t\t\t\t\tThe Curtain With, \tFuego -> \tDark Puddle[2] > \tGolden Age -> \tFuego, \tBackwards Down the Number Line, \tCavern > \tPossum \nENCORE:\n\t\t\t\t\t\t\t\tFee[3], \tTube, \tMore"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 04/18/2026",
+        "venue": "SPHERESPHERE",
+        "location": "Las Vegas,\n\t\tNV",
+        "setlist": "SET 1:\n\t\tBuried Alive, \tAC/DC Bag, \tReba, \tColonel Forbin's Ascent > \tFly Famous Mockingbird, \tSigma Oasis, \tWalk Away, \tBathtub Gin \nSET 2:\n\t\t\t\t\t\t\t\tOblivion, \tSimple, \tTweezer, \tWaste, \tTwist, \tRun Like an Antelope \nENCORE:\n\t\t\t\t\t\t\t\tI Am the Walrus, \tTweezer Reprise"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 04/17/2026",
+        "venue": "SPHERESPHERE",
+        "location": "Las Vegas,\n\t\tNV",
+        "setlist": "SET 1:\n\t\tFree, \tBirds of a Feather, \tMartian Monster, \tGuelah Papyrus, \tDivided Sky, \tHey Stranger, \tMull, \tLimb By Limb, \tSuzy Greenberg \nSET 2:\n\t\t\t\t\t\t\t\tNo Men In No Man's Land > \tLight, \tJoy, \tMike's Song > \tI Am Hydrogen > \tWeekapaug Groove, \tBeneath a Sea of Stars Part 1 > \tMost Events Aren't Planned \nENCORE:\n\t\t\t\t\t\t\t\tBrief Time[1], \tCarini"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTHURSDAY 04/16/2026",
+        "venue": "SPHERESPHERE",
+        "location": "Las Vegas,\n\t\tNV",
+        "setlist": "SET 1:\n\t\tEvolve, \tWolfman's Brother, \tFoam, \tTheme from the Bottom, \tRift, \tScents and Subtle Sounds > \tSteam, \tSplit Open and Melt \nSET 2:\n\t\t\t\t\t\t\t\tEverything's Right, \tDown with Disease, \tTwenty Years Later, \tGotta Jibboo, \tLifeboy, \tYou Enjoy Myself > \tAlso Sprach Zarathustra \nENCORE:\n\t\t\t\t\t\t\t\tSpace Oddity, \tHarry Hood"
+    },
+    {
+        "date": "PHISH,\n\t\t\tSATURDAY 01/31/2026",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tMike's Song > \tHalley's Comet -> \tWeekapaug Groove, \tJulius, \tMy Friend, My Friend[1], \tMull, \tVultures, \tAlso Sprach Zarathustra > \tDrift While You're Sleeping \nSET 2:\n\t\t\t\t\t\t\t\tA Song I Heard the Ocean Sing -> \tBeneath a Sea of Stars Part 1 > \tMeatstick > \tGolden Age > \tSlave to the Traffic Light \nENCORE:\n\t\t\t\t\t\t\t\tLoving Cup > \tHarry Hood"
+    },
+    {
+        "date": "PHISH,\n\t\t\tFRIDAY 01/30/2026",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tBlaze On[1], \tBouncing Around the Room, \tEvolve, \tWolfman's Brother, \tTube, \tWater in the Sky[2], \tFree > \tBathtub Gin, \tMost Events Aren't Planned \nSET 2:\n\t\t\t\t\t\t\t\tCarini > \tLight -> \tFrankie Says > \tEverything's Right, \tLife Saving Gun, \tFirst Tube \nENCORE:\n\t\t\t\t\t\t\t\tSimeon[3], \tA Life Beyond The Dream"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTHURSDAY 01/29/2026",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tGumbo, \tNICU > \tPrince Caspian > \tOblivion, \tBrian and Robert[1], \tStash, \tYa Mar, \tMcGrupp and the Watchful Hosemasters > \tSay It To Me S.A.N.T.O.S. \nSET 2:\n\t\t\t\t\t\t\t\tA Wave of Hope -> \tRuby Waves > \tLonely Trip, \tWhat's Going Through Your Mind \nENCORE:\n\t\t\t\t\t\t\t\tDancing in Midair[2], \tRun Like an Antelope"
+    },
+    {
+        "date": "PHISH,\n\t\t\tWEDNESDAY 01/28/2026",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tHey Stranger, \tThe Moma Dance > \tBack on the Train, \tRoggae, \tSand, \tBreath and Burning, \tSigma Oasis, \tFling Your Head[1], \tChalk Dust Torture \nSET 2:\n\t\t\t\t\t\t\t\tWaves > \tFuego > \tNo Men In No Man's Land, \tMercury > \tBoogie On Reggae Woman, \tBackwards Down the Number Line > \tCharacter Zero \nENCORE:\n\t\t\t\t\t\t\t\tDog Faced Boy, \tGhost"
+    },
+    {
+        "date": "PHISH,\n\t\t\tTUESDAY 01/27/2026",
+        "venue": "MOON PALACEMOON PALACE",
+        "location": "Cancun, Quintana Roo,\n\t\tMexico",
+        "setlist": "SET 1:\n\t\tJam, \tMy Soul, \tTheme from the Bottom"
     }
 ]
